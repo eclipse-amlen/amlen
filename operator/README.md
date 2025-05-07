@@ -15,7 +15,7 @@ The release process is currently simple because we don't have anything (e.g. tes
 
 4. Update the operator versions in Amlen main branch ready to the next release
 
-The older process (that would be needed if we had testing infrastructure folloeing thhe the main branch is))
+The older process (that would be needed if we had testing infrastructure folloeing the the main branch is))
 push a change that moves the version from the current alpha version to the actual version, ie if the version is 1.0.3-a then submit a PR
 to change it to version 1.0.3
 
