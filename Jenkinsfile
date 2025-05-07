@@ -124,7 +124,7 @@ pipeline {
                             env.BUILD_LABEL = "${env.BUILD_TIMESTAMP}_eclipse${distro}"
                         }
 			buildtype = sh (returnStdout: true, script: '''
-                            message=`git log -1 --skip=$x --pretty=%B`
+                            message=`git log -1 --pretty=%B`
                             if [[ "$message" =~ [[]buildtype=([A-Za-z0-9]+)[]] ]]
                             then
                                 echo ${BASH_REMATCH[1]}
