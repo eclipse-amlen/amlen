@@ -32,12 +32,12 @@ def startBuilderBuild(GITHUB_TOKEN,QUAYIO_TOKEN,BUILD_LABEL,distro,filename,vers
     if ( waitForQuayBuild(build_uuid,"amlen-builder-${distro}",QUAYIO_TOKEN) == "complete" ) {
         sh ( returnStdout: true, script: '''
             echo ' { "tag": "'''+GIT_BRANCH+'''-builder-update", "object": "'''+env.GIT_COMMIT+'''", "message": "creating a tag", "tagger": { "name": "Jenkins", "email": "noone@nowhere.com" }, "type": "commit" } ' > tag.json
-            sha=$(curl -v -X POST -d @tag.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse/amlen/git/tags" | jq -r '.["object"]["sha"]')
+            sha=$(curl -v -X POST -d @tag.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse-amlen/amlen/git/tags" | jq -r '.["object"]["sha"]')
             echo "{\\\"ref\\\":\\\"refs/tags/'''+GIT_BRANCH+'''-builder-update\\\",\\\"sha\\\":\\\"$sha\\\"}" > tagref.json
-            rc=$(curl -w "%{http_code}" -o /dev/null -s -X POST -d @tagref.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse/amlen/git/refs")
+            rc=$(curl -w "%{http_code}" -o /dev/null -s -X POST -d @tagref.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse-amlen/amlen/git/refs")
             if [ "$rc" != "201" ]
             then
-                curl -w "\n%{http_code}\n" -s -X POST -d @tagref.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse/amlen/git/refs/tags/'''+GIT_BRANCH+'''-builder-update"
+                curl -w "\n%{http_code}\n" -s -X POST -d @tagref.json --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse-amlen/amlen/git/refs/tags/'''+GIT_BRANCH+'''-builder-update"
             fi
         ''' )
     }
@@ -184,7 +184,7 @@ pipeline {
                         script {
                             changedFiles = sh ( returnStdout: true, script: '''
                                 mainBranch='''+mainBranch+'''
-                                git fetch --force --progress -- https://github.com/eclipse/amlen.git +refs/heads/main:refs/remotes/origin/main
+                                git fetch --force --progress -- https://github.com/eclipse-amlen/amlen.git +refs/heads/main:refs/remotes/origin/main
                                 git diff --name-only ${mainBranch}-builder-update''' )
                             buildImage = sh ( returnStdout: true, script: '''curl https://quay.io/api/v1/repository/amlen/amlen-builder-almalinux8/tag/?onlyActiveTags=true -H "Authorization: Bearer $QUAYIO_TOKEN" -H "Content-Type: application/json"  | jq -r '.["tags"]|map(select(.name? | match("'''+mainBranch+'''-"))) | sort_by(.name?)|reverse[0].name // "'''+mainBranch+'''-1.0.0.0"' ''').trim()
                             if (changedFiles.contains("Dockerfile.")) {
@@ -219,7 +219,7 @@ pipeline {
                         script {
 
                             changedFiles = sh ( returnStdout: true, script: '''
-                                git fetch --force --progress -- https://github.com/eclipse/amlen.git +refs/heads/main:refs/remotes/origin/main
+                                git fetch --force --progress -- https://github.com/eclipse-amlen/amlen.git +refs/heads/main:refs/remotes/origin/main
                                 if [ $(git tag -l '''+GIT_BRANCH+'''-builder-update) ] ; then
                                     git diff --name-only '''+GIT_BRANCH+'''-builder-update
                                 else
@@ -378,7 +378,7 @@ spec:
                                     }
                                     sh ( returnStdout: true, script: '''
                                         echo "{\\\"body\\\":\\\"Built with quay.io/amlen/amlen-builder-${distro}:${buildImage}\\\"}"
-                                        curl -X POST --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse/amlen/commits/${GIT_COMMIT}/comments" -d "{\\\"body\\\":\\\"Built with quay.io/amlen/amlen-builder-'''+distro+''':'''+buildImage+'''\\\"}"
+                                        curl -X POST --header "Content-Type:application/json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/eclipse-amlen/amlen/commits/${GIT_COMMIT}/comments" -d "{\\\"body\\\":\\\"Built with quay.io/amlen/amlen-builder-'''+distro+''':'''+buildImage+'''\\\"}"
                                     ''' )
                                 }
                             }
@@ -440,12 +440,12 @@ spec:
                                      NOORIGIN_BRANCH=${GIT_BRANCH#origin/} # turns origin/master into master
 
                                      if [[ "$BRANCH_NAME" == "$mainBranch" ]] ; then
-                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse/amlen/statuses/${GIT_COMMIT} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH} DISTRO=${distro} BUILD=${BUILD_LABEL}\\\",\\\"context\\\":\\\"bvt\\\"}"
-                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse/amlen/statuses/${GIT_COMMIT} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH}\\\",\\\"context\\\":\\\"molecule\\\"}"
+                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse-amlen/amlen/statuses/${GIT_COMMIT} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH} DISTRO=${distro} BUILD=${BUILD_LABEL}\\\",\\\"context\\\":\\\"bvt\\\"}"
+                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse-amlen/amlen/statuses/${GIT_COMMIT} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH}\\\",\\\"context\\\":\\\"molecule\\\"}"
                                      elif [[ ! -z "$CHANGE_ID" ]] ; then
-                                         commit=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse/amlen/pulls/$CHANGE_ID/commits | jq '.[-1].sha')
-                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse/amlen/statuses/${commit//\\\"/} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH} DISTRO=${distro} BUILD=${BUILD_LABEL}\\\",\\\"context\\\":\\\"bvt\\\"}"
-                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse/amlen/statuses/${commit//\\\"/} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH}\\\",\\\"context\\\":\\\"molecule\\\"}"
+                                         commit=$(curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse-amlen/amlen/pulls/$CHANGE_ID/commits | jq '.[-1].sha')
+                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse-amlen/amlen/statuses/${commit//\\\"/} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH} DISTRO=${distro} BUILD=${BUILD_LABEL}\\\",\\\"context\\\":\\\"bvt\\\"}"
+                                         curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/eclipse-amlen/amlen/statuses/${commit//\\\"/} -d "{\\\"state\\\":\\\"pending\\\",\\\"target_url\\\":\\\"https://example.com/build/status\\\",\\\"description\\\":\\\"PR=${NOORIGIN_BRANCH}\\\",\\\"context\\\":\\\"molecule\\\"}"
                                      fi   
                                  '''
                              }
