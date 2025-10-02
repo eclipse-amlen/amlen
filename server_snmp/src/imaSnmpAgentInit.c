@@ -36,7 +36,7 @@
 static int keep_running;	/* protected by mutex */
 static int snmp_agent_reinit; /* protected by mutex */
 
-static ism_threadh_t snmpAgentThread = NULL;
+static ism_threadh_t snmpAgentThread = 0;
 static pthread_mutex_t snmp_agent_lock;
 static pthread_mutex_t *snmp_agent_lock_p = NULL;
 
