@@ -14,6 +14,8 @@
 %define distrel %(day="`date +%j`"; echo "0.$day")
 %define _tmppath %{_topdir}/tmp
 
+%global debug_package %{nil}
+
 Summary: ${IMA_PRODUCTNAME_FULL} Proxy for Linux x86_64
 Name: ${IMA_PKG_PROXY}
 Version: ${IMA_PROXY_VERSION_ID}
