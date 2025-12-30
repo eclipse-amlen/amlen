@@ -541,34 +541,21 @@ function update_liberty_ldap_password() {
                 ls -l /usr/lib/jvm >> ${INSTALL_LOG} 2>&1 
                 ls -l /usr/lib/jvm/java-1.8.0-openjd*/jre/bin >> ${INSTALL_LOG} 2>&1 
                 ls -l /usr/lib/jvm/java-1.8.0-openjd*/jre >> ${INSTALL_LOG} 2>&1 
+                ls -l /usr/lib/jvm/jre-21*/jre >> ${INSTALL_LOG} 2>&1 
                 echo $PATH >> ${INSTALL_LOG} 2>&1 
                 ${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes ${PASSWD} >> ${INSTALL_LOG} 2>&1 
 
                 if [ ! -x "$(command -v java)" ]; then
                     if [ -z "${JAVA_HOME}" ]; then
-                        #We currently prereq java 1.8 so this should exist - if the rpm spec changes, update our guess (3 occurences) below
+                        #We currently prereq java 21 - so that should exist - but  so this should exist - if the rpm spec changes, update our guess below
                         
-                        unset -v latestjava
-                        unset -v chosenjava
-                        if [ -e "/usr/lib/jvm/jre-1.8.0" ]; then
-                            latestjava=/usr/lib/jvm/jre-1.8.0
+                        if [ -e "/usr/lib/jvm/jre-21-openjdk" ]; then
+                            export JAVA_HOME=/usr/lib/jvm/jre-21-openjdk
+                            echo "java not setup. Guessing java home to be ${JAVA_HOME}" >> ${INSTALL_LOG}
+                            export PATH=${PATH}:${JAVA_HOME}/bin
                         else
-                            for f in /usr/lib/jvm/jre-1.8.0-*
-                            do 
-                                [[ $f -nt $latestjava ]] && latestjava=$f
-                            done
-                            if [ -e "$latestjava" ]; then
-                                chosenjava=$latestjava
-                            fi
-
-                            if [ -e "$chosenjava" ]; then
-                                export JAVA_HOME=$chosenjava
-                                echo "java not setup. Guessing java home to be ${JAVA_HOME}" >> ${INSTALL_LOG}
-                                export PATH=${PATH}:${JAVA_HOME}/bin
-                            else
-                                echo "java not setup. Couldn't guess likely location" >> ${INSTALL_LOG}
-                                exit 1
-                            fi
+                            echo "java not setup. Couldn't guess likely location" >> ${INSTALL_LOG}
+                            exit 1
                         fi
                     else
                         echo "java not setup. But java home set to be ${JAVA_HOME}" >> ${INSTALL_LOG}
