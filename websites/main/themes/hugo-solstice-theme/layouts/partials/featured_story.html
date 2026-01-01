@@ -1,0 +1,45 @@
+{{/*
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $show_featured_story := .Page.Params.show_featured_story }}
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+{{/*
+  The `$has_jumbotron` scratch variable is set in the `jumbotron.html` partial.
+*/}}
+{{ $has_jumbotron := .Scratch.Get "has_jumbotron" }}
+
+{{/*
+  Aside from Quicksilver, featured stories can appear in the jumbotron or in
+  the main content area. If no jumbotron was found on the page, we display this
+  partial's content.
+*/}}
+
+{{ if $show_featured_story }}
+  {{ if and (or (eq $layout_style "quicksilver") (not $has_jumbotron)) (ne $layout_style "neptune") }}
+    <div class="eclipsefdn-featured-story featured-story" id="featured-story" data-publish-target="{{ .Page.Params.featured_content_publish_target | default .Site.Params.featured_content_publish_target | default "eclipse_org"}}">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-sm-offset-2 col-md-16 col-md-offset-0 featured-story-block featured-story-block-content match-height-item-by-row featured-container">
+          </div>
+          <div class="col-sm-9 col-md-8 featured-side featured-story-block match-height-item-by-row">
+            <div class="featured-side-content text-center">
+              {{ .Site.Data.featuredstory.defaultRight | safeHTML }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{ end }}
+{{ end }}
+

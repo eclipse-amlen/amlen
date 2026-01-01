@@ -1,0 +1,19 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What is Eclipse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>The way you download Eclipse depends on how close you want to be to the &#147;live stream.&#148; Following are the release types that can be downloaded from the Eclipse download site (http://eclipse.org/downloads), in increasing level of closeness to the CVS HEAD stream:</p><ul><li>The latest release, used by most products in the market. These releases have little risk of surprises, yet those builds can be up to 6 months behind what is being worked on now. Example version numbers for these releases are 2.1.2 and 3.0.</li><li>Stable builds (so-called milestone builds), which are typically 6 weeks apart and deliver a major collection of stable features. These builds are moderately tested, making them reliable enough for the needs of most developers. An example is Eclipse 3.0M4, which refers to the milestone 4 build of Eclipse 3.0.</li><li>Integration builds, done every week and sometimes more in case of failure or when closer to a release date. These builds integrate contributions from various Eclipse subteams to test the collaborations of various plug-ins. Build names start with the letter &#147;I.&#148;</li><li>Nightly builds, which provide a view of the contents of the CVS server&#146;s HEAD stream at 8pm (Eastern Standard Time) each night. You can compare this build to the result of musical chairs. The music stops at 8pm, and the build captures what was released at that instant. Mileage accordingly varies. Build names start with the letter &#147;N.&#148;</li></ul><p>Each release or build has a corresponding set of build notes and test results. Be sure to consult these notes before selecting a given build. Automated test suites are run against the nightly and integration builds. Having a build pass the tests can increase the confidence level people have in them. In all cases, the builds are shipped as a compressed archive, and installation is a simple matter of unzipping them anywhere on your local machine.</p><p>Alternatively, you may have already installed Eclipse without knowing it. Many commercial products are based on Eclipse, and so while installing these products, you often install a given version of Eclipse. These products usually are not shy about being based on Eclipse, so you can easily discover the location of the eclipse installation by investigating the installation directory of the product. Usually, the directory will contain a sub-directory called eclipse that contains the embedded Eclipse instance. While running your product, you can activate the menu option Help > About ... and then click on the Eclipse icon to see what version of the platform is being used.</p>"
+      }
+    },{
+      "@type": "Question",
+      "name": "What is the Eclipse Platform?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Those who download the generic Eclipse Platform&mdash;usually by mistake&mdash;are somewhat confounded by what they see. The platform was conceived as the generic foundation for an IDE. That is, the platform is an IDE without any particular programming language in mind. You can create generic projects, edit files in a generic text editor, and share the projects and files with a Concurrent Versions System (CVS) server. The platform is essentially a glorified version of a file-system browser.</p>"
+      }
+    }]
+}

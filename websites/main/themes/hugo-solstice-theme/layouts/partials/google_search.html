@@ -1,0 +1,40 @@
+<!--
+  Copyright (c) 2018 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ if .Site.Params.gcse }}
+<li class="dropdown eclipse-more eclipse-gcse hidden-xs">
+  <a data-toggle="dropdown" class="dropdown-toggle" role="button">
+    {{- .Site.Params.eclipse_search_icon | default "<i class=\"fa fa-search\"></i> <b class=\"caret\"></b>" | safeHTML}}
+  </a>
+  <ul class="dropdown-menu">
+    <li>
+      <!-- Content container to add padding -->
+      <div class="yamm-content">
+        <div class="row">
+          <div class="col-sm-24">
+            <p>
+              <strong>{{ i18n "search-section-label" }}</strong>
+            </p>
+            <form action="https://www.eclipse.org/home/search" method="get">
+              <div class="form-group">
+                <input class="form-control margin-bottom-10" type="textfield" name="q" placeholder="Search">
+                <input class="btn btn-primary" type="submit" value="Submit">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</li>
+{{ end }}

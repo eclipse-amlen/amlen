@@ -1,0 +1,14 @@
+/node_modules/
+/static/*
+!/static/js/
+/static/images/vendor/
+!/static/images/fake_logo/
+/static/js/*
+/exampleSite/public
+/exampleSite/layouts/robots.txt
+/public
+/exampleSite/data/eclipsefdn_projects.yaml
+/.project
+/exampleSite/.hugo_build.lock
+.hugo_build.lock
+.hvm

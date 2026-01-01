@@ -1,0 +1,13 @@
+{{ $wg := .Get "wg" | default "eclipse_org" }}
+{{ $title := .Get "title" | default ""  }}
+{{ $type := .Get "type" | default ""  }}
+{{ $template := .Get "template" | default "list"  }}
+{{ $limit := .Get "limit" | default ""  }}
+{{ $skip := .Get "skipItems" | default ""  }}
+{{ $class := .Get "class" | default ""  }}
+{{ $viewMorePath := .Get "viewMorePath" | default ""  }}
+
+{{/* Converts type to kebab case and pluralizes */}}
+{{ $id := .Get "id" | default (pluralize (replace $type "_" "-")) }}
+
+<div class="newsroom-resources" id="{{ $id }}" data-res-wg="{{ $wg }}" data-res-title="{{ $title }}" data-res-type="{{ $type }}" data-res-template="{{ $template }}" data-res-limit="{{ $limit }}" data-res-skip="{{ $skip }}" data-res-class="{{ $class }}" data-res-view-more="{{ $viewMorePath }}"></div>

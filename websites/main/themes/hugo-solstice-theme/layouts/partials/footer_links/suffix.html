@@ -1,0 +1,38 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $hide_footer_newsletter := $.Site.Params.hide_footer_newsletter | default false }}
+
+{{ if eq $.Site.Params.layout_style "astro" }}
+  <div id="footer-end" class="footer-section col-md-8 col-md-offset-1 col-sm-24">
+    {{ if not $hide_footer_newsletter }}
+      <div class="footer-end-newsletter">
+        <form 
+          id="mc-embedded-subscribe-form" 
+          action="https://eclipse.us6.list-manage.com/subscribe/post?u=eaf9e1f06f194eadc66788a85&amp;id=e7538485cd&amp;f_id=00f9c2e1f0" 
+          method="post" 
+          novalidate 
+          target="_blank"
+        >
+          <label class="footer-end-newsletter-label" for="email">Subscribe to our Newsletter</label>
+          <div class="footer-end-newsletter-input-wrapper">
+            <input class="footer-end-newsletter-input" type="email" id="email" name="EMAIL" autocomplete="email" placeholder="Enter your email address" />
+            <button class="footer-end-newsletter-submit btn btn-link" id="mc-embedded-subscribe" type="submit" name="subscribe">
+              <i class="fa fa-solid fa-envelope fa-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

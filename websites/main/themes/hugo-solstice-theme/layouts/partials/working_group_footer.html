@@ -1,0 +1,55 @@
+{{/* 
+  Copyright (c) 2024 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $eclipse_foundation_logo := "https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-grey-orange.svg" }}
+
+<p id="back-to-top">
+  <a class="visible-xs" href="#">{{ i18n "navigation-back-to-top" }}</a>
+</p>
+<footer class="footer footer-working-group" id="footer">
+  <div class="container">
+    {{ partial "footer_prefix.html" . }}
+    <div class="text-center margin-bottom-40">
+      <img 
+        class="img-responsive margin-x-auto margin-bottom-30" 
+        src="{{ $eclipse_foundation_logo }}" 
+        width="150" 
+        aria-labelledby="footer-working-group-ef" 
+      />
+      <div class="footer-working-group-sponsor">
+        <div class="footer-working-group-circle-group">
+          <div class="footer-working-group-circle"></div>
+          <div class="footer-working-group-circle"></div>
+          <div class="footer-working-group-circle hidden-xs"></div>
+          <div class="footer-working-group-circle hidden-xs"></div>
+        </div>
+        <p class="fw-500" id="footer-working-group-ef">An Eclipse Foundation Working Group</p>
+        <div class="footer-working-group-circle-group">
+          <div class="footer-working-group-circle"></div>
+          <div class="footer-working-group-circle hidden-xs"></div>
+          <div class="footer-working-group-circle hidden-xs"></div>
+          <div class="footer-working-group-circle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-sections row equal-height-md font-bold">
+      {{ partial "footer_links/prefix.html" . }}
+      <div class="col-sm-20 col-sm-offset-4 col-xs-24">
+        {{ partial "footer_links/links.html" . }}
+      </div>
+      {{ partial "footer_links/suffix.html" . }}
+    </div>
+    <div class="text-center">
+    {{ partial "footer_links/footer-copyright.html" . }}
+    </div>
+    <a href="#" class="scrollup">{{ i18n "navigation-back-to-top" }}</a>
+  </div>
+</footer>
+

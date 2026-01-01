@@ -1,0 +1,255 @@
+<!--
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<!-- Base vars of data assuming basic requirements -->
+{{$currLang:=.Page.Lang }}
+{{ $year := .Get "year" }}
+{{ if $year }}
+  {{ .Scratch.Set "base" (index (index .Site.Data $currLang) $year) }}
+{{ else }}
+  {{ .Scratch.Set "base" (index .Site.Data $currLang) }}
+{{ end }}
+{{ $base := .Scratch.Get "base" }}
+{{ $event_id := .Get "event" | default "default" }}
+{{ $src := .Get "src" | default "agenda" }}
+{{ $icon_class := .Get "icon_class" | default "fa-file"}}
+{{ $agendabase := (index (index $base $event_id) $src) }}
+{{ $types := $agendabase.types }}
+{{ $complete := $agendabase.complete }}
+<!-- Allow for adjusted titles -->
+{{$title_suffix := .Get "title" }}
+{{ $multiSet := false }}
+<!-- Check if multiple session sets  -->
+{{ if isset $agendabase "sets" }}
+  <!-- Separate checks needed as hugo isn't failfast  -->
+  {{ if gt (len $agendabase.sets) 1 }}
+    {{ $multiSet = true }}
+  {{ end }}
+{{ end }}
+
+<style>
+{{ range $types }}
+{{ if .color }}
+span.eclipsefdn-agenda-legend-icon-{{ urlize .id }}::after {
+  background-color: {{ .color }};
+}
+{{ end }}
+{{ end }}
+</style>
+
+<div class="eclipsefdn-agenda">
+  <h2>{{ .Get "title" | default (i18n "agenda-sessions") }}</h2>
+  <div class="eclipsefdn-agenda-legend">
+    {{ if $types }}
+      <h4>{{ i18n "agenda-legend" }}</h4>
+      <ul class="list-inline">
+        {{ range $types }}
+        <li><span class="eclipsefdn-agenda-legend-icon-{{ .id }} eclipsefdn-agenda-legend-icon">&nbsp;</span> {{ .name }}</li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+  {{ $agendaItemsBase := slice $agendabase }}
+  {{ if $multiSet }}
+    {{ $agendaItemsBase = $agendabase.sets }}
+
+  <div id="navbar-agenda">
+    <ul class="nav nav-tabs solstice-tabs content-nav-tab" role="tablist">
+      {{ range $index,$set := $agendabase.sets }}
+        <li role="presentation" {{- if eq $index 0 }}class="active"{{ end -}}>
+          <a href="#agenda-sessions-{{ $set.name | urlize }}" data-toggle="tab" aria-controls="agenda-sessions-{{ $set.name | urlize }}" role="tab">
+            {{ .name }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+  <div class="content-nav-tab-body tab-content no-gutters-mobile margin-bottom-30" id="tabs-content">
+  {{ end }}
+
+  {{ $hasOrgs := false }}
+  {{ if $multiSet }}
+    {{ range $index, $set := $agendaItemsBase }}
+      {{ range $set.items }}
+        {{ if isset . "organization" }}
+          {{ $hasOrgs = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ else }}
+    {{ range $index, $set := $agendaItemsBase }}
+      {{ range $set.items }}
+        {{ if isset . "organization" }}
+          {{ $hasOrgs = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ range $index, $set := $agendaItemsBase }}
+    <!-- Check for slide and vod column -->
+    {{ $has_slides := false }}
+    {{ $has_vod := false }}
+    {{ range $set.items }}
+      {{ if isset . "slides" }}
+        {{ $has_slides = true }}
+      {{ end }}
+      {{ if isset . "vod" }}
+        {{ $has_vod = true }}
+      {{ end }}
+    {{ end }}
+
+    <!-- Check if multiple session sets  -->
+    {{ if $multiSet }}
+      <div role="tabpanel" class="tab-pane{{ if eq $index 0}} active{{ end }}" id="agenda-sessions-{{ $set.name | urlize }}">
+    {{ end }}
+  <div class="eclipsefdn-agenda-schedule">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{{ i18n "agenda-session-name" }}</th>
+          <th>{{ i18n "agenda-presenter-name" }}</th>
+          {{ if $hasOrgs }}
+          <th>{{ i18n "agenda-organization" }}</th>
+          {{ end }}
+          {{ if and ($complete) ($has_vod) }}
+          <th class="text-center">{{ i18n "agenda-session-recording" }}</th>
+          {{ else }}
+          <th>{{ i18n "agenda-session-schedule" }}</th>
+          {{ end }}
+          {{ if $has_slides }}
+          <th class="text-center">{{ i18n "agenda-session-slides" }}</th>
+          {{ end }}
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $set.items }}
+        <tr>
+          <td>
+          {{ if $types }}
+          <span class="eclipsefdn-agenda-legend-icon-{{ .type }} eclipsefdn-agenda-legend-icon">
+            <span class="sr-only"> {{ range first 1 (where $types "id" .type) }} {{ .name }} {{ end}} </span>
+          </span>
+          {{ end }}
+          {{ .name }}
+          {{ if isset . "abstract" }}
+            {{/* 
+              Build the "presenter" data attribute for the modal. If multiple
+              presenters, make a comma delimited string. 
+            */}}
+            {{ $presenters := "" }}
+            {{ if .presenter }}
+              {{ $presenters = .presenter }}
+            {{ else if .presenters }}
+              {{ $presenters = delimit .presenters ", " }}
+            {{ end }}
+            <a class="margin-left-10" href="#" title="{{ i18n " agenda-abstract-modal-alt" . }}"
+              data-toggle="modal" data-target="#eclipsefdn-modal-event-session" data-title="{{ .name }}" data-presenter="{{ $presenters }}" data-time="{{ .time }}">
+              <i class="fa fa-external-link">
+                <span class="sr-only">
+                  {{ i18n "agenda-abstract-modal-alt" . }}
+                </span>
+              </i>
+            </a>
+            <div class="modal-content hidden">{{ .abstract | safeHTML }}</div>
+          {{ end }}
+          </td>
+          <td>
+            {{ if and (isset . "presenters") }}
+              <ul>
+              {{ range .presenters }}
+                  <li>{{ . | safeHTML }}</li>
+              {{ end }}
+              </ul>
+            {{ else }}
+              {{ .presenter | safeHTML }}
+            {{ end }}
+          </td>
+          {{ if $hasOrgs }}
+          <td>
+            {{ .organization | safeHTML }}
+          </td>
+          {{ end }}
+          {{ if and ($complete) ($has_vod) }}
+          <td class="text-center">
+            {{ if (isset . "vod") }}
+              <a class="btn btn-primary btn-wide" href="{{ .vod }}" title="{{ i18n "agenda-session-recording-button-alt" . }}">
+                <i class="fa fa-play"></i><span class="sr-only">{{ i18n "agenda-session-recording-button-alt" . }}</span>
+              </a>
+            {{ end }}
+          </td>
+          {{ else }}
+            {{if .times }}
+              <td>
+                <ul class="margin-0 padding-0" style="list-style: none;">
+                  {{range .times}}
+                    <li>{{ . | safeHTML }}</li>
+                  {{end}}
+                </ul>
+              </td>
+            {{else if $agendabase.dynamicTime}}
+            <td class="dynamic-time" data-tz="{{ $agendabase.timezone | default "GMT-04" }}">{{.time | safeHTML }}</td>
+            {{else}}
+            <td class="static-time">{{.time | safeHTML }}</td>
+            {{end}}
+          {{ end }}
+          <!-- Write the slide column if it has been set -->
+          {{ if $has_slides }}
+          <td class="text-center">
+            {{ if (isset . "slides") }}
+              <a class="btn btn-primary btn-wide" href="{{ .slides }}" title="{{ i18n "agenda-session-slides-button-alt" . }}">
+                <i class="fa {{ $icon_class }}"></i> <span class="sr-only">{{ i18n "agenda-session-slides-button-alt" . }}</span>
+              </a>
+            {{ end }}
+          </td>
+          {{ end }}
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+
+    <!-- Check if multiple session sets  -->
+    {{ if $multiSet }}
+      <!-- Close tab panel -->
+      </div>
+    {{ end }}
+  {{ end }}
+  <!-- Check if multiple session sets  -->
+  {{ if $multiSet }}
+    <!-- Close tab content section -->
+    </div>
+  {{ end }}
+</div>
+
+<script>
+// Since bootstrap default tabs behaviour prevents scrolling to the anchor
+// we need to handle this ourselves. We also allow for a custom scroll target
+// to be set via the shortcode parameter "scroll_target". If not set we default
+// to "navbar-agenda" which is the id of the tab navigation bar.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hash = window.location.hash;
+  if (hash && hash.startsWith('#agenda-session')) {
+    const targetId = '{{ .Get "scroll_target" | default "navbar-agenda" }}';
+    let element = document.getElementById(targetId);
+    if (!element) {
+      element = document.getElementById('navbar-agenda');
+    }
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+  }
+});
+</script>

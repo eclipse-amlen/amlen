@@ -1,0 +1,176 @@
+Title: Site Parameters
+Description: |
+  Following section describes the parameters set within the sites config.toml file, rather than parameters set at the page level. 
+items:
+  - 
+    name: call_for_action_icon
+    description: Icon class for the navbar CTA button. The icons used in Solstice are from Font Awesome, and any icon name should be prepended by 'fa-'.
+    values:
+      - Icon class from Font Awesome, prepended by 'fa-'
+    example: fa-github
+  - 
+    name: call_for_action_text
+    description: The text for the CTA button in the navbar
+    values:
+      - Any string value
+  - 
+    name: call_for_action_url
+    description: The anchor URL for the CTA button in the navbar.
+    values:
+      - Absolute link or fully qualified URL. For best results with internal URLs, end URLs without extensions with a slash. e.g. /downloads -> /downloads/
+  - 
+    name: description
+    description: Description of the overall site, used in a pages meta description if no page level description is set.
+    values:
+      - Any string value
+  - 
+    name: facebook_url
+    description: URL to the Facebook page for the site. If there is no value set, will default to Eclispe Foundation page.
+    deprecated: "0.1.7"
+    values:
+      - Absolute link to Facebook profile
+  - 
+    name: favicon
+    description: URL to the favicon image for the site.
+    values:
+      - Absolute link or fully qualified URL to an image
+  - 
+    name: fb_app_id
+    description: The Facebook application ID string for the sites ad network account.
+    values:
+      - Any string value
+  - 
+    name: gcse
+    description: The Google site search collection ID string.
+    values:
+      - Any string value
+  - 
+    name: google_tag_manager
+    description: If set, the Google tag manager is activated in the footer.
+    values:
+      - "true"
+  - 
+    name: jumbotron_class
+    description:  Used in the jumbotron.html layout file. Allow you to change the default value of col-md-20 col-md-offset-2 col-sm-18 col-sm-offset-3. Can be set at the site or page level.
+    values:
+      - Any string value
+  - 
+    name: jumbotron_tagline_class
+    description:  Used in the jumbotron.html layout file. Allow you to change the default value of col-sm-18 col-sm-offset-3. Can be set at the site or page level.
+    values:
+      - Any string value
+  - 
+    name: jumbotron_btn_class
+    description:  Used in the jumbotron.html layout file. Allow you to change the default value of btn btn-primary. Can be set at the site or page level.
+    values:
+      - Any string value
+  - 
+    name: main_content_class
+    description:  Used in the main_prefix.html layout file. Allow you to change the default value of col-md-18 padding-bottom-30 is overriten. Can be set at the site or page level.
+    values:
+      - Any string value
+  - 
+    name: main_sidebar_class
+    description:  Used in the main_suffix.html layout file. Allow you to change the default value of col-md-6 padding-bottom-30. Can be set at the site or page level.
+    values:
+      - Any string value
+  - 
+    name: header_wrapper_class
+    description:  Used in the header.html layout file, being appended to the header-wrapper class to optionally change or add to the header classes used on the page. Only used if not set at the page level.
+    values:
+      - Any string value
+  -
+    name: hide_call_for_action
+    description: Hides the CFA button site-wide.
+    value:
+      - "true"
+  - 
+    name: hide_cfa_same_page
+    description: Attempt to hide CFA on the page it links to 
+    values:
+      - "true"
+  - 
+    name: js
+    description: URL to the main javascript to be used on the site. This does not affect any scripts added in custom sctions of the site. Defaults to <a href="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/javascript/main.min.js">main.min.js</a>
+    values:
+      - Absolute link or fully qualified URL to a JS file
+  - 
+    name: keywords
+    description: Keywords to use in the head of the page, used in metadata tagging. Used if the keywords param is not set at the page level.
+    values:
+      - Array of strings
+    example: '["tag1", "tag2", "tag3"]'
+  - 
+    name: linkedin_url
+    description: URL to the linkedin page for the site. If there is no value set, will default to Eclispe Foundation page.
+    deprecated: "0.1.7"
+    values:
+      - Absolute link to linkedin profile
+  - 
+    name: bluesky_url
+    description: URL to the Bluesky page for the site. If there is no value set, will default to Eclispe Foundation page.
+    deprecated: "0.1.7"
+    values:
+      - Absolute link to Bluesky profile
+  - 
+    name: logo
+    description: URL to the logo image for the site. If there is no other image set in page or site parameters, this image is used as the sharing image for social media links.
+    values:
+      - Absolute link or fully qualified URL to an image
+  - 
+    name: seo_title_suffix
+    description: If set, this value is appended to the page title in the head of the page for the meta title.
+    values:
+      - Any string value
+  - 
+    name: share_img
+    description:  URL to the image used for sharing links for the site. If there is no other image set in page or site parameters, this image is used as the sharing image for social media links.
+    values:
+      - Absolute link or fully qualified URL to an image
+  - 
+    name: show_events
+    description:  Boolean value, when set to true events will be enabled on the site.
+    values:
+      - "true"
+  - 
+    name: styles
+    description: URL to the stylesheet to be used on the site. This does not affect any stylesheets added in custom sctions of the site. Defaults to <a href="https://eclipse.org/eclipse.org-common/themes/solstice/public/stylesheets/quicksilver.min.css">quicksilver.min.css</a>
+    values:
+      - Absolute link or fully qualified URL to a CSS file
+  - 
+    name: twitter_url
+    description: URL to the Twitter page for the site. If there is no value set, will default to Eclispe Foundation page.
+    deprecated: "0.1.7"
+    values:
+      - Absolute link to Twitter profile
+  - 
+    name: youtube_url
+    description: URL to the YouTube page for the site. If there is no value set, will default to Eclispe Foundation page.
+    deprecated: "0.1.7"
+    values:
+      - Absolute link to YouTube profile
+  - 
+    name: hide_breadcrumb
+    description: Hides the breadcrumb on all pages if set to true, otherwise ignored.
+    values:
+      - "true"
+  - 
+    name: show_collapsible_menu
+    description: Show collapsible menu for mobile view on all pages if set to true, otherwise is ignored. 
+    values:
+      - "true"
+  - 
+    name: custom_jumbotron_class
+    description: Optional custom_jumbotron_class that will be used for custom_jumbotron.
+    values:
+      - Any string value
+  - name: socials
+    values:
+      - "Array of objects with the following properties: name (string), icon (string, Font Awesome 6 icon classes), url (string)"
+    example: |
+      <pre>
+      [[Params.socials]]
+        name = "Bluesky"
+        icon = "fa-brands fa-bluesky"
+        url = "https://bsky.app/profile/eclipsefdn.bsky.social"
+      </pre>

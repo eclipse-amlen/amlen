@@ -1,0 +1,53 @@
+complete: true
+types:
+    - name: Demo
+      id: demo 
+      color: "#66c"
+    - name: Keynote
+      id: keynote 
+      color: "#e44"
+sets:
+  - name: Day 1
+    items: 
+      - name: How best to apologize, a workshop
+        presenter: Ken Canadian
+        time: 15:00-18:00
+        type: demo
+        vod: "#1"
+        slides: "#slide-1"
+      - name: How to 'how to'
+        presenter: Jim Bob
+        time: 18:00-19:00
+        type: demo
+        vod: "#2"
+        slides: "#slide-2"
+      - name: Industry Keynote
+        presenter: Eclipse Foundation, .etc
+        time: 19:00-20:00
+        type: keynote
+        vod: "#3"
+        slides: "#slide-3"
+  - name: Day 2
+    items: 
+       - name: The return of the Open-source software
+         presenter: Ken K.
+         abstract: "<p>Sample abstract</p>"
+         type: 1
+         vod: "#1"
+         slides: "#slide-4"
+       - name: How to 'how to' Awakens
+         presenter: Jim Bob
+         type: b2
+         vod: "#2"
+         slides: "#slide-5"
+       - name: A New Industry Keynote
+         presenter: Eclipse Foundation, .etc
+         type: b2
+         vod: "#3"
+         slides: "#slide-6"
+       - name: Revenge of the Best practices
+         presenter: Adam A.
+         type: 3
+         vod: "#4"
+         slides: "#slide-7"
+      

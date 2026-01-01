@@ -1,0 +1,176 @@
+[upcoming-events-header]
+other = "Próximos Eventos"
+
+[upcoming-events-learn-more]
+other = "Aprende más"
+
+[upcoming-events-learn-more-title]
+other = "Aprender más sobre {{ . }}"
+
+[past-events-header]
+other = "Past Events"
+
+[past-events-learn-more]
+other = "Eventos pasados"
+
+[past-events-learn-more-title]
+other = "Learn more about {{ . }}"
+
+[agenda-schedule]
+other = "Aprender más sobre"
+
+[agenda-legend]
+other = "Leyenda"
+
+[agenda-sessions]
+other = "Sesiones"
+
+[agenda-session-name]
+other = "Nombre de la sesión"
+
+[agenda-presenter-name]
+other = "Nombre del presentador"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Grabación de la sesión"
+
+[agenda-session-schedule]
+other = "Hora programada"
+
+[agenda-session-recording-button-alt]
+other = "Video de sesión para sesión {{ .name }}"
+
+[agenda-abstract-modal-alt]
+other = "Ver {{.name}} abstract"
+
+[agenda-modal-close-alt]
+other = "Cerrar"
+
+[speakers-tiles-title]
+other = "Orador"
+
+[committee-carousel-title]
+other = "Conoce al Comité del Evento"
+
+[committee-carousel-content]
+other = "Nos enorgullece presentar que las sesiones y las conferencias magistrales para el evento JakartaOne en Español 2020 Livestream son elegidas por un comité independiente compuesto por voluntarios de Yakarta&reg; ¡Comunidad de EE y Cloud Native Java!"
+
+[committee-carousel-button-text]
+other = "Aprende más"
+
+[committee-twitter-follow-text]
+other = "Siguenos {{ .name }} en Twitter!"
+
+[footer-get-social-title]
+other = "Redes Sociales"
+
+[footer-our-events-title]
+other = "Próximos Eventos"
+
+[footer-get-social-content]
+other = "Siga la dirección oficial de Twitter de la conferencia <a href='https://www.twitter.com/@{{.Count}}'> @ {{.Count}} </a> para actualizaciones de eventos en vivo, anuncios de presentaciones, noticias ¡y más!"
+
+[footer-jakarta-callout-content]
+other = "Impulsado por la participación, Yakarta&reg; EE se centra en permitir la colaboración impulsada por la comunidad y la innovación abierta para La Nube"
+
+[footer-jakarta-callout-button-text]
+other = "Aprende más"
+
+[navbar-manage-cookies-label]
+  other = "Administrar cookies"
+
+[navbar-edit-acccount-label]
+  other = "Editar mi cuenta"
+
+[footer-foundation-about-us-text]
+  other = "Sobre Nosotros"
+
+[footer-foundation-contact-us-text]
+  other = "Contacta con nosotros"
+
+[footer-foundation-donate-text]
+  other = "Donar"
+
+[footer-foundation-governance-text]
+  other = "Gobernancia"
+
+[footer-foundation-logo-artwork-text]
+  other = "Logo y Artwork"
+
+[footer-foundation-board-of-directors-text]
+  other = "Junta Directiva"
+
+[footer-legal-section-text]
+  other = "Legal"
+
+[footer-legal-privacy-policy-text]
+  other = "Política de Privacidad"
+
+[footer-legal-terms-use-text]
+  other = "Términos de Uso"
+
+[footer-legal-epl-text]
+  other = "Licencia Pública de Eclipse"
+
+[footer-legal-resources-text]
+  other = "Recursos Legales"
+
+[footer-useful-links-section-text]
+  other = "Enlaces Útiles"
+
+[footer-useful-links-report-bug-text]
+  other = "Reportar un Error"
+
+[footer-useful-links-documentation-text]
+  other = "Documentación"
+
+[footer-useful-links-contribute-text]
+  other = "Como Contribuir"
+
+[footer-useful-links-mailing-list-text]
+  other = "Listas de correos"
+
+[footer-useful-links-forums-text]
+  other = "Forums"
+
+[footer-useful-links-marketplace-text]
+  other = "Tienda"
+
+[footer-other-section-text]
+  other = "Otros"
+
+[footer-other-tools-text]
+  other = "IDE y Herramientas"
+
+[footer-other-community-projects-text]
+  other = "Proyectos de la Comunidad"
+
+[footer-other-working-groups-text]
+  other = "Grupos de Trabajos"
+
+[footer-other-research-text]
+  other = "Investigación@Eclipse"
+
+[footer-other-report-vulnerability-text]
+  other = "Reportar una Vulnerabilidad"
+
+[footer-other-status-text]
+  other = "Estatus del Servicio"
+
+[footer-sr-social-account]
+  other = "Cuenta de {{ . }}"
+
+[navigation-back-to-top]
+  other = "Volver arriba"
+
+[navigation-breadcrumb-sr]
+  other = "Breadcrumb"
+
+[navigation-content-skip]
+  other = "Saltar al Contenido Principal"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation. Todos los derechos reservados."

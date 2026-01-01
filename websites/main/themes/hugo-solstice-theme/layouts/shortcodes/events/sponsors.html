@@ -1,0 +1,77 @@
+<!-- 
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+{{ $lang := .Page.Lang }}
+{{ $year := .Get "year" }}
+{{ if $year }}
+  {{ .Scratch.Set "base" (index (index .Site.Data $lang) $year) }}
+{{ else }}
+  {{ .Scratch.Set "base" (index .Site.Data $lang) }}
+{{ end }}
+{{ $base := .Scratch.Get "base" }}
+{{ $event := .Get "event" | default "default" }}
+{{ $source := .Get "source" | default "sponsors" }}
+
+{{ $useCarousel:= .Get "useCarousel" | default "false" }}
+{{ $headerClass:= .Get "headerClass" | default "padding-bottom-20"}}
+{{ $itemClass:= .Get "itemClass" | default "padding-20" }}
+{{ $displayBecomeSponsor := .Get "displayBecomeSponsor" | default "true" }}
+{{ $title := .Get "title" | default (i18n "events-sponsor-title") }}
+{{ $useMaxWidth := .Get "useMax" | default "true" }}
+{{ $xsSliderCount := .Get "xsSliderCount" | default 2 }}
+{{ $smSliderCount := .Get "smSliderCount" | default 3 }}
+{{ $mdSliderCount := .Get "mdSliderCount" | default 4 }}
+{{ $lgSliderCount := .Get "lgSliderCount" | default 6 }}
+<div class="eclipsefdn-sponsors">
+  <div class="eclipsefdn-sponsors-heading">
+    <h2 {{with $headerClass}} class="{{ $headerClass }}"{{ end }}>{{ $title }}</h2>
+  </div>
+  <div class="eclipsefdn-sponsors-content text-center{{ if eq $useMaxWidth "true"}} with-max{{ end }}">
+    {{ if eq $useCarousel "true" }}
+      <div class="owl-carousel owl-theme solstice-slider vertical-align" 
+        data-slider-xs-count="{{ $xsSliderCount }}" 
+        data-slider-sm-count="{{ $smSliderCount }}" 
+        data-slider-md-count="{{ $mdSliderCount }}" 
+        data-slider-lg-count="{{ $lgSliderCount }}">
+    {{ range (index (index $base $event) $source).items }}
+      <div class="item{{ if ne $useCarousel "true" }} col-xs-12 col-sm-6 {{ end }} {{ $itemClass }}">
+        {{ if .url }}
+          <a href="{{ .url }}" target="_blank" title="{{ printf "%s homepage" .title}}">
+        {{ end }}
+        <div class="vertical-align match-height-item-by-row">
+          <img class="img img-responsive"  src="{{ .image }}" alt="{{ .title }}-{{ i18n "events-sponsor-image-alt"}}" {{- with .width }} width="{{ . }}"{{ end -}}>
+        </div>
+        {{ if .url }}
+          </a>
+        {{ end }}
+      </div>
+    {{ end }}
+      </div>
+    {{ else }}
+    <ul class="list-inline">
+    {{ range (index (index $base $event) $source).items }}
+      <li class="{{ $itemClass }}">
+        {{ if .url }}
+          <a href="{{ .url }}" target="_blank" title="{{ printf "%s homepage" .title}}">
+        {{ end }}
+          <img class="img img-responsive"  src="{{ .image }}" alt="{{ .title }}-{{ i18n "events-sponsor-image-alt"}}" {{- with .width }} width="{{ . }}"{{ end -}}>
+        {{ if .url }}
+          </a>
+        {{ end }}
+      </li>
+    {{ end }}
+    {{ end }}
+    {{ if eq $displayBecomeSponsor "true" }}
+      <p class="text-center"><a class="btn btn-primary" href="https://outreach.eclipse.foundation/event_sponsor">Become a Sponsor</a></p>
+    {{ end }}
+  </div>
+</div>

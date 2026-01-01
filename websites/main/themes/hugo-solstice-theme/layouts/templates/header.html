@@ -1,0 +1,26 @@
+<!--
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<!--
+
+Used to help generate site-specific templating assets. These can be consumed by a remote API and used to bootstrap 
+the development of themed content.
+
+-->
+<html lang="{{ .Lang }}">
+<head>
+  {{ block "head" . }}{{ partial "head.html" . }}{{ end }}
+  {{ block "head-custom" . }}{{ partial "head_custom.html" . }}{{ end }}
+  {{ block "head-suffix" . }}{{ partial "head_suffix.html" . }}{{ end }}
+</head>
+<body>
+  {{ block "header" . }}{{ partial "header.html" . }}{{ end }}

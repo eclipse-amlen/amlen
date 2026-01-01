@@ -1,0 +1,29 @@
+complete: true
+types:
+    - name: Demo
+      id: 1
+      color: "#e44"
+    - name: Keynote
+      id: b2 
+      color: "#a0a"
+    - name: Cloud
+      id: 3 
+      color: "#66e"
+
+items:
+    - name: Open-source software
+      presenter: Ken K.
+      type: 1
+      vod: "#1"
+    - name: How to 'how to'
+      presenter: Jim Bob
+      type: b2
+      vod: "#2"
+    - name: Industry Keynote
+      presenter: Eclipse Foundation, .etc
+      type: b2
+      vod: "#3"
+    - name: Best practices for Interneting your Things
+      presenter: Adam A.
+      type: 3
+      vod: "#4"

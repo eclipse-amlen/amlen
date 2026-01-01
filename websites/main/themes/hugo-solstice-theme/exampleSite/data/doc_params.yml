@@ -1,0 +1,168 @@
+Title: Document Parameters
+Description: |
+  Following section describes the parameters optionally set within each of the pages within the site. These will always override parameters of the same name present in the site parameters section.
+items:
+  - 
+    name: container
+    description: If set, replaces the default container class of "container" with what is set in the parameter.
+    values:
+      - Any string value
+  - 
+    name: disable_css
+    description: Disables CSS on the given page if set to "true", otherwise is ignored.
+    values:
+      - "true"
+  - 
+    name: Description
+    description: Built in Hugo document parameter. Used in the head meta description as the primary value if set.
+    values:
+      - Any string value
+  - 
+    name: header_wrapper_class
+    description: Used in the header.html layout file, being appended to the header-wrapper class to optionally change or add to the header classes used on the page.
+    values:
+      - Any string value
+  - 
+    name: headline
+    description: If set, will render a jumbotron in the header with the given text as the headline of the content. Also used in the title meta tag when seo_title is missing from the page parameters. 
+    values:
+      - Any string value
+  -
+    name: hide_call_for_action
+    description: Hides the CFA button on the page.
+    values:
+      - "true"
+  - 
+    name: hide_breadcrumb
+    description:  Hides the page breadcrumb if set to true, otherwise ignored.
+    values:
+      - "true"
+  - 
+    name: hide_page_title
+    description: Hides the page title if set to true, otherwise ignored.
+    values:
+      - "true"
+  - 
+    name: hide_sidebar
+    description: Hides the main content sidebar if set to true, otherwise ignored.
+    values:
+      - "true"
+  - 
+    name: image
+    description: URL for an image that will be used on the page for TODO. Used in fallback scenarios for sharing thumbnail when share_img is not set for the page.
+    values:
+      - Absolute links or fully qualified URLs.
+  - 
+    name: keywords
+    description: Keywords to use in the head of the page, used in metadata tagging.
+    values:
+      - Array of strings
+    example: '["tag1", "tag2", "tag3"]'
+  - 
+    name: links
+    description: Optional set of links that will be included under the tagline in the jumbotron as buttons, with the text as the anchors of the buttons.
+    values:
+      - Array of URL objects that each contain values for "text" and "href" 
+    example: |
+      [[href: "about/", text: "About"], [href: "news/", text: "News"]]
+  - 
+    name: main_menu
+    description: |
+      Replaces the default main menu for one defined in config.toml or menus.toml.
+      <a href="./params/main-menu">See more information here</a>.
+    values:
+      - Any string value
+  - 
+    name: redirect_url
+    description: Set the redirect URL for client-side page forwarding. Used in the head.html layout file, and is used in the canonical URL, and in an instant refresh meta tag for page target. If set, it will also set the page to not be indexed in the future by robots.
+    values:
+      - Absolute links, relative links, or fully qualified URLs.
+  - 
+    name: seo_title
+    description: The Search Engine Optimized (SEO) title of the page. This will be used as the site title in the metadata, along with the site SEO suffix.
+    values:
+      - Any string value
+  - 
+    name: share_img
+    description: Image URL source used for thumbnails when shared via Twitter.
+    values:
+      - Absolute links or fully qualified URLs.
+  - 
+    name: show_featured_footer
+    description: Shows the featured footer section at the top of the page if set to true, otherwise is ignored.
+    values:
+      - "true"
+    ref: /components/featured_footer/
+  - 
+    name: show_featured_story
+    description: Shows the featured story section at the top of the page if set to true, otherwise is ignored.
+    values:
+      - "true"
+    ref: /components/featured_story/
+  - 
+    name: subtitle
+    description: Used in the jumbotron, set in a second level header under the headline. Ignored if headline is not set.
+    values:
+      - Any string value
+  - 
+    name: Summary
+    description: Built in Hugo document parameter. Used in the head meta description if the Description parameter is not set.
+    values:
+      - Any string value
+  - 
+    name: tagline
+    description: Optional tagline that will be inserted after the subtitle parameter in the jumbotron as the tagline under the titles for the page. 
+    values:
+      - Any string value
+  - 
+    name: show_collapsible_menu
+    description: Show collapsible menu for mobile view on this page if set to true, otherwise is ignored. 
+    values:
+      - "true"
+  - 
+    name: custom_jumbotron
+    description: Optional custom_jumbotron that will be inserted after taglines, can include html tags. We recommend to not use taglines and custom_jumbotron at the same time.
+    values:
+      - Any string value
+  - 
+    name: custom_jumbotron_class
+    description: Optional custom_jumbotron_class that will be used for custom_jumbotron.
+    values:
+      - Any string value
+  -
+    name: author
+    description: Author name of the blog. This will be used to set the author of a blog. 
+    values: 
+      - Any string value
+  -
+    name: email
+    description: Email address of the author of the blog. This will be used to set the email of a blog. If not set, site email will be used and if this is not set, "no+reply@eclipse-foundation.org" will be used as the email.
+    values: 
+      - Any valid email address value
+    example: example@domain.com
+
+  - name: "breadcrumb_title"
+    description: "Custom title for the breadcrumb. If not set, the page title will be used. It will be trunacted at 32 characters."
+    values:
+      - Any string value
+
+  -
+    name: format_title
+    description: Formats the page title in headings and breadcrumbs to title case. If there is no value set, will default to true.
+    values:
+      - "false"
+
+  -
+    name: sidebar
+    description: Target specific menu identifiers. Used when a page or sub-section uses different sidebar content than the rest of the section it's in. Each identifier must have a corresponding "menu.sidebar" entry in the site's "config" file. If this parameter is omitted, the default sidebar for the section is used.
+    values:
+      - An array of string values
+  - 
+    name: body_class
+    description: Add classes to the body element.
+    values:
+      - Any string value
+    name: format_title
+    description: Formats the page title in headings and breadcrumbs to title case. If there is no value set, will default to true.
+    values:
+      - "false"

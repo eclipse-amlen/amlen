@@ -1,0 +1,63 @@
+DefaultContentLanguage = "en"
+title = "Hugo Solstice Theme"
+theme = "hugo-solstice-theme"
+metaDataFormat = "yaml"
+googleAnalytics = ""
+#disableKinds = ["taxonomy", "taxonomyTerm"]
+baseURL = "https://webdev.eclipse.org/docs/hugo"
+
+[Params]
+  format_title = false
+  google_tag_manager = "GTM-5WLCZXC"
+  description = "Eclipse Foundation: Solstice theme for Hugo."
+  subtitle = "Eclipse Foundation"
+  seo_title_suffix = " | The Eclipse Foundation"
+  keywords = ["hugo", "solstice", "eclipse foundation"]
+#  logo = "images/logo/eclipse-foundation-white.svg"
+#  favicon = "images/favicon.ico"
+  layout_style = "neptune"
+  styles = "css/neptune.css"
+  js = "js/neptune.js"
+  gcse = "011805775785170369411:p3ec0igo0qq"
+  gcse_result_url = "/search"
+  # eclipse_search_icon = "<i data-feather=\"search\" stroke-width=\"1\"></i>"
+  header_wrapper_class = "header-default-bg-img"
+  call_for_action_text = "Download"
+  call_for_action_url = "https://eclipse.org/downloads"
+  call_for_action_icon = ""
+  call_for_action_id = "download-cta"
+  show_events = true
+  table_classes = "table table-bordered"
+  hide_cfa_same_page = true
+  hide_footer_newsletter = false
+  show_collapsible_menu = true
+  sidebar_layout = "default"
+  hide_deprecation_warnings = true
+  hide_ad = false
+
+[Params.author]
+  name = "Christopher Guindon"
+  website = "https://www.eclipse.org"
+  email = "webdev@eclipse-foundation.org"
+  facebook = "eclipse.org"
+  twitter = "EclipseFdn"
+  youtube = "EclipseFdn"
+  googleplus = "+Eclipse"
+  linkedin = "company/eclipse-foundation/"
+  bluesky = "eclipsefdn.bsky.social"
+
+[permalinks]
+  news = "/:sections/:year/:month/:day/:slug/"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  membership_level = "membership_levels"
+  participation_level = "participation_levels"
+  technology_types = "technology_types"
+  build_technologies = "build_technologies"
+  other_tags = "other_tags"
+
+[blackfriday]
+  plainIDAnchors = true
+  hrefTargetBlank = true

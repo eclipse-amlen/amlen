@@ -1,0 +1,14 @@
+
+{{ $listType := .Get "listType" | default "ul" }}
+{{ $listClass := .Get "listClass" }}
+{{ $listStyle := .Get "listStyle" }}
+
+{{ if eq $listType "ul" }}
+<ul{{ with $listClass }} class="{{ . }}"{{ end }}{{ with $listStyle }} style="list-style-type: {{ . }}"{{ end }}>
+  {{ .Inner }}
+</ul>
+{{ else }}
+<ol{{ with $listClass }} class="{{ . }}"{{ end }}{{ with $listStyle }} style="list-style-type: {{ . }}"{{ end }}>
+  {{ .Inner }}
+</ol>
+{{ end }}

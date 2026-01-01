@@ -1,0 +1,71 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+{{ $current_page := . }}
+
+<nav class="header-navbar-nav">
+    <ul class="header-navbar-nav-links">
+        {{ range (index .Site.Menus $main_menu) }}
+            {{ $menu_id := .Identifier | default (lower .Name) }}
+            {{ $target_menu := printf "%s-menu" $menu_id }}   
+            {{ $active_class := "" }}
+            {{ $menu_type := "link" }}
+
+            {{ if $current_page.IsMenuCurrent $main_menu . }}
+                {{ $active_class = "active" }}
+            {{ end }}
+            
+            {{/* If the menu has children, we will show a dropdown */}}
+            {{ if .HasChildren }}
+              {{ $menu_type = "dropdown" }}
+            {{ end }}
+
+            {{/* Unless if any of the menus are 3-levels deep then we will show a mega menu. */}}
+            {{ range .Children }}
+              {{ if .HasChildren }}
+                {{ $menu_type = "mega" }}
+              {{ end }}
+            {{ end }}
+
+            <li class="navbar-nav-links-item {{ $active_class }}">
+                {{ if eq $menu_type "link" }}
+                <a class="link-unstyled" href="{{ .URL }}">{{ .Name }}</a>
+                {{ else if eq $menu_type "dropdown" }}
+                  <div class="dropdown">
+                    <button class="btn-link link-unstyled" id="{{ $menu_id }}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ .Name }}
+                      <i class="fa fa-caret-down" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="{{ $menu_id }}">
+                      {{ range .Children }}
+                        <li>
+                          <a class="link-unstyled" href="{{ .URL }}">{{ .Name }}</a>
+                        </li>
+                      {{ end }}
+                    </ul>
+                  </div>
+                {{ else }}
+                  <button 
+                      class="nav-link-js btn-link link-unstyled" 
+                      type="button"
+                      aria-expanded="true" 
+                      data-menu-target="{{ $target_menu }}"
+                  >
+                      {{ .Name }}
+                  </button>
+                {{ end }}
+            </li>
+        {{ end }}
+    </ul>
+</nav>

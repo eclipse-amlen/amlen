@@ -1,0 +1,176 @@
+[upcoming-events-header]
+other = "Próximos eventos"
+
+[upcoming-events-learn-more]
+other = "Saiba mais"
+
+[upcoming-events-learn-more-title]
+other = "Aprenda mais sobre {{ . }}"
+
+[past-events-header]
+other = "Evento anteriores"
+
+[past-events-learn-more]
+other = "Saiba mais"
+
+[past-events-learn-more-title]
+other = "Aprenda mais sobre {{ . }}"
+
+[agenda-schedule]
+other = "Detalhes do evento"
+
+[agenda-legend]
+other = "Legenda"
+
+[agenda-sessions]
+other = "Sessões"
+
+[agenda-session-name]
+other = "Palestra"
+
+[agenda-presenter-name]
+other = "Palestrante"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Palestra gravanda"
+
+[agenda-session-schedule]
+other = "Quando"
+
+[agenda-session-recording-button-alt]
+other = "Video da apresentação {{ .name }}"
+
+[agenda-abstract-modal-alt]
+other = "Veja {{.name}} detalhes"
+
+[agenda-modal-close-alt]
+other = "Fechar"
+
+[speakers-tiles-title]
+other = "Palestrante"
+
+[committee-carousel-title]
+other = "Veja o Program Committee"
+
+[committee-carousel-content]
+other = "Estamos orgulhosos de dizer que as sessões e palestras do JakartaOne Livestream Event são escolhidas por um comitê independente composto por voluntários da comunidade Jakarta® EE e Cloud Native Java!"
+
+[committee-carousel-button-text]
+other = "Saiba mais"
+
+[committee-twitter-follow-text]
+other = "Siga {{ .name }} no Twitter!"
+
+[footer-get-social-title]
+other = "Get Social"
+
+[footer-our-events-title]
+other = "Próximos eventos"
+
+[footer-get-social-content]
+other = "Siga o evento no Twitter <a href='https://www.twitter.com/@{{.Count}}'>@{{.Count}}</a> para atualizações, eventos ao vivo, anúncios de palestrantes e muito mais!"
+
+[footer-jakarta-callout-content]
+other = "Powered by participation, Jakarta&reg; EE is focused on enabling community-driven collaboration and open innovation for the cloud"
+
+[footer-jakarta-callout-button-text]
+other = "Saiba mais"
+
+[navbar-manage-cookies-label]
+  other = "Gerencie Cookies"
+
+[navbar-edit-acccount-label]
+  other = "Editar minha conta"
+
+[footer-foundation-about-us-text]
+  other = "Sobre nós"
+
+[footer-foundation-contact-us-text]
+  other = "Fale conosco"
+
+[footer-foundation-donate-text]
+  other = "Doe"
+
+[footer-foundation-governance-text]
+  other = "Governança"
+
+[footer-foundation-logo-artwork-text]
+  other = "Logo e Artwork"
+
+[footer-foundation-board-of-directors-text]
+  other = "Board dos Diretores"
+
+[footer-legal-section-text]
+  other = "Legal"
+
+[footer-legal-privacy-policy-text]
+  other = "Política de privacidade"
+
+[footer-legal-terms-use-text]
+  other = "Termo de uso"
+
+[footer-legal-epl-text]
+  other = "Eclipse Public License"
+
+[footer-legal-resources-text]
+  other = "Legal Resources"
+
+[footer-useful-links-section-text]
+  other = "Useful Links"
+
+[footer-useful-links-report-bug-text]
+  other = "Report um Bug"
+
+[footer-useful-links-documentation-text]
+  other = "Documentação"
+
+[footer-useful-links-contribute-text]
+  other = "Como contribuir"
+
+[footer-useful-links-mailing-list-text]
+  other = "Mailing Lists"
+
+[footer-useful-links-forums-text]
+  other = "Fóruns"
+
+[footer-useful-links-marketplace-text]
+  other = "Marketplace"
+
+[footer-other-section-text]
+  other = "Outros"
+
+[footer-other-tools-text]
+  other = "IDE e ferramentas"
+
+[footer-other-community-projects-text]
+  other = "Projetos da comunidade"
+
+[footer-other-working-groups-text]
+  other = "Working Groups"
+
+[footer-other-research-text]
+  other = "Research@Eclipse"
+
+[footer-other-report-vulnerability-text]
+  other = "Report um Vunerabilidade"
+
+[footer-other-status-text]
+  other = "Service Status"
+
+[footer-sr-social-account]
+  other = "Conta do {{ . }}"
+
+[navigation-back-to-top]
+  other = "Back to the top"
+
+[navigation-breadcrumb-sr]
+  other = "Breadcrumb"
+
+[navigation-content-skip]
+  other = "Pule para o conteúdo principal"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation AISBL. Todos os direitos reservados."

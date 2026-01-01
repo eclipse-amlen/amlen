@@ -1,0 +1,130 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $logo := .Site.Params.logo | default "https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg" }}
+{{ $logo_width := .Site.Params.logo_width | default "150" }}
+{{ $logo_title := .Site.Params.logo_title | default $.Site.Title }}
+
+{{ $call_for_action_text := .Site.Params.call_for_action_text }}
+{{ $call_for_action_url := .Site.Params.call_for_action_url }}
+{{ $call_for_action_icon := .Site.Params.call_for_action_icon }}
+{{ $call_for_action_id := .Site.Params.call_for_action_id }}
+
+{{ $hide_cfa := .Site.Params.hide_call_for_action | default .Page.Params.hide_call_for_action | default false }}
+
+<div class="navigation-bar dark">
+  <div class="container">
+    <div class="navigation-bar-inner">
+      <div class="navigation-bar-left">
+        <a class="focus-highlight focus-inverse" href="/">
+          <img
+            class="navigation-bar-brand"
+            src="{{ $logo }}"
+            alt="{{ $logo_title }}"
+          />
+        </a>
+      </div>
+      {{ partial "nav.html" . }}
+      <div class="navigation-bar-right">
+        <!-- Navbar controls -->
+        <div class="navigation-bar-controls hidden-xs hidden-sm">
+          <ul>
+            <li class="dropdown">
+              <a
+                class="dropdown-toggle link-unstyled focus-highlight"
+                tabindex="0"
+                id="search-dropdown-toggle"
+                data-toggle="dropdown"
+                href="#"
+                aria-label="Search"
+              >
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              </a>
+              <form
+                class="search-bar dropdown-menu dropdown-menu-right"
+                aria-labelledby="search-dropdown-toggle"
+                action="https://www.eclipse.org/home/search/"
+                method="get"
+              >
+                <input class="search-bar-input" name="q" placeholder="Search" />
+                <button class="btn btn-link" type="submit">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </form>
+            </li>
+            <li class="dropdown">
+              <a
+                class="dropdown-toggle focus-highlight"
+                id="user-menu"
+                href="#"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                tabindex="0"
+              >
+                <i class="fa-regular fa-user" aria-hidden="true"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="user-menu"
+              >
+                <li>
+                  <a href="https://accounts.eclipse.org/user">
+                    <i
+                      class="fa-solid fa-user margin-right-10"
+                      aria-hidden="true"
+                    ></i>
+                    View my account
+                  </a>
+                </li>
+                <li>
+                  <a href="https://accounts.eclipse.org/user/edit">
+                    <i
+                      class="fa-solid fa-edit margin-right-10"
+                      aria-hidden="true"
+                    ></i>
+                    Edit my account
+                  </a>
+                </li>
+                <li>
+                  <a role="link" class="toolbar-manage-cookies" href="#" tabindex="0">
+                    <i
+                      class="fa-solid fa-wrench margin-right-10"
+                      aria-hidden=""
+                    ></i>
+                    Manage cookies
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- Navbar controls end -->
+        {{ if not $hide_cfa }}
+          <div class="navigation-bar-ctas hidden-xs hidden-sm">
+            <ul>
+              <li>
+                <a 
+                  class="btn btn-outline-primary" 
+                  {{ with $call_for_action_id -}} id="{{ . }}" {{- end }} 
+                  href="{{ $call_for_action_url }}"
+                >
+                  {{ $call_for_action_text }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        {{ end }}
+        <a class="mobile-menu-toggle visible-xs visible-sm" aria-expanded="false">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

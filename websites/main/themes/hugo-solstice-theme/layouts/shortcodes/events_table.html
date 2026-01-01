@@ -1,0 +1,40 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+<div class="table-responsive">
+  <table class="table table-stripped">
+    <thead>
+      <tr>
+        <th>{{ i18n "events-table-conference-header" }}</th>
+        <th>{{ i18n "events-table-location-header" }}</th>
+        <th>{{ i18n "events-table-date-header" }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .Site.Data.events.items }}
+        <tr>
+          <td>{{ .name }}</td>
+          <td>{{ .location }}</td>
+          <td>{{ .date }}</td>
+          <td class="text-right">
+            {{$t := time .expire_date }}
+            {{ if $t.After now }}
+              <a class="btn btn-secondary btn-xs" href="{{ .button_url }}">{{ .button_text }}</a>
+            {{ end }}
+          </td>
+        </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>

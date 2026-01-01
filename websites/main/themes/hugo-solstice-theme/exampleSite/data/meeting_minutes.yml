@@ -1,0 +1,50 @@
+dir: '/docs/hugo/components/eclipsefdn_meeting_minutes/documents/'
+order:
+   - specification_committee
+   - marketing_committee
+items:
+   marketing_committee:
+       -
+          url: marketing_committee/minutes-marketing-0818-2022.pdf
+          title: August 18, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0804-2022.pdf
+          title: August 04, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0721-2022.pdf
+          title: July 21, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0707-2022.pdf
+          title: July 07, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0623-2022.pdf
+          title: June 23, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0609-2022.pdf
+          title: June 09, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0512-2022.pdf
+          title: May 12, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0428-2022.pdf
+          title: April 28, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-0317-2022.pdf
+          title: March 17, 2022 (pdf)
+          year: 2022
+       -
+          url: marketing_committee/minutes-marketing-february-11-2021.pdf
+          title: February 11, 2021 (pdf)
+          year: 2021
+   specification_committee:
+      - url: specification_committee/minutes-specification-june-28-2018.pdf
+        title: June 28, 2018 (pdf)
+        year: 2018

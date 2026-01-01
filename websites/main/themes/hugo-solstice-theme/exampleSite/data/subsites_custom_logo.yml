@@ -1,0 +1,11 @@
+items:
+  -
+    page_url: '/subsite-1'
+    logo: '/third-parent/images/fake_logo/jakarta_ee_logo_schooner_color_horizontal_default.png'
+    logo_url: '/subsite-1'
+    logo_title: 'subsite-1'
+  -
+    page_url: '/third-parent'
+    logo: '/third-parent/images/fake_logo/jakartaone_livestream_test_white_logo.svg'
+    logo_url: '/third-parent'
+    logo_title: 'Third Parent'

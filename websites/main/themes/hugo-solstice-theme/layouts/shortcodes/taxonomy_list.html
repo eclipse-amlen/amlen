@@ -1,0 +1,44 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{if and (.Get "term") (.Get "section")}}
+  {{$term := .Get "term"}}
+  {{$section := .Get "section"}}
+  
+  {{ $taxonomy := .Get "taxonomy" }}
+  
+  <div class="news-list-col margin-bottom-40">
+    {{ if .Get "icon" }}
+      <div class="news-list-icon"><i data-feather="{{ .Get "icon" }}" stroke-width="1"></i></div>
+    {{ end }}
+    <h2 class="heading-line">
+      <span>{{ humanize $term }}</span>
+    </h2>
+    <div class="news-list-media">
+      {{ range $index, $value := $.Site.Taxonomies }}
+
+        {{ if eq $taxonomy $index}}
+          {{ range first 5 (where (index $value $term).Pages "Section" $section) }}
+            {{ .Render "summary" }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ if eq $term "news" }}
+    <ul class="list-inline news-list-links">
+      <li class="news-list-links-view-all"><a href="{{ print "categories/" $term }}">{{ i18n "taxonomy-list-view-all" }}</a></li>
+      <li class="news-list-links-rss"><a href="{{ print "categories/" $term "/index.xml" }}" title="{{ i18n "taxonomy-list-rss-feed-label" }}">{{ i18n "taxonomy-list-rss-feed-label" }} <i class="fa fa-rss"></i></a></li>
+    </ul>
+    {{ end }}
+  </div>
+{{ end }}

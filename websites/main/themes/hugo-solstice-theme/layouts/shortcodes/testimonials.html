@@ -1,0 +1,32 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<!-- Allow for alt sources and languages -->
+{{ $source := .Get "source" | default "testimonials" }}
+{{ $languageBase := index .Site.Data .Site.Language.Lang }}
+<!-- Get the base of the testimonials by checking existence in localized section -->
+{{ $base := index .Site.Data $source}}
+{{ if and (ne $languageBase nil) (isset $languageBase $source)  }} 
+  {{ $base = index $languageBase $source }}
+{{ end }}
+
+
+<div class="row testimonial-container">
+  {{ range $base.items}}
+    <div class="col-sm-8 margin-bottom-20 testimonial-item">
+      <div style="background-color:#f1f3f7;" class="padding-20">
+      <p>"{{ .text }}"</p>
+      <p class="text-right"><strong>– {{ .title }}</strong></p>
+      </div>
+    </div>
+  {{ end }}
+</div>
