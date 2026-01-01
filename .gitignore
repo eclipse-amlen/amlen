@@ -28,3 +28,5 @@ bin/*
 **/target/*
 #server.py is copied from server_main/scripts as part of the build
 operator/build/scripts/server.py
+#This is the output of the website hugo build and is copied to a separate amlen-website repo
+websites/main/public
