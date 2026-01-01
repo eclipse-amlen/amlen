@@ -1,0 +1,56 @@
+{{/*
+  Copyright (c) 2020, 2023 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+    Yi Liu <yi.liu@eclipse-foundation.org>
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $id := .Get "id" | default "featured-story-container" }}
+{{ $templateId := .Get "templateId" }}
+{{ $projectIds :=  .Get "projectIds" }}
+{{ $url :=  .Get "url" | relURL }}
+{{ $types := .Get "types" | default "projects, proposals" }}
+{{ $is_static_source := .Get "is_static_source" | default "false" }}
+{{ $classes :=  .Get "classes" }}
+{{ $display_categories :=  .Get "display_categories" | default "false" }}
+{{ $categories :=  .Get "categories" | default "" }}
+{{ $view_all_url := .Get "view_all_url" | default "/projects" }}
+{{ $display_view_more := .Get "display_view_more" | default "true" }}
+{{ $sorting_method := .Get "sorting_method" }}
+{{ $page_size := .Get "page_size" }}
+
+<section id="wg-projects" class="container featured-section featured-section-projects" data-filter-wg="{{ $.Site.Params.projects_working_group }}">
+  <div class="row">
+    <div class="col-xs-24" id="projects-list">
+      <ul class="featured-projects list-inline list {{ $classes }}" 
+         id="{{ $id }}"
+         data-types="{{ $types }}"
+         data-project-ids="{{ $projectIds }}" 
+         data-template-id="{{ $templateId }}"
+         data-url="{{ $url }}"
+         data-is-static-source="{{ $is_static_source }}"
+         {{ with $sorting_method -}}
+            data-sorting-method="{{ . }}" 
+         {{- end }}
+         {{ with $page_size -}}
+            data-page-size="{{ . }}" 
+         {{- end }}
+         {{ with $display_categories -}}
+            data-display-categories="{{ . }}"
+         {{- end }}
+      ></ul>
+           
+    </div>
+  </div>
+    {{ if eq $display_view_more "true" }}
+        <p class="text-center margin-top-30">
+            <a href="{{ $view_all_url }}" class="btn btn-primary">View All Projects</a>
+        </p>
+    {{ end }}
+</section>

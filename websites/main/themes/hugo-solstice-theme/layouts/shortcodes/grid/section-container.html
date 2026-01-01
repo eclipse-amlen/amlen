@@ -1,0 +1,11 @@
+{{ $containerClass := .Get "containerClass" | default "container" }}
+{{ $is_markdown := .Get "isMarkdown" | default "false" }}
+<section class="row {{ with .Get "class" }}{{ . }}{{ end }}"{{ with .Get "id" }} id="{{ . }}"{{ end }}>
+  <div class="{{- $containerClass -}}">
+    {{ if eq $is_markdown "true" }}
+     {{ .Inner | markdownify }}
+    {{ else }}
+      {{ .Inner }}
+   {{ end }}
+  </div>
+</section>

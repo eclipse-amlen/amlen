@@ -1,0 +1,43 @@
+{{/*
+  Copyright (c) 2024 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $class := .Get "class" | default "" }}
+{{ $id := .Get "id" }}
+{{ $type := .Get "type" }}
+{{ $collaboration := .Get "collaboration" }}
+{{ $level := .Get "level" }}
+{{ $sort := .Get "sort" }}
+{{ $link_member_website := .Get "link_member_website" }}
+
+<ul 
+  class="eclipsefdn-members-list {{ $class }}"
+  {{ with $id }}
+    data-id="{{ . }}"
+  {{ end }}
+  {{ with $type }}
+    data-type="{{ . }}"
+  {{ end }}
+  {{ with $collaboration }}
+    data-ml-wg="{{ . }}"
+  {{ end }}
+  {{ with $level }}
+    data-ml-level="{{ . }}"
+  {{ end }}
+  {{ with $sort }}
+    data-ml-sort="{{ . }}"
+  {{ end }}
+  {{ with $link_member_website }}
+    data-ml-link-member-website="{{ . }}"
+  {{ end }}
+>
+</ul>

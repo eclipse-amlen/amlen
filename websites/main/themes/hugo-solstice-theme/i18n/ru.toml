@@ -1,0 +1,341 @@
+[eclipse-foundation-text]
+  other = "Eclipse Foundation"
+
+[navbar-manage-cookies-label]
+  other = "Управление Cookies"
+
+[navbar-edit-acccount-label]
+  other = "Редактирование акаунта"
+
+[footer-foundation-about-us-text]
+  other = "О нас"
+
+[footer-foundation-contact-us-text]
+  other = "Контакт с нами"
+
+[footer-foundation-donate-text]
+  other = "Пожертвовать нам"
+
+[footer-foundation-members-text]
+  other = "Участники"
+
+[footer-foundation-governance-text]
+  other = "Управление"
+
+[footer-foundation-logo-artwork-text]
+  other = "Лого и художественное оформление"
+
+[footer-foundation-board-of-directors-text]
+  other = "Борд директоров"
+
+[footer-legal-code-of-conduct-text]
+  other = "Поведенческий код"
+
+[footer-legal-section-text]
+  other = "Юридическая информация"
+
+[footer-legal-privacy-policy-text]
+  other = "Политика приватности"
+
+[footer-legal-terms-use-text]
+  other = "Правила использования"
+
+[footer-legal-epl-text]
+  other = "Eclipse Public License"
+
+[footer-legal-resources-text]
+  other = "Юридические ресурсы"
+
+[footer-useful-links-section-text]
+  other = "Полезные ссылки"
+
+[footer-useful-links-report-bug-text]
+  other = "Сообщить о проблеме"
+
+[footer-useful-links-documentation-text]
+  other = "Документация"
+
+[footer-useful-links-contribute-text]
+  other = "Как контрибьютить"
+
+[footer-useful-links-mailing-list-text]
+  other = "Мейлинг листы"
+
+[footer-useful-links-forums-text]
+  other = "Формы"
+
+[footer-useful-links-marketplace-text]
+  other = "Маркетплейс"
+
+[footer-other-section-text]
+  other = "Другое"
+
+[footer-other-tools-text]
+  other = "IDE и инструменты"
+
+[footer-other-community-projects-text]
+  other = "Проекты"
+
+[footer-other-working-groups-text]
+  other = "Работчие "
+
+[footer-other-research-text]
+  other = "Research@Eclipse"
+
+[footer-other-report-vulnerability-text]
+  other = "Сообщить о бреши в безопасости"
+
+[footer-other-status-text]
+  other = "Статус сервиса"
+
+[footer-sr-social-account]
+  other = "{{ . }} аккаунт"
+
+[navigation-back-to-top]
+  other = "Вверх"
+
+[navigation-breadcrumb-sr]
+  other = "Цепочка навигации"
+
+[navigation-content-skip]
+  other = "Пропустить к основному содержаию"
+
+[navigation-mobile-menu-toggle]
+  other = "Переключить навигацию"
+
+[navigation-more-menu-label]
+  other = "Больше"
+
+[navigation-more-community-section]
+  other = "Сообщество"
+
+[navigation-more-community-marketplace-label]
+  other = "Маркетплейс"
+
+[navigation-more-community-events-label]
+  other = "События"
+
+[navigation-more-community-planet-eclipse-label]
+  other = "Планета Eclipse"
+
+[navigation-more-community-newsletter-label]
+  other = "Новостная подписка"
+
+[navigation-more-community-videos-label]
+  other = "Видео"
+
+[navigation-more-community-blogs-label]
+  other = "Блоги"
+
+[navigation-more-participate-section]
+  other = "Учавствовать"
+
+[navigation-more-participate-bug-label]
+  other = "Загрузить"
+
+[navigation-more-participate-forums-label]
+  other = "Форумы"
+
+[navigation-more-participate-mailing-lists-label]
+  other = "Мейлинг листы"
+
+[navigation-more-participate-wiki-label]
+  other = "Wiki"
+
+[navigation-more-participate-irc-label]
+  other = "IRC"
+
+[navigation-more-ide-section]
+  other = "Eclipse IDE"
+
+[navigation-more-ide-download-label]
+  other = "Загрузить"
+
+[navigation-more-ide-learn-label]
+  other = "Узнать больше"
+
+[navigation-more-ide-docs-label]
+  other = "Документация"
+
+[navigation-more-ide-support-label]
+  other = "Начало работы / Поддержка"
+
+[navigation-more-ide-contribute-label]
+  other = "Как контрибьютить"
+
+[navigation-more-ide-tools-label]
+  other = "IDE и инструменты"
+
+[navigation-more-ide-forum-label]
+  other = "Форум новичков"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation AISBL. Все права защищены."
+
+[search-section-label]
+  other = "Поиск"
+
+[project-single-licenses-label]
+  other = "Лицензии:"
+
+[project-single-tags-label]
+  other = " Таги"
+
+[project-summary-read-more]
+  other = "Прочитать больше..."
+
+[project-summary-latest-release]
+  other = "Крайние релизы:"
+
+[project-summary-download-label]
+  other = "загрузить"
+
+[project-summary-toggle-dropdown]
+  other = "Преглючить Dropdown"
+
+[project-summary-website-label]
+  other = "Вебсайт"
+
+[project-summary-logo-text]
+  other = "{{ .Title }} лого"
+
+[events-table-conference-header]
+  other = "Конференция"
+
+[events-table-location-header]
+  other = "Местоположение"
+
+[events-table-date-header]
+  other = "Дата"
+
+[members-list-members-label]
+  other = "Участники"
+
+[members-list-all-members]
+  other = "Все участники"
+
+[taxonomy-list-view-all]
+  other = "Посмотреть все"
+
+[taxonomy-list-rss-feed-label]
+  other = "Подпишитесь на наш RSS-feed"
+
+[not-found-template-heading]
+  other = "Страница не найдена"
+
+[not-found-template-content]
+  other = "К сожалению, запрошенная страница не может быть найдена. Ниже приведены некоторые ссылки, которые могут быть полезны."
+
+[not-found-template-eclipse-home]
+  other = "Eclipse home"
+
+[not-found-template-search-link]
+  other = "<a href='//eclipse.org/projects/searchpage.php'>Поиск</a> на ашем сайте"
+
+[not-found-template-privacy-terms-of-use]
+  other = "Вебсайт <a href='//eclipse.org/legal/privacy/'>privacy policy</a> и <a href='//eclipse.org/legal/terms-of-use/'> и условия использования</a>"
+
+[not-found-template-legal-documents]
+  other = "Правовые документы"
+
+[not-found-template-logos-artwork]
+  other = "Лого и художественное оформление"
+
+[not-found-template-webmaster-faq]
+  other = "ЧаВо вебмастера"
+
+[not-found-template-email-webmaster]
+  other = "аписать вебмастеру"
+
+[not-found-template-useful-links]
+  other = "Полезные ссылки"
+
+[not-found-template-project-archives]
+  other = "Eclipse project архивы"
+
+[not-found-template-project-downloads]
+  other = "Eclipse project загрузки"
+
+[faq-list-heading]
+  other = "Содержание"
+
+[project-list-logo-alt]
+  other = "{{ .name }} лого"
+
+[project-list-read-more-sr]
+  other = "Прочитать больше о {{ .name }}"
+
+[project-list-read-more]
+  other = "Прочитать больше..."
+
+[project-list-dropdown-sr]
+  other = "Переключить dropdown"
+
+[project-list-downloads]
+  other = "Загрузить"
+
+[project-list-website]
+  other = "Вебсайт"
+
+[project-list-resources]
+  other = "Ресурсы разработчика"
+
+[project-list-who]
+  other = "Кто вовлечен"
+
+[project-list-governance]
+  other = "Управление"
+
+[project-list-contact]
+  other = "Контакт"
+
+[agenda-schedule]
+other = "Программа на день"
+
+[agenda-legend]
+other = "Легенда"
+
+[agenda-sessions]
+other = "Программа"
+
+[agenda-session-name]
+other = "Название доклада"
+
+[agenda-presenter-name]
+other = "Имя докладчика"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Запись доклада"
+
+[agenda-session-schedule]
+other = "Запланированное Время"
+
+[agenda-session-recording-button-alt]
+other = "Видео доклада {{ .name }}"
+
+[agenda-session-slides-button-alt]
+other = "Слайды доклада {{ .name }}"
+
+[agenda-session-slides]
+other = "Слайды"
+
+[committee-carousel-title]
+other = "Програмный комитет"
+
+[committee-carousel-button-text]
+other = "Узнать больше"
+
+[committee-twitter-follow-text]
+other = "Следуй за {{ .name }} на Twitter!"
+
+[events-sponsor-title]
+other = "Спонсоры"
+
+[events-sponsor-image-alt]
+other = "лого"
+
+[modal-close-alt]
+  other = "Закрыть"

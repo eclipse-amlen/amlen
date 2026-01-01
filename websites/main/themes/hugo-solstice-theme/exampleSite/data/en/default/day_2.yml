@@ -1,0 +1,30 @@
+complete: true
+types:
+    - name: Demo
+      id: 1
+      color: "#e44"
+    - name: Keynote
+      id: b2 
+      color: "#a0a"
+    - name: Cloud
+      id: 3 
+      color: "#66e"
+
+items:
+    - name: The return of the Open-source software
+      presenter: Ken K.
+      abstract: "<p>Sample abstract</p>"
+      type: 1
+      vod: "#1"
+    - name: How to 'how to' Awakens
+      presenter: Jim Bob
+      type: b2
+      vod: "#2"
+    - name: A New Industry Keynote
+      presenter: Eclipse Foundation, .etc
+      type: b2
+      vod: "#3"
+    - name: Revenge of the Best practices
+      presenter: Adam A.
+      type: 3
+      vod: "#4"

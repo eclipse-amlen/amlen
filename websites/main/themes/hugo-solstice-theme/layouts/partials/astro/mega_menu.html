@@ -1,0 +1,65 @@
+{{/*
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+
+{{ $current_page := . }}
+{{ $hide_ad := $.Site.Params.hide_ad | default true }}
+{{ $header_ad_format := $.Site.Params.header_ad_format | default "ads_square" }}
+{{ $megaMenu := .Site.Data.mega_menu }}
+
+<div class="eclipsefdn-mega-menu">
+    {{ range (index .Site.Menus $main_menu) }}
+        {{ $menu_id := .Identifier | default (lower .Name) }}
+        {{ $menu_id = printf "%s-menu" $menu_id }}
+
+        <div class="mega-menu-submenu container hidden" data-menu-id="{{ $menu_id }}">
+            <div class="mega-menu-submenu-featured-story">
+
+              {{ if .Params.description }}
+                <p class="mega-menu-submenu-featured-story-heading">{{ .Params.heading | default .Name }}</p>
+                <p class="mega-menu-submenu-featured-story-text">{{ .Params.description }}</p>
+              {{ end }}
+
+              {{ with .Params.link }}
+                <a class="mega-menu-submenu-featured-story-btn btn btn-primary" href="{{ .url }}">{{ .text }}</a>
+              {{ end }}
+
+            </div>
+            <div class="mega-menu-submenu-links-section">
+                {{ range .Children }}
+                    <div class="mega-menu-submenu-links">
+                        <p class="menu-heading">{{ .Name }}</p>
+                        <ul>
+                            {{ range .Children }}
+                                <li>
+                                    <a href="{{ .URL }}">{{ .Name }}</a>
+                                </li>
+                            {{ end }}
+                        </ul>
+                    </div>
+                {{ end }}
+            </div>
+            <div class="mega-menu-submenu-ad-wrapper">
+              {{ if eq $hide_ad false }}
+                <div
+                  class="eclipsefdn-mega-menu-promo-content mega-menu-promo-content"
+                  data-ad-format="ads_square"
+                  data-ad-publish-to="eclipse_org_home"
+                >
+                </div>
+              {{ end }}
+            </div>
+        </div>
+    {{ end }}
+</div>

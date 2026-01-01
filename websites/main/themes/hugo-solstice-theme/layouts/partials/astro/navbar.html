@@ -1,0 +1,51 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $logo := .Site.Params.logo | default "https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-grey-orange.svg" }}
+{{ $logo_width := .Site.Params.logo_width | default "150" }}
+{{ $logo_title := .Site.Params.logo_title | default $.Site.Title }}
+
+{{ $call_for_action_text := .Site.Params.call_for_action_text }}
+{{ $call_for_action_url := .Site.Params.call_for_action_url }}
+{{ $call_for_action_icon := .Site.Params.call_for_action_icon }}
+{{ $call_for_action_id := .Site.Params.call_for_action_id }}
+
+{{ $hide_cfa := .Site.Params.hide_call_for_action | default .Page.Params.hide_call_for_action | default false }}
+
+<div class="header-navbar-wrapper">
+    <div class="container">
+        <div class="header-navbar">
+            <div class="header-navbar-brand">
+                <a class="logo-wrapper" href="/" title="{{ $logo_title }}">
+                    <img src="{{ $logo }}" alt="" width="{{ $logo_width }}" />
+                </a>
+            </div>
+            {{ partial "nav.html" . }}
+            <div class="header-navbar-end">
+                {{ if not $hide_cfa }}
+                <a 
+                  class="header-navbar-end-download-btn btn btn-primary" 
+                  href="{{ $call_for_action_url }}" 
+                  {{ with $call_for_action_id -}} id="{{ . }}" {{- end }}
+                >
+                  <i class="fa {{ $call_for_action_icon }}" aria-hidden="true"></i>
+                  {{ $call_for_action_text }}
+                  </a>
+                {{ end }}
+                <button class="mobile-menu-btn" aria-label="Toggle mobile navigation menu" aria-expanded="false">
+                    <i class="fa fa-bars fa-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

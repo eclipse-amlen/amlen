@@ -1,0 +1,41 @@
+<div id="footer-js">
+  <!-- Placed at the end of the document so the pages load faster -->
+  {{- $default_js := "https://www.eclipse.org/eclipse.org-common/themes/solstice/public/javascript/main.min.js?var=0.0.250" -}}
+  {{- if eq .Site.Params.layout_style "astro" -}}
+    {{- $default_js = "https://www.eclipse.org/eclipse.org-common/themes/solstice/public/javascript/astro.min.js?var=0.0.250" -}}
+  {{- end -}}
+  {{- with .Site.Params.js | default $default_js }}
+  <script src="{{ . | relURL }}?v={{ now.Unix }}"></script>
+  {{ end }}
+
+  {{- with .Site.Params.hugo_js }}
+    <script src="{{ . | relURL }}"></script>
+  {{ end }}
+
+  <!-- Read in mustache templates registered in page scratch -->
+  {{ range $key, $value := (.Page.Scratch.Get "mustache-templates") }}
+  <script id="{{ $key }}" type="text/html">
+  {{ readFile $value | safeHTML}}
+  </script>
+  {{ end }}
+
+  <!-- Initialize any newsroom components on the page -->
+  <script>
+  (function($, document) {
+    {{ range (.Page.Scratch.Get "events-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "filteredEvents"
+      });
+    {{ end }}
+    {{ range (.Page.Scratch.Get "news-container-ids") }}
+      $("#{{ . }}").eclipseFdnApi({
+        type: "newsItems"
+      });
+    {{ end }}
+  })(jQuery, document);
+  </script>
+
+  {{ if eq (.Page.Scratch.Get "is_using_twitter") "true" }}
+    <script src="https://platform.twitter.com/widgets.js" async></script>
+  {{ end }}
+</div>

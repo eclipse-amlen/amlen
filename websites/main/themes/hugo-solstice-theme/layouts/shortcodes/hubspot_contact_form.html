@@ -1,0 +1,39 @@
+{{ if and (isset .Params "portalId") (isset .Params "formId")}}
+<div id="hubspot-form-fallback" class="alert alert-info">
+  {{ if isset .Params "fallbackMessage" }}
+    {{ .Params.fallbackMessage | markdownify }}
+  {{ else }}
+    <p>
+      If you are unable to access the contact form, please reach out to us at
+      <a href="mailto:membership.coordination@eclipse-foundation.org"
+        >membership.coordination@eclipse-foundation.org</a
+      >
+      for assistance with your membership inquiry.
+    </p>
+  {{ end }}
+</div>
+
+<!--[if lte IE 8]>
+  <script
+    charset="utf-8"
+    type="text/javascript"
+    src="//js.hsforms.net/forms/v2-legacy.js"
+  ></script>
+<![endif]-->
+
+<script
+  charset="utf-8"
+  type="text/javascript"
+  src="//js.hsforms.net/forms/v2.js"
+></script>
+<script>
+  hbspt.forms.create({
+    region: "na1",
+    portalId: '{{ index .Params "portalId"}}',
+    formId: '{{ index .Params "formId"}}',
+    onFormReady: function () {
+      document.getElementById("hubspot-form-fallback").classList.add("hidden");
+    },
+  });
+</script>
+{{ end }}

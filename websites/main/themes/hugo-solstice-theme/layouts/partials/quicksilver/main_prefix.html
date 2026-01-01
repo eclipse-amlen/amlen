@@ -1,0 +1,37 @@
+{{/*
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ partial "collapsible-menu.html" . }}
+<main>
+  <div class="{{- .Params.container | default .Site.Params.container | default "container"}}">
+    {{ if ne .Page.Params.hide_sidebar true }}
+      <div class="row">
+        <div class="{{- .Params.main_content_class | default .Site.Params.main_content_class | default "col-md-18 padding-bottom-30"}}">
+    {{ end }}
+
+    {{ if eq .Page.Params.is_deprecated true }}
+      <div class="alert alert-danger margin-top-20" role="alert">
+        This page is deprecated and may contain some information that is no longer relevant or accurate.
+      </div>
+    {{ end }}
+
+    {{ if ne .Page.Params.hide_page_title true }}
+      <h1>
+        {{ if eq .Page.Params.format_title false }}
+          {{ .Title | safeHTML }}
+        {{ else }}
+          {{ .Title | safeHTML | title }}
+        {{ end }}
+      </h1>
+    {{ end }}
+

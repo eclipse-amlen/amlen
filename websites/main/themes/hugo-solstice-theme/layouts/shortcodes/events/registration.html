@@ -1,0 +1,54 @@
+<!-- 
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $currLang:=.Page.Lang }}
+{{ $event_id := .Get "event" | default "default" }}
+{{ $year := .Get "year" }}
+{{ if $year }}
+  {{ .Scratch.Set "base" (index (index .Site.Data $currLang) $year) }}
+{{ else }}
+  {{ .Scratch.Set "base" (index .Site.Data $currLang) }}
+{{ end }}
+{{ $base := .Scratch.Get "base" }}
+{{ $registration := (index $base $event_id).registration }}
+{{ $t := time $registration.end_date }}
+
+<div class="eclipsefdn-registration">
+  <div class="row">
+    {{ if $registration.image }}
+      <div class="eclipsefdn-registration-image col-xs-24 col-md-6 match-height-item-by-row">
+        {{ $registration.image | safeHTML }}
+      </div>
+    {{ end }}
+    <div class="eclipsefdn-registration-content col-xs-24 text-middle text-center {{ if $registration.image }}col-md-18 match-height-item-by-row{{ end }}"
+      data-end="{{ $t }}">
+      <h2{{ with .Get "headerClass" }} class="{{ . }}"{{ end }}>{{ .Get "title" | default $registration.title }}</h2>
+      <div class="eclipsefdn-registration-body">
+        {{ .Inner | markdownify }}
+        {{- with $registration.links }}
+        <ul class="list-inline cta-links eclipsefdn-registration-links">
+          {{ range . }}
+          <li><a href="{{ .url }}" class="btn btn-primary"{{ if eq .external "true" }} target="_blank"{{ end }}>{{ .text }}</a></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+      {{ if $t.Before now }}
+        <div class="eclipsefdn-registration-content-end">
+         <p>{{ $registration.end_text }}</p>
+        </div>
+      {{ end }}
+      {{ $registration.custom_content | safeHTML }}
+    </div>
+  </div>
+</div>

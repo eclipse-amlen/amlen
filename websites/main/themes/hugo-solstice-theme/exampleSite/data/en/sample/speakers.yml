@@ -1,0 +1,11 @@
+items:
+  - name: "Notareal Guy"
+    title: "Test dummy at the Eclipse Foundation"
+    twitter_handle: "eclipsefdn"
+    bio: |
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus nec nisi iaculis placerat. Maecenas accumsan quis est vel ornare. Suspendisse molestie feugiat dapibus. Integer malesuada at justo eget fermentum. Integer consectetur sodales est, sit amet euismod elit faucibus sed. Pellentesque dictum aliquam nisl iaculis dictum. Nulla pharetra, sapien et semper elementum, nibh magna egestas justo, at aliquam nisl nibh ac turpis. Donec maximus orci massa, feugiat pretium metus consequat vel. Duis mollis ante leo, vitae mollis nulla efficitur vitae.</p>
+      <p>Morbi non consequat orci, id pellentesque leo. Donec malesuada justo at orci interdum, at aliquam lectus tempus. Aliquam congue dui sit amet erat auctor tempor. Sed sollicitudin ipsum sit amet finibus fermentum. Nam malesuada metus vitae orci mattis posuere. Ut sit amet tincidunt lacus, ac luctus leo. Vestibulum fringilla massa eget quam volutpat ultrices. Nam a odio commodo, aliquet mauris in, congue dui. Nam ut auctor turpis.</p>
+  - name: "Jim Bob"
+    title: "Test dummy at the Eclipse Foundation"
+    bio: |
+      <p>Morbi non consequat orci, id pellentesque leo. Donec malesuada justo at orci interdum, at aliquam lectus tempus. Aliquam congue dui sit amet erat auctor tempor. Sed sollicitudin ipsum sit amet finibus fermentum. Nam malesuada metus vitae orci mattis posuere. Ut sit amet tincidunt lacus, ac luctus leo. Vestibulum fringilla massa eget quam volutpat ultrices. Nam a odio commodo, aliquet mauris in, congue dui. Nam ut auctor turpis.</p>

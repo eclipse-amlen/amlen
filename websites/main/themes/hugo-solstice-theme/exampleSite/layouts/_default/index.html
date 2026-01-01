@@ -1,0 +1,5 @@
+{{ define "main" }}
+  {{ .Content }}
+  {{ partial "param_list.html" .Site.Data.doc_params }}
+  {{ partial "param_list.html" .Site.Data.site_params }}
+{{ end }}

@@ -1,0 +1,24 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+<div class="col-sm-24 margin-top-20">
+  <div class="row">
+    <div id="copyright" class="col-sm-16">
+      <p id="copyright-text">{{ i18n "footer-copyright-text" | safeHTML}}</p>
+    </div>
+    {{ if eq $layout_style "quicksilver" }}
+      {{ partial "socials.html" . }}
+    {{ end }}
+  </div>
+</div>

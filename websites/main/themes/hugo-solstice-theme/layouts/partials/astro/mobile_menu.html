@@ -1,0 +1,108 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+{{ $current_page := . }}
+
+<nav class="mobile-menu hidden" aria-expanded="false">
+    <ul>
+        {{ range (index .Site.Menus $main_menu) }}
+            {{ $menu_id := .Identifier | default (lower .Name) }}
+            {{ $target_menu := printf "%s-menu" $menu_id }}
+            {{ $menu_type := "link" }}
+
+            {{/* If the desktop menu uses basic dropdowns, set menu type to "dropdown". */}}
+            {{ if .HasChildren }}
+              {{ $menu_type = "dropdown" }}
+            {{ end }}
+
+            {{/* Unless if any of the menus are 3-levels deep then we know the desktop menu type is "mega". */}}
+            {{ range .Children }}
+              {{ if .HasChildren }}
+                {{ $menu_type = "mega" }}
+              {{ end }}
+            {{ end }}
+            
+            {{ $args := dict "target_menu" $target_menu "Name" .Name "URL" .URL "Identifier" .Identifier "Children" .Children }}
+
+            {{ if eq $menu_type "link" }}
+              {{ template "mobile_menu_link" $args  }}
+            {{ else if eq $menu_type "dropdown" }}
+              {{ template "mobile_menu_dropdown" $args }} 
+            {{ else if eq $menu_type "mega" }}
+              {{ template "mobile_menu_mega" $args }} 
+            {{ end }}
+        {{ end }}
+    </ul>
+</nav>
+
+{{ define "mobile_menu_link" }}
+  <li>
+    <a class="mobile-menu-item" href="{{ .URL }}">{{ .Name }}</a>
+  </li>
+{{ end }}
+
+{{ define "mobile_menu_dropdown" }}
+  <li class="mobile-menu-dropdown">
+    <a class="mobile-menu-item mobile-menu-dropdown-toggle" data-target="{{ .target_menu }}">
+      <span>{{ .Name }}</span>
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+    </a>
+    <div class="mobile-menu-sub-menu-wrapper">
+      <ul class="mobile-menu-sub-menu mobile-menu-links-menu hidden" id="{{ .Identifier }}-menu">
+        {{ range .Children }}
+          {{ template "mobile_menu_link" . }}
+        {{ end }}
+      </ul>
+    </div>
+  </li>
+{{ end }}
+
+{{ define "mobile_menu_mega" }}
+  <li class="mobile-menu-dropdown">
+    <a class="mobile-menu-item mobile-menu-dropdown-toggle" data-target="{{ .target_menu }}">
+      <span>{{ .Name }}</span>
+      <i class="fa fa-chevron-down" aria-hidden="true"></i>
+    </a>
+    <div class="mobile-menu-sub-menu-wrapper">
+      <ul class="mobile-menu-sub-menu hidden" id="{{ .Identifier }}-menu">
+        {{ range .Children }}
+          <li class="mobile-menu-dropdown">
+            <a 
+              data-target="{{ .Identifier }}-sub-menu"
+              class="mobile-menu-item mobile-menu-dropdown-toggle" 
+              aria-expanded="false"
+            >
+              <span>{{ .Name }}</span>
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </a>
+            <div class="mobile-menu-sub-menu-wrapper">
+              <ul 
+                class="mobile-menu-sub-menu mobile-menu-links-menu hidden"
+                id="{{ .Identifier }}-sub-menu"
+              >
+                {{ range .Children }}
+                  <li>
+                    <a class="mobile-menu-item" href="{{ .URL }}">
+                      {{ .Name }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            </div>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </li>
+{{ end }}

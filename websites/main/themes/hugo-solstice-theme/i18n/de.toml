@@ -1,0 +1,341 @@
+[eclipse-foundation-text]
+other = "Eclipse Foundation"
+
+[navbar-manage-cookies-label]
+other = "Cookies verwalten"
+
+[navbar-edit-acccount-label]
+other = "Meinen Account bearbeiten"
+
+[footer-foundation-about-us-text]
+other = "Über uns"
+
+[footer-foundation-contact-us-text]
+other = "Kontakt"
+
+[footer-foundation-donate-text]
+other = "Spenden"
+
+[footer-foundation-members-text]
+other = "Mitglieder"
+
+[footer-foundation-governance-text]
+other = "Governance"
+
+[footer-foundation-logo-artwork-text]
+other = "Logos und Vorlagen"
+
+[footer-foundation-board-of-directors-text]
+other = "Vorstand"
+
+[footer-legal-section-text]
+other = "Recht"
+
+[footer-legal-code-of-conduct-text]
+other = "Code of Conduct"
+
+[footer-legal-privacy-policy-text]
+other = "Datenschutz"
+
+[footer-legal-terms-use-text]
+other = "Nutzungsbedingungen"
+
+[footer-legal-epl-text]
+other = "Eclipse Public License"
+
+[footer-legal-resources-text]
+other = "Juristische Quellen"
+
+[footer-useful-links-section-text]
+other = "Nützliche Links"
+
+[footer-useful-links-report-bug-text]
+other = "Fehler melden"
+
+[footer-useful-links-documentation-text]
+other = "Dokumentation"
+
+[footer-useful-links-contribute-text]
+other = "Wie kann ich mithelfen"
+
+[footer-useful-links-mailing-list-text]
+other = "Mailing-Listen"
+
+[footer-useful-links-forums-text]
+other = "Foren"
+
+[footer-useful-links-marketplace-text]
+other = "Marktplatz"
+
+[footer-other-section-text]
+other = "Andere"
+
+[footer-other-tools-text]
+other = "IDE und Werkzeuge"
+
+[footer-other-community-projects-text]
+other = "Projekte"
+
+[footer-other-working-groups-text]
+other = "Arbeitsgruppen"
+
+[footer-other-research-text]
+other = "Research@Eclipse"
+
+[footer-other-report-vulnerability-text]
+other = "Sicherheitslücke melden"
+
+[footer-other-status-text]
+other = "Service-Status"
+
+[footer-sr-social-account]
+  other = "{{ . }}-Account"
+
+[navigation-back-to-top]
+other = "Zurück nach oben"
+
+[navigation-breadcrumb-sr]
+other = "Breadcrumb"
+
+[navigation-content-skip]
+other = "Springe zum Hauptinhalt"
+
+[navigation-mobile-menu-toggle]
+other = "Navigation umschalten"
+
+[navigation-more-menu-label]
+other = "Mehr"
+
+[navigation-more-community-section]
+other = "Community"
+
+[navigation-more-community-marketplace-label]
+other = "Marktplatz"
+
+[navigation-more-community-events-label]
+other = "Events"
+
+[navigation-more-community-planet-eclipse-label]
+other = "Planet Eclipse"
+
+[navigation-more-community-newsletter-label]
+other = "Newsletter"
+
+[navigation-more-community-videos-label]
+other = "Videos"
+
+[navigation-more-community-blogs-label]
+other = "Blogs"
+
+[navigation-more-participate-section]
+other = "Mitmachen"
+
+[navigation-more-participate-bug-label]
+other = "Download"
+
+[navigation-more-participate-forums-label]
+other = "Foren"
+
+[navigation-more-participate-mailing-lists-label]
+other = "Mailing-Listen"
+
+[navigation-more-participate-wiki-label]
+other = "Wiki"
+
+[navigation-more-participate-irc-label]
+other = "IRC"
+
+[navigation-more-ide-section]
+other = "Eclipse IDE"
+
+[navigation-more-ide-download-label]
+other = "Download"
+
+[navigation-more-ide-learn-label]
+other = "Erfahre mehr"
+
+[navigation-more-ide-docs-label]
+other = "Dokumentation"
+
+[navigation-more-ide-support-label]
+other = "Getting Started / Support"
+
+[navigation-more-ide-contribute-label]
+other = "Wie kann ich mithelfen"
+
+[navigation-more-ide-tools-label]
+other = "IDE und Werkzeuge"
+
+[navigation-more-ide-forum-label]
+other = "Newcomer-Forum"
+
+[footer-copyright-text]
+other = "Copyright &copy; Eclipse Foundation AISBL. Alle Rechte vorbehalten."
+
+[search-section-label]
+other = "Suchen"
+
+[project-single-licenses-label]
+other = "Lizenzen:"
+
+[project-single-tags-label]
+other = " Tags"
+
+[project-summary-read-more]
+other = "Lese mehr..."
+
+[project-summary-latest-release]
+other = "Letztes Release:"
+
+[project-summary-download-label]
+other = "Download"
+
+[project-summary-toggle-dropdown]
+other = "Dropdown umschalten"
+
+[project-summary-website-label]
+other = "Website"
+
+[project-summary-logo-text]
+other = "{{ .Title }} Logo"
+
+[events-table-conference-header]
+other = "Konferenz"
+
+[events-table-location-header]
+other = "Ort"
+
+[events-table-date-header]
+other = "Datum"
+
+[members-list-members-label]
+other = "Mitglieder"
+
+[members-list-all-members]
+other = "Alle Mitglieder"
+
+[taxonomy-list-view-all]
+other = "Alles anzeigen"
+
+[taxonomy-list-rss-feed-label]
+other = "Abonniere unseren RSS-Feed"
+
+[not-found-template-heading]
+other = "Seite nicht gefunden"
+
+[not-found-template-content]
+other = "Es tut uns leid, die von Ihnen angeforderte Seite kann nicht angezeigt werden. Unten finden Sie einige Links, welche nützlich sein könnten."
+
+[not-found-template-eclipse-home]
+other = "Eclipse Home"
+
+[not-found-template-search-link]
+other = "<a href='//eclipse.org/projects/searchpage.php'>Website durchsuchen</a>"
+
+[not-found-template-privacy-terms-of-use]
+other = "Website <a href='//eclipse.org/legal/privacy/'>Datenschutzhinweise</a> und <a href='//eclipse.org/legal/terms-of-use/'>Nutzungsbedingungen</a>"
+
+[not-found-template-legal-documents]
+other = "Juristische Dokumente"
+
+[not-found-template-logos-artwork]
+other = "Logos und Vorlagen"
+
+[not-found-template-webmaster-faq]
+other = "Webmaster FAQ"
+
+[not-found-template-email-webmaster]
+other = "Email an den Webmaster"
+
+[not-found-template-useful-links]
+other = "Nützliche Links"
+
+[not-found-template-project-archives]
+other = "Eclipse-Projekt-Archiv"
+
+[not-found-template-project-downloads]
+other = "Eclipse-Projekt-Downloads"
+
+[faq-list-heading]
+other = "Inhaltsverzeichnis"
+
+[project-list-logo-alt]
+other = "{{ .name }} Logo"
+
+[project-list-read-more-sr]
+other = "Lese mehr über {{ .name }}"
+
+[project-list-read-more]
+other = "Lese mehr..."
+
+[project-list-dropdown-sr]
+other = "Dropdown umschalten"
+
+[project-list-downloads]
+other = "Download"
+
+[project-list-website]
+other = "Website"
+
+[project-list-resources]
+other = "Developer Resources"
+
+[project-list-who]
+other = "Wer ist involviert"
+
+[project-list-governance]
+other = "Governance"
+
+[project-list-contact]
+other = "Kontakt"
+
+[agenda-schedule]
+other = "Zeitplan"
+
+[agenda-legend]
+other = "Legende"
+
+[agenda-sessions]
+other = "Agenda"
+
+[agenda-session-name]
+other = "Session-Name"
+
+[agenda-presenter-name]
+other = "Sprecher-Name"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Session-Aufzeichnung"
+
+[agenda-session-schedule]
+other = "Geplante Zeit"
+
+[agenda-session-recording-button-alt]
+other = "Session-Video der Session {{ .name }}"
+
+[agenda-session-slides-button-alt]
+other = "Session-Slides der Session {{ .name }}"
+
+[agenda-session-slides]
+other = "Folien"
+
+[committee-carousel-title]
+other = "Treffe das Programmkomitee"
+
+[committee-carousel-button-text]
+other = "Erfahre mehr"
+
+[committee-twitter-follow-text]
+other = "Folge {{ .name }} auf Twitter!"
+
+[events-sponsor-title]
+other = "Sponsoren"
+
+[events-sponsor-image-alt]
+other = "Logo"
+
+[modal-close-alt]
+other = "Schließen"

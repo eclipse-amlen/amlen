@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Example Project A",
+        "website_url": "#",
+        "topic": null,
+        "summary": "An example of a project static source.",
+        "logo": "https://projects.eclipse.org/sites/all/modules/custom/pmi/project_state/images/incubating.png",
+        "state": "running",
+        "tags": [
+            "CPS",
+            "Security"
+        ],
+        "mainCategory": "CPS",
+        "releases": [
+            {
+                "name": "0.2.0",
+                "url": "#"
+            }
+        ]
+    },
+    {
+        "name": "Example Project B",
+        "website_url": "#",
+        "topic": null,
+        "summary": "An example of a project static source.",
+        "logo": "https://projects.eclipse.org/sites/all/modules/custom/pmi/project_state/images/incubating.png",
+        "state": "running",
+        "tags": [
+            "Security"
+        ],
+        "mainCategory": "Security",
+        "releases": [
+            {
+                "name": "0.2.0",
+                "url": "#"
+            }
+        ]
+    },
+    {
+        "name": "Example Project C",
+        "website_url": "#",
+        "topic": null,
+        "summary": "An example of a project static source.",
+        "logo": "https://projects.eclipse.org/sites/all/modules/custom/pmi/project_state/images/incubating.png",
+        "state": "running",
+        "tags": [
+            "CPS",
+            "Security"
+        ],
+        "mainCategory": "CPS",
+        "releases": [
+            {
+                "name": "0.2.0",
+                "url": "#"
+            }
+        ]
+    }
+]

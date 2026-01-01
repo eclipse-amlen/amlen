@@ -1,0 +1,102 @@
+{{/*
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $show_featured_story := .Page.Params.show_featured_story | default false }}
+{{ $hide_jumbotron := .Page.Params.hide_jumbotron }}
+{{ $jumbotron_container := .Page.Params.jumbotron_container | default "container" }}
+{{ $custom_jumbotron_end := .Page.Params.custom_jumbotron_end }}
+
+{{/*
+    We need to keep track of whether or not a jumbotron is present on the
+    page to know where to render the featured story.
+*/}}
+{{ .Scratch.Set "has_jumbotron" false }}
+
+{{ if or (isset .Page.Params "headline") (eq $hide_jumbotron false) }}
+    {{ .Scratch.Set "has_jumbotron" true }}
+
+    <div class="jumbotron featured-jumbotron featured-jumbotron-dark margin-bottom-0">
+      <div class="{{ $jumbotron_container }}">
+        <div class="row">
+          <div class="{{- .Params.jumbotron_class | default .Site.Params.jumbotron_class | default "col-md-20 col-md-offset-2 col-sm-18 col-sm-offset-3" }}">
+            {{ if and (.Page.Params.headline) (ne .Page.Params.headline "") }}
+              <h1 class="featured-jumbotron-headline">
+                {{ if eq (.Page.Params.format_title | default .Site.Params.format_title) false }}
+                  {{ .Page.Params.headline | safeHTML }}
+                {{ else }}
+                  {{ .Page.Params.headline | title | safeHTML }}
+                {{ end }}
+              </h1>
+            {{ end }}
+            {{ if isset .Page.Params "subtitle" }}
+              <div class="featured-jumbotron-subtitle">{{ .Page.Params.subtitle  | title | safeHTML }}</div>
+            {{ end }}
+
+            {{ if isset .Page.Params "tagline" }}
+              <div class="row">
+                <div class="{{- .Params.jumbotron_tagline_class | default .Site.Params.jumbotron_tagline_class | default "col-md-16" }}">
+                  <p class="featured-jumbotron-tagline">{{ .Page.Params.tagline | safeHTML }}</p>
+                </div>
+              </div>
+            {{ end }}
+
+           {{ if isset .Page.Params "custom_jumbotron" }}
+              <div class="row">
+                <div class="{{- .Params.custom_jumbotron_class | default .Site.Params.custom_jumbotron_class | default "col-sm-18 col-sm-offset-3"}}">
+                  {{ .Page.Params.custom_jumbotron | safeHTML }}
+                </div>
+              </div>
+          {{ end }}
+
+            {{ if isset .Page.Params "links" }}
+                {{- with .Params.jumbotron_btn_class | default .Site.Params.jumbotron_btn_class | default "btn btn-primary" }}
+                    {{ $.Scratch.Set "jumbotron_btn" . }}
+                {{ end }}
+                <ul class="featured-jumbotron-links list-inline">
+                    {{ range $key,$val := index .Page.Params.links}}
+                        {{ $btn_class := "" }}
+                        {{ with (index $val 2) }}
+                          {{ $btn_class = .class }}
+                        {{ else }}
+                          {{ $btn_class = $.Scratch.Get "jumbotron_btn" }}
+                        {{ end }}
+                        <li>
+                          <a class="{{ $btn_class }}" href="{{ (index $val 0).href}}" {{ with (index $val 3) -}} id="{{ .id | safeHTMLAttr }}" {{- end }}>
+                            {{ (index $val 1).text}}
+                          </a>
+                        </li>
+                    {{ end }}
+                </ul>
+            {{ end }}
+            <div class="featured-jumbotron-end">
+              {{ if (eq $show_featured_story true) }}
+                {{ $publish_target := .Page.Params.featured_content_publish_target | default .Site.Params.featured_content_publish_target | default "eclipse_org" }}
+                <div
+                  class="eclipsefdn-featured-story"
+                  data-template-id="template-featured-story-jumbotron"
+                  data-publish-target="{{ $publish_target }}"
+                >
+                  <div class="featured-container"></div>
+                </div>
+              {{ end }}
+              {{ if $custom_jumbotron_end }}
+                <div class="featured-jumbotron-end-custom">
+                  {{ $custom_jumbotron_end | safeHTML }}
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{{ end }}

@@ -1,0 +1,90 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $jumbotron_container := .Page.Params.jumbotron_container | default "container" }}
+{{ $jumbotron_class := .Params.jumbotron_class | default .Site.Params.jumbotron_class | default "col-xs-24" }}
+{{ $headline := .Page.Params.headline }}
+{{ $preheadline := .Page.Params.preheadline }}
+{{ $tagline := .Page.Params.tagline }}
+{{ $links := .Page.Params.links }}
+{{ $default_btn_class := "btn btn-primary" }}
+
+{{ $jumbotron_background_class := .Page.Params.jumbotron_background_class | default .Site.Params.jumbotron_background_class | default "bg bg-hero-1" }}
+
+{{ .Store.Set "has_jumbotron" (or (isset .Page.Params "headline") (isset .Page.Params "custom_jumbotron")) }}
+{{ $has_jumbotron := .Store.Get "has_jumbotron" }}
+
+{{ if $has_jumbotron }}
+  <section class="featured-jumbotron fade-group {{ $jumbotron_background_class }}">
+    <div class="{{ $jumbotron_container }}">
+      <div class="{{ $jumbotron_class }}">
+        <div class="featured-jumbotron-heading-group">
+          {{ with $.Page.Params.preheadline }}
+            <p 
+              class="featured-jumbotron-preheadline fade-item"
+              data-fade-duration="0.5"
+              data-fade-direction="none"
+            >
+              {{- . | safeHTML -}}
+            </p>
+          {{ end }}
+          {{ with $headline }}
+            <h1 
+              class="featured-jumbotron-headline fade-item"
+              data-fade-duration="0.5"
+              data-fade-direction="none"
+            >
+              {{- . | safeHTML -}}
+            </h1>
+          {{ end }}
+        </div>
+        {{ with $tagline }}
+          <p 
+            class="featured-jumbotron-tagline fade-item"
+            data-fade-duration="0.5"
+            data-fade-direction="none"
+          >
+            {{- . -}}
+          </p>
+        {{ end }}
+       {{ if isset .Page.Params "custom_jumbotron" }}
+          <div class="row">
+            <div class="{{- .Params.custom_jumbotron_class | default .Site.Params.custom_jumbotron_class | default "col-xs-24" }}">
+              {{ .Page.Params.custom_jumbotron | safeHTML }}
+            </div>
+          </div>
+        {{ end }}
+        {{ with $links }}
+          <ul class="featured-jumbotron-links list-inline">
+            {{ range $key,$val := index . }}
+                {{ $btn_class := "" }}
+                {{ with (index $val 2) }}
+                  {{ $btn_class = .class }}
+                {{ else }}
+                  {{ $btn_class = $default_btn_class }}
+                {{ end }}
+                <li>
+                  <a 
+                    class="{{ $btn_class }} fade-item" 
+                    href="{{ (index $val 0).href }}"
+                    {{ with (index $val 3) -}} id="{{ .id | safeHTMLAttr }}" {{- end }}
+                    data-fade-duration="0.5"
+                    data-fade-direction="none"
+                  >
+                    {{ (index $val 1).text}}
+                  </a>
+                </li>
+              {{ end }}
+          </ul>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,170 @@
+[upcoming-events-header]
+other = "Upcoming Events"
+
+[upcoming-events-learn-more]
+other = "Learn more"
+
+[upcoming-events-learn-more-title]
+other = "Learn more about {{ . }}"
+
+[past-events-header]
+other = "Past Events"
+
+[past-events-learn-more]
+other = "Learn more"
+
+[past-events-learn-more-title]
+other = "Learn more about {{ . }}"
+
+[agenda-schedule]
+other = "タイムテーブル"
+
+[agenda-legend]
+other = "凡例"
+
+[agenda-sessions]
+other = "セッション"
+
+[agenda-session-name]
+other = "セッション名"
+
+[agenda-presenter-name]
+other = "登壇者"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "ビデオ"
+
+[agenda-session-schedule]
+other = "時刻"
+
+[agenda-abstract-modal-alt]
+other = "{{.name}} の概要"
+
+[agenda-modal-close-alt]
+other = "終了"
+
+[agenda-session-recording-button-alt]
+other = "セッション{{ .name }}のセッションビデオ"
+
+[committee-carousel-title]
+other = "プログラム委員会のご紹介"
+
+[committee-carousel-content]
+other = "私達は、Eclipse Foundation と独立した Jakarta&reg; EE コミュニティのボランティアスタッフです。プログラム委員会は、クラウドネイティブJavaを推進する、JakartaOne Livestream Event のイベント内容を企画・構成しています。"
+
+[committee-carousel-button-text]
+other = "詳細"
+
+[committee-twitter-follow-text]
+other = "Twitterで{{ .name }}をフォローしてください！"
+
+[footer-get-social-title]
+other = "ソーシャルメディア"
+
+[footer-get-social-content]
+other = "イベント公式Twitterハンドル<a href='https://www.twitter.com/@{{.Count}}'>@{{.Count}}</a>をフォローして、イベントの最新情報、登壇者の発表、ニュースなどを入手してください！"
+
+[footer-our-events-title]
+other = "Upcoming Events"
+
+[footer-jakarta-callout-content]
+other = "Jakarta&reg; EEはコミュニティ主導によるクラウドのための共創とオープンイノベーションの実現を目指します"
+
+[footer-jakarta-callout-button-text]
+other = "詳細"
+
+[navbar-manage-cookies-label]
+  other = "クッキーの管理"
+
+[navbar-edit-acccount-label]
+  other = "アカウントを編集"
+
+[eclipse-foundation-text]
+  other = "Eclipse Foundation"
+
+[footer-foundation-about-us-text]
+  other = "プロフィール"
+
+[footer-foundation-contact-us-text]
+  other = "お問い合わせ"
+
+[footer-foundation-donate-text]
+  other = "寄付"
+
+[footer-foundation-governance-text]
+  other = "ガバナンス"
+
+[footer-foundation-logo-artwork-text]
+  other = "ロゴとアートワーク"
+
+[footer-foundation-board-of-directors-text]
+  other = "ボード"
+
+[footer-legal-section-text]
+  other = "法務関連"
+
+[footer-legal-privacy-policy-text]
+  other = "個人情報保護方針"
+
+[footer-legal-terms-use-text]
+  other = "利用規約"
+
+[footer-legal-epl-text]
+  other = "Eclipseパブリックライセンス"
+
+[footer-legal-resources-text]
+  other = "法務関連リソース"
+
+[footer-useful-links-section-text]
+  other = "リンク"
+
+[footer-useful-links-report-bug-text]
+  other = "バグを報告"
+
+[footer-useful-links-documentation-text]
+  other = "ドキュメンテーション"
+
+[footer-useful-links-contribute-text]
+  other = "貢献する方法"
+
+[footer-useful-links-mailing-list-text]
+  other = "メーリングリスト"
+
+[footer-useful-links-forums-text]
+  other = "フォーラム"
+
+[footer-useful-links-marketplace-text]
+  other = "マーケットプレース"
+
+[footer-other-section-text]
+  other = "その他"
+
+[footer-other-tools-text]
+  other = "統合開発環境とツール"
+
+[footer-other-community-projects-text]
+  other = "プロジェクトのコミュニティ"
+
+[footer-other-working-groups-text]
+  other = "ワーキンググループ"
+
+[footer-other-research-text]
+  other = "リサーチ@ Eclipse"
+
+[footer-other-report-vulnerability-text]
+  other = "脆弱性を報告する"
+
+[footer-other-status-text]
+  other = "サービス状況"
+
+[footer-sr-social-account]
+  other = "{{ . }}アカウント"
+
+[navigation-back-to-top]
+  other = "トップに戻る"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation AISBL. All Rights Reserved."
