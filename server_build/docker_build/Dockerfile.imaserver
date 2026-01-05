@@ -15,8 +15,9 @@
 # FROM quay.io/centos/centos:7
 # FROM quay.io/almalinuxorg/almalinux:8
 # FROM quay.io/almalinuxorg/almalinux:9
+# FROM quay.io/almalinuxorg/almalinux:10
 # For Fedora, the verion changes very often due to their short life
-# FROM quay.io/fedora/fedora:35-x86_64
+# FROM quay.io/fedora/fedora:43-x86_64
 FROM IMA_SVR_DISTRO
 
 WORKDIR ${IMA_SVR_INSTALL_PATH}/bin

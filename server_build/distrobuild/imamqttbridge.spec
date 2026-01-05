@@ -14,6 +14,8 @@
 #This is the default format when I download the source from a branch in GHE
 %define sourcename messagegateway-buildoss
 
+%global debug_package %{nil}
+
 Summary: Amlen Bridge for Linux x86_64
 Name: AmlenBridge
 Version: 1.1dev

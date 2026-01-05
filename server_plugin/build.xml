@@ -136,7 +136,7 @@
 		<replace file="${server.plugin.src.dir}/com/ibm/ima/plugin/impl/ImaPluginImpl.java" token="IMA_SVR_INSTALL_PATH" value="${IMA_SVR_INSTALL_PATH}" />
 		<replace file="${server.plugin.src.dir}/com/ibm/ima/plugin/impl/ImaPluginInstaller.java" token="IMA_SVR_INSTALL_PATH" value="${IMA_SVR_INSTALL_PATH}" />
 
-		<javac source="1.8" target="1.8" srcdir="${server.plugin.src.dir}" destdir="${server.plugin.bin.dir}" deprecation="no"
+		<javac release="8" srcdir="${server.plugin.src.dir}" destdir="${server.plugin.bin.dir}" deprecation="no"
 		     includeAntRuntime="no" encoding="utf-8"
 		     debug="yes" debuglevel="lines,source,vars" optimize="yes">
 			<src path="${server.plugin.src.dir}" />
@@ -214,7 +214,7 @@
 
 	<!--  Compile the unit test code  -->
 	<target name="plugin_compile_test" depends="plugin_compile">
-		<javac  source="1.7" target="1.7" srcdir="${server.plugin.test.src.dir}" destdir="${server.plugin.junit.dir}"
+		<javac release="8" srcdir="${server.plugin.test.src.dir}" destdir="${server.plugin.junit.dir}"
                      debug="yes" debuglevel="lines,source,vars" optimize="yes">
          <classpath refid="test.classpath" />
       </javac>

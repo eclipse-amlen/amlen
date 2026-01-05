@@ -44,13 +44,6 @@ spec:
             steps {
                 container('jnlp') {
                     echo "In BuildFanout, BUILD_LABEL is ${env.BUILD_LABEL}"
-                    
-                    build job: 'Build_SingleBranch_ChooseDistro', parameters: [
-                             string(name: 'branchName', value: String.valueOf(branchName)),
-                             string(name: 'buildId', value: String.valueOf(env.BUILD_LABEL)),
-                             string(name: 'buildcontainerVersion', value: buildcontainerVersion),
-                             string(name: 'distro', value: "centos7")
-                             ]
 
                     build job: 'Build_SingleBranch_ChooseDistro', parameters: [
                              string(name: 'branchName', value: String.valueOf(branchName)),
@@ -63,6 +56,13 @@ spec:
                              string(name: 'buildId', value: String.valueOf(env.BUILD_LABEL)), 
                              string(name: 'buildcontainerVersion', value: buildcontainerVersion),
                              string(name: 'distro', value: "almalinux9")]
+
+                    build job: 'Build_SingleBranch_ChooseDistro', parameters: [
+                             string(name: 'branchName', value: String.valueOf(branchName)),
+                             string(name: 'buildId', value: String.valueOf(env.BUILD_LABEL)),
+                             string(name: 'buildcontainerVersion', value: buildcontainerVersion),
+                             string(name: 'distro', value: "almalinux10")
+                             ]
 
                     build job: 'Build_SingleBranch_ChooseDistro', parameters: [
                              string(name: 'branchName', value: String.valueOf(branchName)),

@@ -101,7 +101,7 @@
 		<!--  Compile the public api classes with no visibility to the internal files -->
 		<javac srcdir="${client.proxy.src.dir}" destdir="${client.proxy.bin.dir}" deprecation="no"
              includeAntRuntime="no" encoding="utf-8"
-             debug="yes" debuglevel="lines,source" optimize="yes" target="1.8" source="1.8">
+             debug="yes" debuglevel="lines,source" optimize="yes" release="8">
 			<src path="${client.proxy.src.dir}" />
 			<classpath refid="compile.classpath" />
 		</javac>

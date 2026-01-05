@@ -15,21 +15,26 @@
 # FROM quay.io/centos/centos:7
 # FROM quay.io/almalinuxorg/almalinux:8
 # FROM quay.io/almalinuxorg/almalinux:9
+# FROM quay.io/almalinuxorg/almalinux:10
 # For Fedora, the verion changes very often due to their short life
-# FROM quay.io/fedora/fedora:35-x86_64
+# FROM quay.io/fedora/fedora:43-x86_64
 FROM IMA_SVR_DISTRO
 
 WORKDIR ${IMA_WEBUI_INSTALL_PATH}/bin
 
-# For RHEL8 and compatible distros, openldap-servers is not in the default repo
+# For RHEL8+ and compatible distros, openldap-servers is not in the default repo
 # and that is a prereq so one of:
-#  1) CodeReady Builder stream for RHEL
-#  2) PowerTools for CentOS/AlmaLinux
+#  1) CodeReady Builder/PowerTools stream for RHEL/Almalinux 8
+#  2) EPEL for RHEL/Almalinux 9+
 #  3) Symas repo
 # Needs to be enabled e.g. we enable symas:
 #RUN curl -o /etc/yum.repos.d/sofl.repo https://repo.symas.com/configs/SOFL/rhel8/sofl.repo
-# We make this step optional as not all distros will suport the commands
+# We make this step optional as not all distros will support the commands
+
+RUN dnf install dnf-plugins-core -y
 RUN dnf config-manager --set-enabled powertools || true
+RUN dnf config-manager --set-enabled crb || true
+RUN dnf install epel-release -y || true
 
 # Add RPM in a temporary directory inside the container
 # Make sure that imawebui.rpm is available in the directory where "docker build" command

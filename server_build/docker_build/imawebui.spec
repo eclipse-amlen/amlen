@@ -13,6 +13,7 @@
 %define _topdir %(echo $PWD)/..
 %define distrel %(day="`date +%j`"; echo "0.$day")
 %define _tmppath %{_topdir}/tmp
+%global debug_package %{nil}
 
 Summary: ${IMA_PRODUCTNAME_FULL} Web UI for Linux x86_64
 Name: ${IMA_PKG_WEBUI}
