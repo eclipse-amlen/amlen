@@ -24,6 +24,8 @@ RUN dnf -y update && \
     # Needed to build the proxy
     dnf -y install epel-release && \
     dnf -y install mongo-c-driver-devel && \
+    # We use java21
+    dnf -y install java-21-openjdk-headless java-21-openjdk-devel && \
     # Needed for verifying python stuff
     pip3 install pylint requests
 
@@ -66,4 +68,7 @@ RUN cd /deps && \
     make && \
     cp libstatsdclient.so /usr/lib64 && \
     cp statsd-client.h /usr/include
-
+    
+#Use Java 21
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+ENV PATH="$JAVA_HOME/bin:$PATH"
