@@ -1,0 +1,79 @@
+{{/* 
+  Copyright (c) 2023, 2024 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+    Zachary Sabourin <zachary.sabourin@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ if isset .Site.Menus "sidebar" }}
+  {{ $identifiers := slice "home" }}
+
+  {{ if .Page.Params.sidebar }}
+    {{ $identifiers = .Page.Params.sidebar }}
+  {{ else if .Page.Section }}
+    {{ $identifiers = slice .Page.Section }}
+  {{ end }}
+  
+  {{ $menu_sections := where .Site.Menus.sidebar "Identifier" "in" $identifiers}}
+
+  {{ with $menu_sections }}
+    <aside class="main-sidebar-default-margin" id="main-sidebar">
+      {{ range . }}
+        {{ if .HasChildren }}
+          <ul class="ul-left-nav" id="leftnav" role="tablist" aria-multiselectable="true">
+            <li class="main-sidebar-main-item main-sidebar-item-indented separator">
+              {{ if .URL }}
+                <a class="main-sidebar-heading link-unstyled" href="{{ .URL }}">
+                  {{ .Name }}
+                </a>
+              {{ else }}
+                <p class="main-sidebar-heading">
+                  {{ .Name }}
+                </p>
+              {{ end }}
+            </li>
+            {{ range .Children }}
+              <li class="main-sidebar-item main-sidebar-item-indented">
+                {{ if .HasChildren }}
+                  <li class="main-sidebar-item main-sidebar-item-indented">
+                    <a class="link-unstyled" role="button" data-toggle="collapse" href="#{{ .Identifier }}" aria-expanded="false" aria-controls="{{ .Identifier }}">
+                      <span>{{ .Name }}</span>
+                      <i class="main-sidebar-item-icon fa fa-chevron-down" aria-hidden="true"></i>
+                    </a>
+                    <div class="collapse" id="{{ .Identifier }}">
+                      <ul class="main-sidebar-item-submenu list-unstyled">
+                        {{ range .Children }}
+                        <li class="submenu-item">
+                          {{ .Pre }}
+                          <a class="link-unstyled" href="{{ .URL | relURL }}" target="_self">{{ .Name }}</a>
+                        </li>
+                        {{ end }}
+                      </ul>
+                    </div>
+                  </li>
+                {{ else }}
+                  <li class="main-sidebar-item main-sidebar-item-indented">
+                    <a class="link-unstyled" href="{{ .URL | relURL }}">
+                      <div>
+                        <span class="main-sidebar-item-pre" aria-hidden="true">
+                          {{ .Pre }}
+                        </span>
+                        {{ .Name }}
+                      </div>
+                    </a>
+                  </li>
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      {{ end }}
+    </aside>
+  {{ end }}
+{{ end }}

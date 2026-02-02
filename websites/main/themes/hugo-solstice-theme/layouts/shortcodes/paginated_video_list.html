@@ -1,0 +1,39 @@
+<!--
+ Copyright (c) Eclipse Foundation
+
+ This program and the accompanying materials are made
+ available under the terms of the Eclipse Public License 2.0
+ which is available at https://www.eclipse.org/legal/epl-2.0/
+
+ SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $params := dict 
+  "description_max" (.Get "description_max" | default 200)
+  "count" (.Get "count" | default 6)
+  "filterable" (.Get "filterable" | default true)
+}}
+
+{{ $base := cond (eq (.Get "localize" | default "false") "false") .Site.Data (index .Site.Data .Page.Lang) }}
+{{ $playlists := index $base (.Get "src") }}
+{{ $store := .Store }}
+
+{{ range $playlist := $playlists }}
+  {{ with resources.GetRemote (print "https://www.youtube.com/feeds/videos.xml?playlist_id=" $playlist.id) }}
+    {{ range $video := (.Content | transform.Unmarshal).entry }}
+      {{ $store.SetInMap "videos" (.title | urlize) (merge $video (dict "category" $playlist.title)) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="eclipsefdn-paginated-video-list" data-count="{{ $params.count }}" data-filterable="{{ $params.filterable }}">
+  {{ range sort ($store.GetSortedMapValues "videos") "published" "desc" }}
+    <div class="video-item"
+          data-title="{{ .title }}"
+          data-id="{{ .videoId }}"
+          data-category="{{ .category }}"
+          data-date='{{ time.Format "2 January 2006" .published }}'
+          data-description='{{ index .group "description" | truncate $params.description_max }}'
+    ></div>
+  {{ end }}
+</div>

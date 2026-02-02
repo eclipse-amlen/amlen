@@ -1,0 +1,57 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<div class="margin-bottom-40">
+	<h2 id="{{ .Title | urlize }}">{{ .Title }}</h2>
+	<p>{{ .Description }}</p>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Parameter name</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range sort .items "name" }}
+				<tr>
+					<td>{{ .name }}</td>
+					<td>
+						<p>{{ .description | safeHTML }}</p>
+            {{ if .deprecated }}
+              <p class="red">Deprecated in v{{ .deprecated }}</p>
+            {{ end }}
+						{{ if isset .values 0 }}
+							<p><em>Accepted values:</em></p>
+							<ul>
+								{{ range .values }}
+									<li>{{ . }}</li>
+								{{ end }}
+							</ul>
+						{{ end }}
+						
+						{{ if and (trim .example " " | ne "") (isset . "example") }}
+							<p>
+								<em>Example:</em> {{ .example | safeHTML }}
+							</p>
+						{{ end }}
+						
+						{{ if and (trim .ref " " | ne "") (isset . "ref") }}
+							<p>
+								<em>Reference:</em> <a href="{{ .ref }}">Document reference</a>
+							</p>
+						{{ end }}
+					</td>
+				</tr>
+			{{ end }}
+		</tbody>
+	</table>
+</div>

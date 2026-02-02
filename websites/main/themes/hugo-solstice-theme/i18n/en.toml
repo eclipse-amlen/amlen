@@ -1,0 +1,364 @@
+[eclipse-foundation-text]
+  other = "Eclipse Foundation"
+
+[navbar-manage-cookies-label]
+  other = "Manage Cookies"
+
+[navbar-edit-acccount-label]
+  other = "Edit my account"
+
+[footer-foundation-about-us-text]
+  other = "About"
+
+[footer-foundation-contact-us-text]
+  other = "Contact Us"
+
+[footer-foundation-sponsor-text]
+  other = "Sponsor"
+
+[footer-foundation-careers-text]
+  other = "Careers"
+
+[footer-foundation-members-text]
+  other = "Membership"
+
+[footer-foundation-governance-text]
+  other = "Governance"
+
+[footer-foundation-logo-artwork-text]
+  other = "Logo and Artwork"
+
+[footer-foundation-board-of-directors-text]
+  other = "Board of Directors"
+
+[footer-legal-section-text]
+  other = "Legal"
+
+[footer-legal-code-of-conduct-text]
+  other = "Code of Conduct"
+
+[footer-legal-privacy-policy-text]
+  other = "Privacy Policy"
+
+[footer-legal-terms-use-text]
+  other = "Terms of Use"
+
+[footer-legal-compliance-text]
+  other = "Compliance"
+
+[footer-legal-epl-text]
+  other = "Eclipse Public License"
+
+[footer-legal-resources-text]
+  other = "Legal Resources"
+
+[footer-legal-manage-cookies-label]
+  other = "Manage Cookies"
+
+[footer-useful-links-section-text]
+  other = "Useful Links"
+
+[footer-useful-links-report-bug-text]
+  other = "Report a Bug"
+
+[footer-useful-links-documentation-text]
+  other = "Documentation"
+
+[footer-useful-links-contribute-text]
+  other = "How to Contribute"
+
+[footer-useful-links-mailing-list-text]
+  other = "Mailing Lists"
+
+[footer-useful-links-forums-text]
+  other = "Forums"
+
+[footer-useful-links-marketplace-text]
+  other = "Marketplace"
+
+[footer-other-section-text]
+  other = "More"
+
+[footer-other-tools-text]
+  other = "IDE and Tools"
+
+[footer-other-contact-text]
+  other = "Contact Us"
+
+[footer-other-support-text]
+  other = "Support"
+
+[footer-other-report-vulnerability-text]
+  other = "Report a Vulnerability"
+
+[footer-other-status-text]
+  other = "Service Status"
+
+[footer-other-community-projects-text]
+  other = "Projects"
+
+[footer-other-working-groups-text]
+  other = "Working Groups"
+
+[footer-other-research-text]
+  other = "Research@Eclipse"
+
+[footer-sr-social-account]
+  other = "{{ . }} account"
+
+[navigation-back-to-top]
+  other = "Back to the top"
+
+[navigation-breadcrumb-sr]
+  other = "Breadcrumb"
+
+[navigation-content-skip]
+  other = "Skip to main content"
+
+[navigation-mobile-menu-toggle]
+  other = "Toggle navigation"
+
+[navigation-more-menu-label]
+  other = "More"
+
+[navigation-more-community-section]
+  other = "Community"
+
+[navigation-more-community-marketplace-label]
+  other = "Marketplace"
+
+[navigation-more-community-events-label]
+  other = "Events"
+
+[navigation-more-community-planet-eclipse-label]
+  other = "Planet Eclipse"
+
+[navigation-more-community-newsletter-label]
+  other = "Newsletter"
+
+[navigation-more-community-videos-label]
+  other = "Videos"
+
+[navigation-more-community-blogs-label]
+  other = "Blogs"
+
+[navigation-more-participate-section]
+  other = "Participate"
+
+[navigation-more-participate-bug-label]
+  other = "Download"
+
+[navigation-more-participate-forums-label]
+  other = "Forums"
+
+[navigation-more-participate-mailing-lists-label]
+  other = "Mailing Lists"
+
+[navigation-more-participate-wiki-label]
+  other = "Wiki"
+
+[navigation-more-participate-irc-label]
+  other = "IRC"
+
+[navigation-more-ide-section]
+  other = "Eclipse IDE"
+
+[navigation-more-ide-download-label]
+  other = "Download"
+
+[navigation-more-ide-learn-label]
+  other = "Learn more"
+
+[navigation-more-ide-docs-label]
+  other = "Documentation"
+
+[navigation-more-ide-support-label]
+  other = "Getting Started / Support"
+
+[navigation-more-ide-contribute-label]
+  other = "How to Contribute"
+
+[navigation-more-ide-tools-label]
+  other = "IDE and Tools"
+
+[navigation-more-ide-forum-label]
+  other = "Newcomer Forum"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation AISBL. All Rights Reserved."
+
+[search-section-label]
+  other = "Search"
+
+[project-single-licenses-label]
+  other = "Licenses:"
+
+[project-single-tags-label]
+  other = " Tags"
+
+[project-summary-read-more]
+  other = "Read more..."
+
+[project-summary-latest-release]
+  other = "Latest release:"
+
+[project-summary-download-label]
+  other = "Download"
+
+[project-summary-toggle-dropdown]
+  other = "Toggle Dropdown"
+
+[project-summary-website-label]
+  other = "Website"
+
+[project-summary-logo-text]
+  other = "{{ .Title }} logo"
+
+[events-table-conference-header]
+  other = "Conference"
+
+[events-table-location-header]
+  other = "Location"
+
+[events-table-date-header]
+  other = "Date"
+
+[members-list-members-label]
+  other = "Members"
+
+[members-list-all-members]
+  other = "All members"
+
+[taxonomy-list-view-all]
+  other = "View all"
+
+[taxonomy-list-rss-feed-label]
+  other = "Subscribe to our RSS-feed"
+
+[not-found-template-heading]
+  other = "Page not found"
+
+[not-found-template-content]
+  other = "We're sorry, the page you requested cannot be found. Below are some links that may be useful."
+
+[not-found-template-eclipse-home]
+  other = "Eclipse home"
+
+[not-found-template-search-link]
+  other = "<a href='//eclipse.org/projects/searchpage.php'>Search</a> our site"
+
+[not-found-template-privacy-terms-of-use]
+  other = "Website <a href='//eclipse.org/legal/privacy/'>privacy policy</a> and <a href='//eclipse.org/legal/terms-of-use/'>terms of use</a>"
+
+[not-found-template-legal-documents]
+  other = "Legal documents"
+
+[not-found-template-logos-artwork]
+  other = "Logos and artwork"
+
+[not-found-template-webmaster-faq]
+  other = "Webmaster FAQ"
+
+[not-found-template-email-webmaster]
+  other = "Email the webmaster"
+
+[not-found-template-useful-links]
+  other = "Useful links"
+
+[not-found-template-project-archives]
+  other = "Eclipse project archives"
+
+[not-found-template-project-downloads]
+  other = "Eclipse project downloads"
+
+[faq-list-heading]
+  other = "Table of contents"
+
+[project-list-logo-alt]
+  other = "{{ .name }} logo"
+
+[project-list-read-more-sr]
+  other = "Read more about {{ .name }}"
+
+[project-list-read-more]
+  other = "Read more..."
+
+[project-list-dropdown-sr]
+  other = "Toggle dropdown"
+
+[project-list-downloads]
+  other = "Download"
+
+[project-list-website]
+  other = "Website"
+
+[project-list-resources]
+  other = "Developer Resources"
+
+[project-list-who]
+  other = "Who's involved"
+
+[project-list-governance]
+  other = "Governance"
+
+[project-list-contact]
+  other = "Contact"
+
+[agenda-schedule]
+other = "Plan of the Day"
+
+[agenda-legend]
+other = "Legend"
+
+[agenda-sessions]
+other = "Agenda"
+
+[agenda-session-name]
+other = "Session Name"
+
+[agenda-presenter-name]
+other = "Presenter Name"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Session Recording"
+
+[agenda-session-schedule]
+other = "Scheduled Time"
+
+[agenda-session-recording-button-alt]
+other = "Session video for session {{ .name }}"
+
+[agenda-session-slides-button-alt]
+other = "Session slides for session {{ .name }}"
+
+[agenda-session-slides]
+other = "Slides"
+
+[committee-carousel-title]
+other = "Meet the Program Committee"
+
+[committee-carousel-button-text]
+other = "Learn more"
+
+[committee-twitter-follow-text]
+other = "Follow {{ .name }} on Twitter!"
+
+[events-sponsor-title]
+other = "Sponsors"
+
+[events-sponsor-image-alt]
+other = "logo"
+
+[modal-close-alt]
+  other = "Close"
+
+[table-of-contents-heading]
+other = "Table of Contents"
+
+# Deprecated
+
+[footer-legal-copyright-agent-text]
+  other = "Copyright Agent"

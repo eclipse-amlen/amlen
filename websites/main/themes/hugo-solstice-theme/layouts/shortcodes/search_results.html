@@ -1,0 +1,33 @@
+{{ if .Site.Params.gcse }}
+  <style type="text/css">
+    <!--
+      /* Relevance button */
+      .gsc-control-cse div{
+        width:auto!important;
+      }
+
+      .cse .gsc-control-cse, .gsc-control-cse,
+      .gsc-results .gsc-cursor-box,
+      .gsc-result-info, .gsc-thumbnail-inside, .gsc-url-top{
+        padding:0!important;
+        margin-left:0!important;
+        margin-right:0!important;
+      }
+
+      .gsc-results .gsc-cursor-box{
+        text-align:center;
+        border-top:1px solid #ccc;
+        padding-top:20px!important;
+      }
+      .gsc-result .gs-title{
+        height:1.4em!important;
+        overflow: visible !important;
+      }
+      -->
+  </style>
+  <div class="reset-box-sizing">
+    <script async src="https://cse.google.com/cse.js?cx={{ .Site.Params.gcse }}"></script>
+    <gcse:searchbox-only  resultsUrl="{{ .Page.Permalink | absURL }}"></gcse:searchbox-only>
+    <gcse:searchresults-only resultsUrl="{{ .Page.Permalink | absURL }}"></gcse:searchresults-only>
+  </div>
+{{ end }}

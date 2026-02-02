@@ -1,0 +1,115 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<div class="row tabs-sidebar">
+  {{ $col_class := "col-sm-24" }}
+  {{ $dataLocation := .Get 0 }}
+  {{ if not $dataLocation }}
+    {{ if gt (len $.Site.Taxonomies.participation_levels) 1 }}
+    {{ $col_class = "col-sm-18" }}
+      <div class="col-sm-6">
+        <nav class="nav-sidebar">
+          <ul class="nav tabs">
+            {{ range $index, $level := $.Site.Taxonomies.participation_levels }}
+              <li class="<?php print $value['list_class'];?>">
+                <a class="text-uppercase text-center" href="#tab-{{ $index }}" data-toggle="tab">
+                  <strong> {{ humanize $index }} {{ i18n "members-list-members-label" }}</strong>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+        <p class="text-center"><a id="showalltabs" href="#allmembers" class="btn btn-warning">{{ i18n "members-list-all-members" }}</a></p>
+      </div>
+    {{ end }}
+    <div class="{{ $col_class }}">
+      <div class="tab-content background-white no-border">
+        {{ range $index, $level := $.Site.Taxonomies.participation_levels }}
+          <div class="tab-pane active" id="tab-{{$index}}">
+          <h3 class="block-heading">{{ humanize $index }}</h3>
+          {{ range sort .Pages "Title"}}
+            {{ .Scratch.Set "link" .RelPermalink }}
+    
+            {{ if .Params.link }}
+              {{ .Scratch.Set "link" .Params.link }}
+            {{ end }}
+            
+            {{ if .Params.member_id }}
+              {{ .Scratch.Set "link" (print "https://www.eclipse.org/membership/showMember.php?member_id=" .Params.member_id) }}
+            {{ end }}
+            
+            <div class="row clearfix padding-10 margin-bottom-10">
+              <div class="col-md-6">
+                <a class="margin-left-15 margin-right-15" href="{{ .Scratch.Get "link" }}">
+                  <img style="max-width:125px;" class="img-responsive" src="{{ .Params.logo }}">
+                </a>
+              </div>
+              <div class="col-md-18">
+                <h4 class="h5 margin-top-0 fw-600"><a href="{{ .Scratch.Get "link" }}">{{ .Title | safeHTML }}</a></h4>
+                <p>{{ .Summary }}</p>
+              </div>
+            </div>
+          {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ else }}
+    {{ $data:= index $.Site.Data $dataLocation }}
+    {{ if gt (len $data.types) 1 }}
+    {{ $col_class = "col-sm-18" }}
+      <div class="col-sm-6">
+        <nav class="nav-sidebar">
+          <ul class="nav tabs">
+            {{ range $data.types}}
+              <li class="<?php print $value['list_class'];?>">
+                <a class="text-uppercase text-center" href="#tab-{{ .name | urlize }}" data-toggle="tab">
+                  <strong>{{ humanize .name }}</strong>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+        <p class="text-center"><a id="showalltabs" href="#allmembers" class="btn btn-warning">{{ i18n "members-list-all-members" }}</a></p>
+      </div>
+    {{ end }}
+    <div class="{{ $col_class }}">
+      <div class="tab-content background-white no-border">
+        {{ range $data.types }}
+          <div class="tab-pane active" id="tab-{{ .name | urlize}}">
+          <h3 class="block-heading">{{ humanize .name }}</h3>
+          {{ range sort .items "title" }}
+            {{ $lnk:=.link }}
+            {{ if .member_id }}
+              {{ $lnk = (print "https://www.eclipse.org/membership/showMember.php?member_id=" .member_id) }}
+            {{ end }}
+            
+            <div class="row clearfix padding-10 margin-bottom-10">
+              <div class="col-md-6">
+                <a class="margin-left-15 margin-right-15" href="{{ $lnk }}">
+                  <img style="max-width:125px;" class="img-responsive" src="{{ .image }}">
+                </a>
+              </div>
+              <div class="col-md-18">
+                <h4 class="h5 margin-top-0 fw-600"><a href="{{ $lnk }}">{{ .title }}</a></h4>
+                {{ if .summary }}
+                <p>{{ .summary }}</p>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</div>

@@ -1,0 +1,44 @@
+{{ $class := .Get "class" | default "" }}
+{{ $type := .Get "type" }}
+{{ $handle := .Get "handle" | default .Site.Params.author.twitter }}
+{{ $hide_followers := .Get "hide_followers" | default "true" }}
+{{ $hashtag := .Get "hashtag" }}
+{{ $preload_text := .Get "preload_text" }}
+{{ $size := .Get "size" | default "default" }}
+
+{{ if not $type }}
+    {{ errorf "A type must be provided to display a Twitter button from twitter_button.html" }}
+{{ end }}
+
+{{ $type_map := dict "follow" "twitter-follow-button" "mention" "twitter-mention-button" "hashtag" "twitter-hashtag-button" }}
+{{ $twitter_class := index $type_map $type | default false }}
+
+{{ if not $twitter_class }}
+    {{ errorf "Invalid type shortcode parameter value provided to twitter_button.html" }}
+{{ else if and (eq $type "follow") (not $handle) }}
+    {{ errorf "A handle must be provided to display a Twitter follow button from twitter_button.html" }}
+{{ else if and (eq $type "hashtag") (not $hashtag) }}
+    {{ errorf "A hashtag must be provided to display a Twitter hashtag button from twitter_button.html"}}
+{{ end }}
+
+{{ $href := "https://twitter.com/" }}
+{{ if eq $type "follow" }}
+    {{ $href = printf "%s%s" $href $handle }}
+{{ else if eq $type "mention" }}
+    {{ $href = printf "%s%s%s" $href "/intent/tweet?screen_name=" $handle }}
+{{ else if eq $type "hashtag" }}
+    {{ $href = printf "%s%s%s" $href "/intent/tweet?button_hashtag=" $hashtag }}
+{{ end }}
+
+<div class="eclipsefdn-twitter-button eclipsefdn-twitter-button-{{- $type -}} {{ $class }}">
+    <a class="eclipsefdn-twitter-button-preloaded eclipsefdn-twitter-button-{{- $type -}}-preloaded {{ $twitter_class }}"
+        href="{{ $href }}"    
+        data-dnt="true"
+        data-size="{{ $size }}"
+        {{ if eq $hide_followers "true" }} data-show-count="false" {{ end }}
+    >
+        {{ $preload_text }}
+    </a>
+</div>
+
+{{ .Page.Scratch.Set "is_using_twitter" "true" }}

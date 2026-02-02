@@ -1,0 +1,60 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+{{ $current_page := . }}
+
+<nav class="navigation-bar-nav hidden-xs hidden-sm">
+  <ul>
+    {{ range (index .Site.Menus $main_menu) }}
+      {{ $menu_id := .Identifier | default (lower .Name) }}
+      {{ $target_menu := printf "%s-menu" $menu_id }}   
+      {{ $active_class := "" }}
+      {{ $menu_type := "link" }}
+
+      {{ if $current_page.IsMenuCurrent $main_menu . }}
+        {{ $active_class = "active" }}
+      {{ end }}
+
+      {{/* If the menu has children, we will show a dropdown */}}
+      {{ if .HasChildren }}
+        {{ $menu_type = "dropdown" }}
+      {{ end }}
+
+      {{/* Unless if any of the menus are 3-levels deep then we will show a mega menu. */}}
+      {{ range .Children }}
+        {{ if .HasChildren }}
+          {{ $menu_type = "mega" }}
+        {{ end }}
+      {{ end }}
+
+      {{ if eq $menu_type "link" }}
+        <li>
+          <a href="{{ .URL }}">{{ .Name }}</a>
+        </li>
+      {{ else if eq $menu_type "dropdown" }}
+        <li class="dropdown">
+          <button
+            class="dropdown-toggle btn btn-link"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ .Name }}
+          </button>
+        </li>
+      {{ else if eq $menu_type "mega" }}
+        <li>
+          <button type="button" class="btn btn-link" data-target="{{ $target_menu }}">{{ .Name }}</button>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</nav>

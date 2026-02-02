@@ -1,0 +1,42 @@
+{{/*
+  Copyright (c) 2018, 2023 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $breadcrumb_container := "" }}
+
+{{ if and (eq $.Site.Params.layout_style "astro") (strings.Contains .Params.container "container-fluid") }}
+  {{ $breadcrumb_container = "container" }}
+{{ end }}
+
+<div class="default-breadcrumbs hidden-print" id="breadcrumb">
+  <div class="{{ $breadcrumb_container }}">
+    <div class="row">
+      <div class="col-sm-24">
+        <ol aria-label="Breadcrumb" class="breadcrumb">
+          {{ template "breadcrumbnav" (dict "p1" . "p2" . "site_params" $.Site.Params) }}
+          </ol>
+          {{ define "breadcrumbnav" }}
+            {{ if .p1.Parent }}
+              {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 "site_params" .site_params)  }}
+            {{ else if not .p1.IsHome }}
+              {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 "site_params" .site_params)  }}
+            {{ end }}
+            <li {{ if eq .p1 .p2 }} class="active" aria-current="page"{{ end }}>
+              <a href="{{ .p1.Permalink }}">{{ if eq (.p1.Params.format_title | default .site_params.format_title) false }}{{ .p1.Title | safeHTML }}{{ else }}{{ .p1.Title | safeHTML | title }}{{ end }}</a>
+            </li>
+          {{ end }}
+        </div>
+    </div>
+  </div>
+</div>
+
+

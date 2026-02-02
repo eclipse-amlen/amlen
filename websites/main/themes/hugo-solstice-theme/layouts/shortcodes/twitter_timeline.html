@@ -1,0 +1,20 @@
+{{ $class := .Get "class" }}
+{{ $handle := .Get "handle" | default .Site.Params.Author.twitter }}
+{{ $dark := .Get "dark" | default "" }}
+{{ $tweet_limit := .Get "tweet_limit" | default "20" }}
+
+{{ if not $handle }}
+    {{ errorf "A handle must be provided to display a Twitter timeline from twitter_timeline.html" }}
+{{ end }}
+
+<div class="eclipsefdn-twitter-timeline {{ $class }}">
+    <a class="eclipsefdn-twitter-timeline-preloaded twitter-timeline" 
+        href="https://twitter.com/{{ $handle }}" 
+        {{- if $dark -}} data-theme="dark" {{ end }} 
+        data-tweet-limit="{{ $tweet_limit }}" 
+        data-dnt="true">
+            Follow @{{ $handle }}
+    </a>
+</div>
+
+{{ .Page.Scratch.Set "is_using_twitter" "true" }}

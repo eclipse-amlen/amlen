@@ -1,0 +1,9 @@
+{{ define "main" }}
+	<div>{{ .Content }}</div>
+	<ul>
+		{{ range sort .Pages "Title" }}
+			<li><a href="{{ .Permalink | relURL }}" title="{{ .Title }}">{{ .Title }}</a></li>
+		{{ end }}
+	</ul>
+
+{{ end }}

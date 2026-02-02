@@ -1,0 +1,12 @@
+{{ define "main" }}
+  {{ .Content }} 
+  {{ $paginator := .Paginate .Data.Pages }}
+  {{ if ne $paginator.NumberOfElements 0 }}
+    <div class="news-list">
+      {{ range $paginator.Pages }}
+        {{ .Render "summary" }}
+      {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+  {{ end }}
+{{ end }}

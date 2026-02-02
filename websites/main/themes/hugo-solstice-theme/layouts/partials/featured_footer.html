@@ -1,0 +1,10 @@
+{{ if ne .Page.Params.show_featured_footer false }}
+  <aside class="featured-footer" id="featured-footer">
+    <div class="eclipsefdn-featured-footer container-fluid" data-publish-target="{{ .Page.Params.featured_content_publish_target | default .Site.Params.featured_content_publish_target | default "eclipse_org"}}">
+      <div class="row">
+        <div class="col-sm-24 featured-container">
+        </div>
+      </div>
+    </div>
+  </aside>
+{{ end }}

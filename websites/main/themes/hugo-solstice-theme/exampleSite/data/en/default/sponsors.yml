@@ -1,0 +1,13 @@
+items:
+  - title: Jakarta EE
+    url: https://jakarta.ee/
+    image: https://www.eclipse.org/org/artwork/images/jakartaee_c.png
+    width: 200px
+  - title: IoT
+    url: https://iot.eclipse.org/
+    image: https://www.eclipse.org/org/artwork/images/new_iot_logo_clr.svg
+    width: 100px
+  - title: Eclipse Foundation
+    url: https://www.eclipse.org
+    image: https://www.eclipse.org/org/artwork/images/eclipse_foundation_logo.jpg
+    width: 200px

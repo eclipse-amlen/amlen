@@ -1,0 +1,26 @@
+{{ $playlist_ids := .Get "playlist_ids" | default "" }}
+{{ $description_max := .Get "description_max" | default 200 }}
+{{ $template_id := .Get "template_id" | default "" }}
+{{ $src := .Get "src" }}
+{{ $localize := .Get "localize" | default "false" }}
+
+{{ if $src }}
+    {{ $currLang := .Page.Lang }}
+    {{ if ne $localize "false" }}
+        {{ .Scratch.Set "base" (index .Site.Data $currLang) }}
+    {{ else }}
+        {{ .Scratch.Set "base" .Site.Data }}
+    {{ end }}
+    {{ $base := .Scratch.Get "base" }}
+    {{ $data := index $base $src }}
+    {{ range $data }}
+        {{ $playlist_ids = printf "%s, %s" $playlist_ids .playlist_id }}
+    {{ end }}
+{{ end }}
+
+<div 
+    class="eclipsefdn-video-list" 
+    data-playlist-ids="{{ $playlist_ids }}"
+    {{ with $description_max -}} data-description-max-length="{{ . }}" {{- end }}
+    {{ with $template_id -}} data-template-id="{{ . }}" {{- end }}
+></div>

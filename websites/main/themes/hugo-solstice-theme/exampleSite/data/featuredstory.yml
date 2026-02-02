@@ -1,0 +1,69 @@
+defaultRight: |
+          <p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </p>
+          <p>Sign up to our <br>Newsletter</p>
+          <form action="https://eclipsecon.us6.list-manage.com/subscribe/post" method="post" target="_blank">
+            <div class="form-group">
+              <input type="hidden" name="u" value="eaf9e1f06f194eadc66788a85">
+              <input type="hidden" name="id" value="98ae69e304">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" class="button btn btn-primary">
+          </form>
+items:
+  -
+    title: The 2019 Jakarta EE<br> <strong>Developer Survey</strong><br> results are out!
+    link: <a class="btn btn-primary btn-lg" href="/documents/insights/2019-jakarta-ee-developer-survey.pdf">See the report!</a>
+    content: Test content
+    post_content: Some post content
+    preamble: Preamble test
+    bgImgSrc: https://www.eclipse.org/home/images/ece-2019-banner.jpg
+    content_class: sample-class
+    post_class: post-content-class
+    preamble_class: preamble-class
+    header_class: "header-class second-class"
+    startDate: 2099-07-17
+    endDate: 2099-07-30
+    type: both
+  -
+    preamble: Now available
+    title: <strong>Eclipse IDE 2019-06</strong>
+    content: Get the latest version of the Eclipse IDE story.
+    link: |
+          <ul class="list-inline">
+            <li><a class="btn btn-primary btn-lg" href="/go/PROMO_ECLIPSEIDE_FOOTER@FEATURED_STORY?utm_source=eclipse_foundation&amp;utm_medium=featured_story&amp;utm_campaign=eclipse_ide_2019_06">Download</a></li>
+            <li><a class="btn btn-default btn-lg" href="/eclipseide/">Learn More</a></li>
+          </ul>
+    bgImgSrc: https://www.eclipse.org/home/images/2019-06-bg.jpg
+    startDate: 2019-07-20
+    endDate: 2029-07-30
+    type: story
+  -
+    preamble: Now available
+    title: <strong>Eclipse IDE 2019-06</strong>
+    content: Get the latest version of the Eclipse IDE footer.
+    link: |
+          <ul class="list-inline">
+            <li><a class="btn btn-primary btn-lg" href="/go/PROMO_ECLIPSEIDE_FOOTER@FEATURED_STORY?utm_source=eclipse_foundation&amp;utm_medium=featured_story&amp;utm_campaign=eclipse_ide_2019_06">Download</a></li>
+            <li><a class="btn btn-default btn-lg" href="/eclipseide/">Learn More</a></li>
+          </ul>
+    bgImgSrc: https://www.eclipse.org/home/images/2019-06-bg.jpg
+    startDate: 2019-07-18
+    endDate: 2029-07-30
+    type: footer
+  -
+    preamble: Now available
+    title: <strong>Eclipse IDE 2019-06</strong>
+    content: Get the latest version of the Eclipse IDE story.
+    link: |
+          <ul class="list-inline">
+            <li><a class="btn btn-primary btn-lg" href="/go/PROMO_ECLIPSEIDE_FOOTER@FEATURED_STORY?utm_source=eclipse_foundation&amp;utm_medium=featured_story&amp;utm_campaign=eclipse_ide_2019_06">Download</a></li>
+            <li><a class="btn btn-default btn-lg" href="/eclipseide/">Learn More</a></li>
+          </ul>
+    bgImgSrc: https://www.eclipse.org/home/images/2019-06-bg.jpg
+    startDate: 2019-06-01
+    endDate: 2019-06-15
+    type: story

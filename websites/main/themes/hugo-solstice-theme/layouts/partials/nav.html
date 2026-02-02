@@ -1,0 +1,29 @@
+{{/* 
+  Copyright (c) 2018, 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ if .Page.Params.main_menu }}
+  {{ .Scratch.Set "main_menu" .Page.Params.main_menu }}
+{{ else if (index .Site.Menus "main") }}
+  {{ .Scratch.Set "main_menu" "main" }}
+{{ else if (eq .Site.Params.layout_style "neptune") }}
+    {{ .Scratch.Set "main_menu" "neptune" }}
+{{ else if (eq .Site.Params.layout_style "astro") }}
+  {{ .Scratch.Set "main_menu" "astro" }}
+{{ else }}
+  {{ .Scratch.Set "main_menu" "quicksilver" }}
+{{ end }}
+
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+{{ partial (printf "%s/nav.html" $layout_style) . }}

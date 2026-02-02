@@ -1,0 +1,19 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "Qu'est-ce qu'Eclipse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>La façon dont vous téléchargez Eclipse dépend de la distance à laquelle vous souhaitez vous trouver par rapport au «flux en direct». Voici les types de versions qui peuvent être téléchargés à partir du site de téléchargement Eclipse (http://eclipse.org/downloads), en augmentant le niveau de proximité avec le flux CVS HEAD:</p><ul><li>La dernière version, utilisée par la plupart des produits du marché. Ces versions ont peu de risques de surprises, mais ces versions peuvent avoir jusqu'à 6 mois de retard sur ce sur quoi on travaille actuellement. Les exemples de numéros de version pour ces versions sont 2.1.2 et 3.0.</li><li>Les builds stables (appelés builds jalons), qui sont généralement espacés de 6 semaines et fournissent une collection importante de fonctionnalités stables. Ces versions sont modérément testées, ce qui les rend suffisamment fiables pour les besoins de la plupart des développeurs. Un exemple est Eclipse 3.0M4, qui fait référence à la version jalon 4 d'Eclipse 3.0.</li></ul><p>Chaque version ou build a un ensemble correspondant de notes de build et de résultats de test. Assurez-vous de consulter ces notes avant de sélectionner une version donnée. Les suites de tests automatisés sont exécutées par rapport aux versions de nuit et d'intégration. Avoir une version réussie des tests peut augmenter le niveau de confiance des gens en eux. Dans tous les cas, les builds sont livrés sous forme d'archives compressées et l'installation se résume simplement à les décompresser n'importe où sur votre machine locale.</p>"
+      }
+    },{
+      "@type": "Question",
+      "name": "Qu'est-ce que la plateforme Eclipse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "<p>Ceux qui téléchargent la plate-forme générique Eclipse - généralement par erreur - sont quelque peu déconcertés par ce qu'ils voient. La plateforme a été conçue comme la base générique d'un IDE. Autrement dit, la plate-forme est un IDE sans langage de programmation particulier à l'esprit. Vous pouvez créer des projets génériques, modifier des fichiers dans un éditeur de texte générique et partager les projets et les fichiers avec un serveur CVS (Concurrent Versions System). La plate-forme est essentiellement une version glorifiée d'un navigateur de système de fichiers.</p>"
+      }
+    }]
+}

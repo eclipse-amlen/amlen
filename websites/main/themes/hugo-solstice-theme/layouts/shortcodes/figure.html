@@ -1,0 +1,46 @@
+<!-- 
+ Copyright (C) 2019 Eclipse Foundation, Inc.
+ 
+ This program and the accompanying materials are made
+ available under the terms of the Eclipse Public License 2.0
+ which is available at https://www.eclipse.org/legal/epl-2.0/
+ 
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+    
+ SPDX-License-Identifier: EPL-2.0
+ 
+ The base of this file was the [Hugo Figure shortcode](https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/shortcodes/figure.html) 
+ available under the Apache 2.0 license. Modifications to the 
+ file add default bootstrap classes to conform better with the 
+ theme look and feel.
+-->
+
+<figure class="eclipsefdn-figure {{ .Get "class" | default "col-xs-24"}}">
+    {{- if .Get "link" -}}
+        <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
+    {{- end }}
+    <img class="img {{ .Get "imgClass" | default "img-responsive"}}" src="{{ .Get "src" }}"
+         {{- if or (.Get "alt") (.Get "caption") }}
+         alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
+         {{- end -}}
+         {{- with .Get "width" }} width="{{ . }}"{{ end -}}
+         {{- with .Get "height" }} height="{{ . }}"{{ end -}}
+    /> <!-- Closing img tag -->
+    {{- if .Get "link" }}</a>{{ end -}}
+    {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
+        <figcaption class="text-center">
+            {{ with (.Get "title") -}}
+                <p>{{ . }}</p>
+            {{- end -}}
+            {{- if or (.Get "caption") (.Get "attr") -}}<p>
+                {{- .Get "caption" | markdownify -}}
+                {{- with .Get "attrlink" }}
+                    <a href="{{ . }}">
+                {{- end -}}
+                {{- .Get "attr" | markdownify -}}
+                {{- if .Get "attrlink" }}</a>{{ end }}</p>
+            {{- end }}
+        </figcaption>
+    {{- end }}
+</figure>

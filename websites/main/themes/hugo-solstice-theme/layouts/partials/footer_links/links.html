@@ -1,0 +1,11 @@
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+{{ partial "footer_links/footer-eclipse-foundation.html" . }}
+{{ partial "footer_links/footer-legal.html" . }}
+{{ if eq $.Site.Params.layout_style "quicksilver" }}
+  {{ partial "footer_links/footer-useful-links.html" . }}
+{{ end }}
+{{ partial "footer_links/footer-other.html" . }}
+{{ if eq $layout_style "quicksilver" }}
+  {{ partial "footer_links/footer-copyright.html" . }}
+{{ end }}

@@ -1,0 +1,29 @@
+complete: true
+types:
+    - name: Demo (2020 sample)
+      id: 1
+      color: "#e44"
+    - name: Keynote (2020 sample)
+      id: b2 
+      color: "#a0a"
+
+items:
+    - name: Open-source software (2020 sample)
+      presenter: Ken K.
+      type: 1
+      vod: "#1"
+    - name: How to 'how to' (2020 sample)
+      presenter: Jim Bob 
+      type: b2
+      vod: "#2"
+    - name: Industry Keynote (2020 sample)
+      presenter: Eclipse Foundation, .etc
+      type: b2
+      vod: "#3"
+    - name: Best practices for Interneting your Things (2020 sample)
+      presenter: Adam A.
+      type: b2
+      vod: "#4"
+    - name: Break
+      type: break
+      

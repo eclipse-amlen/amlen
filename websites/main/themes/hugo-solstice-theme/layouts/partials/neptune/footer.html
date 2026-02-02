@@ -1,0 +1,73 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $footer_class := .Page.Params.footer_class }}
+<footer class="footer {{- with $footer_class }} {{ . }}{{ end }}">
+  <div class="container">
+    <div class="footer-inner">
+      <section class="links-section">
+        {{ range $.Site.Menus.footer }}
+          <ul>
+            <li>{{ .Name }}</li>
+            <li>
+              <ul>
+                {{ range .Children }}
+                  <li>
+                    {{ if .URL }}
+                      <a href="{{ .URL }}" {{ with .Params.class -}} class="{{ . }}" {{- end }}>{{ .Name }}</a>
+                    {{ else }}
+                      <button type="button" class="btn btn-link {{ with .Params.class -}} {{ . }} {{- end }}">{{ .Name }}</button>
+                    {{ end }}
+                  </li>
+                {{ end }}
+              </ul>
+            </li>
+          </ul>
+        {{ end }}
+      </section>
+      <section class="social-media-section">
+        <p class="subheading text-tertiary">See what we're up to</p>
+        {{ partial "socials.html" . }}
+      </section>
+      <section class="newsletter-section">
+        <p class="subheading text-tertiary">Stay up to date</p>
+        <h2>Subscribe to our newsletter</h2>
+        <form 
+          class="newsletter-form margin-top-40"
+          id="mc-embedded-subscribe-form" 
+          action="https://eclipse.us6.list-manage.com/subscribe/post?u=eaf9e1f06f194eadc66788a85&amp;id=e7538485cd&amp;f_id=00f9c2e1f0" 
+          method="post" 
+          novalidate 
+          target="_blank"
+        >
+          <div class="text-field-outlined">
+            <input name="EMAIL" type="email" placeholder="Your email">
+            <button class="newsletter-form-submit" type="submit" name="subscribe" id="mc-embedded-subscribe" aria-label="Submit">
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </section>
+      <section class="footer-bottom-section">
+        <img class="img-responsive logo" src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white.svg" alt="Eclipse Foundation">
+        <div class="legal-information">
+          <p>Copyright &copy; Eclipse Foundation AISBL. All rights reserved.</p>
+          <ul class="legal-links">
+            <li><a href="https://www.eclipse.org/legal/privacy/">Privacy policy</a></li>
+            <li><a href="https://www.eclipse.org/legal/terms-of-use/">Terms of use</a></li>
+            <li><a href="https://www.eclipse.org/legal/compliance/">Compliance</a></li>
+            <li><a href="https://www.eclipse.org/legal/">Legal</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+</footer>
+

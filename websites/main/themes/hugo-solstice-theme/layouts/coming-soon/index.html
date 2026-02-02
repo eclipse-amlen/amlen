@@ -1,0 +1,27 @@
+{{ define "main" }}
+<!---->
+{{ end }}
+
+{{ define "main_prefix" }}
+<!---->
+{{ end }}
+
+{{ define "main_suffix" }}
+<!---->
+{{ end }}
+
+{{ define "breadcrumbs" }}
+<!---->
+{{ end }}
+
+{{ define "header" }}
+{{- partial "google_tag_manager_no_script.html" . }}
+<a class="sr-only" href="#content">{{ i18n "navigation-content-skip" }}</a>
+<header class="header-wrapper-coming-soon header-wrapper{{- with .Params.header_wrapper_class | default .Site.Params.header_wrapper_class }} {{ . }}{{end}}" id="header-wrapper">
+  {{ partial "toolbar.html" . }}
+  {{ partial "navbar.html" . }}
+  {{ partial "coming-soon-header.html" . }}
+</header>
+{{ end }}
+
+

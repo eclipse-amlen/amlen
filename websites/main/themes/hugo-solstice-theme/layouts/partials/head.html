@@ -1,0 +1,111 @@
+<!--
+  Copyright (c) 2018 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Site Title, Description, Author, and Favicon -->
+{{ $title :=  .Params.seo_title | default (.Params.headline | plainify) | default (.Title | plainify) | default .Site.Title }}
+{{ if (.Params.format_seo_title | default true) }}
+  {{ $title = $title | title }}
+{{ end }}
+{{ $title_suffix := "" }}
+{{ if not .Params.hide_seo_title_suffix }}
+  {{ $title_suffix = .Params.seo_title_suffix | default .Site.Params.seo_title_suffix }}
+{{ end }}
+{{ $full_title := printf "%s%s" $title $title_suffix }}
+<title>{{ $full_title }}</title>
+<meta property="og:title" content="{{ $full_title }}" />
+<meta name="twitter:title" content="{{ $title | truncate 70 }}{{ $title_suffix }}" />
+{{ if isset .Page.Params "redirect_url" }}
+<link rel="canonical" href="{{ .Page.Params.redirect_url }}"/>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ .Page.Params.redirect_url }}" />
+{{ end }}
+{{- with .Description | default .Page.Params.summary | default .Site.Params.description | plainify }}
+{{- with  . | replaceRE "{{[\\s\\S]*?}}" " " | truncate 160 }}
+<meta name="description" content="{{ . }}">
+<meta property="og:description" content="{{ . }}">
+<meta name="twitter:description" content="{{ . }}">
+{{- end }}
+{{- end }}
+{{- with .Page.Params.author }}
+<meta name="author" content="{{ . }}"/>
+{{- end }}
+ {{- with  .Params.page_favicon | default .Site.Params.favicon | default "https://www.eclipse.org/favicon.ico"}}
+<link href='{{ . | relURL }}' rel='icon' type='image/x-icon'/>
+{{- end -}}
+{{- with .Page.Params.metatag_robots }}
+  <meta name="robots" content="{{ . }}">
+{{- end }}
+<!-- Social Media Tags -->
+{{- with .Params.share_img | default .Params.image  | default .Site.Params.share_img | default .Site.Params.logo }}
+<meta property="og:image" content="{{ . | absURL }}" />
+<meta name="twitter:image" content="{{ . | absURL }}" />
+{{- end }}
+<meta name="twitter:card" content="summary" />
+{{- with .Site.Params.author.twitter }}
+<meta name="twitter:site" content="@{{ . }}" />
+<meta name="twitter:creator" content="@{{ . }}" />
+{{- end }}
+{{- with .Site.Params.fb_app_id }}
+<meta property="fb:app_id" content="{{ . }}" />
+{{- end }}
+<meta property="og:url" content="{{ .Permalink | absLangURL }}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+{{- with .Keywords | default .Site.Params.keywords }}
+<meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }}, {{ end }}{{ $e }}{{ end }}">
+{{ end }}
+<!-- Hugo Version number -->
+{{ hugo.Generator -}}
+<!-- Links and stylesheets -->
+{{ $canonical_url := (.Page.Params.canonical_url | default .Permalink) | absLangURL }}
+<link rel="canonical" href="{{ $canonical_url }}" />
+{{ with .OutputFormats.Get "RSS" }}
+<link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="">
+{{ end }}
+{{ if ne .Page.Params.disable_css "true" }}
+{{- $default_css := "https://www.eclipse.org/public/css/quicksilver.css" -}}
+{{- if eq .Site.Params.layout_style "astro" -}}
+    {{- $default_css = "https://www.eclipse.org/public/css/astro.css" -}}
+{{ else if eq .Site.Params.layout_style "neptune" -}}
+    {{- $default_css = "https://www.eclipse.org/public/css/neptune.css" -}}
+{{- end -}}
+{{- with .Site.Params.styles | default $default_css }}
+<link rel="stylesheet" href="{{ . | relURL }}?v={{ now.Unix }}">
+{{- end }}
+{{- with .Site.Params.style_overrides }}
+<link rel="stylesheet" href="{{ . | relURL }}?v={{ now.Unix }}">
+{{- end }}
+{{- with .Page.Params.page_css_file }}
+<link rel="stylesheet" href="{{ . | relURL }}?v={{ now.Unix }}">
+{{- end }}
+{{- end }}
+{{- partial "google_tag_manager.html" . }}
+{{- partial "head_variables.html" . }}
+
+{{ $metadata := .Page.Params.metadata | default slice }}
+{{ range $metadata }}
+    {{ $path_parts := split .path "/" }}
+    {{ $data := $.Site.Data }}
+    {{ range $path_parts }}
+    {{ $data = index $data . }}
+  {{ end }}
+  {{ if eq .type "ld+json" }}
+    <script type="application/ld+json">
+      {{ with $data }} 
+        {{ . }}
+      {{ end }}
+    </script>
+  {{ end }}
+{{ end }}
