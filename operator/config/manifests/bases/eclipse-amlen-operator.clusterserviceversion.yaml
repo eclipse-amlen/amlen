@@ -200,7 +200,7 @@ spec:
                 - --upstream=http://127.0.0.1:8080/
                 - --logtostderr=true
                 - --v=0
-                image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:0df4ae70e3bd0feffcec8f5cdb428f4abe666b667af991269ec5cb0bbda65869
+                image: quay.io/brancz/kube-rbac-proxy@sha256:cbdad91c207e55cf366b59ce3e6c9d3f3e0b8e51ff33c1e7d153c2f762d83a1e
                 name: kube-rbac-proxy
                 ports:
                 - containerPort: 8443
