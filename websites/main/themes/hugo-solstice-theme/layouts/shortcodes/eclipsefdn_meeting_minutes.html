@@ -1,0 +1,138 @@
+<!-- 
+  Copyright (c) 2019, 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Eric Poirier <eric.poirier@eclipse-foundation.org>
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $tabs_class := .Get "tabs_class" | default "meeting-minutes-tabs-default" }}
+{{ $yearly_sections_enabled := .Get "yearly_sections_enabled" | default false }}
+{{ $data := .Site.Data.meeting_minutes }}
+
+{{/* We need to create a set of years for each committee in order to know which year sections to render. */}}
+{{ $committee_years_set := dict }}
+{{ if $yearly_sections_enabled }}
+  {{ range $key, $committee := $data.items }}
+    {{ $years_set := slice }}
+    {{ range $committee }}
+      {{ if not (in $years_set .year) }}
+        {{ $years_set = $years_set | append .year }}
+      {{ end }}
+    {{ end }}
+    {{ $committee_years_set = merge $committee_years_set (dict $key $years_set) }}
+  {{ end }}
+{{ end }}
+
+{{/*
+  We need to sort the committees by the `order` field in the data file. To do this, we create an ordered slice containing
+  a dict with the committee name as the key and the committee object as value. The committee object which originally comes 
+  from `items` in the data file. If no `order` field was provided then the default behavior of YAML gets used 
+  (alphabetical).
+*/}}
+{{ $ordered_committees := slice }}
+{{ if $data.order }}
+  {{ range $committee_name := $data.order }}
+    {{ $committee := index $data.items $committee_name }}
+    {{ $ordered_committees = $ordered_committees | append (dict "committee_name" $committee_name "items" $committee) }}
+  {{ end }}
+{{ else }}
+  {{ range $committee_name, $committee := $data.items }}
+    {{ $ordered_committees = $ordered_committees | append (dict "committee_name" $committee_name "items" $committee) }}
+  {{ end }}
+{{ end }}
+
+{{ $committee_count := len $data.items }}
+
+<div class="eclipsefdn-meeting-minutes">
+  {{/* We don't need to render the nav tabs if there is only one committee */}}
+  {{ if not (eq $committee_count 1) }}
+    {{ $.Scratch.Set "counter" 0}}
+    <ul class="meeting-minutes-tab nav nav-tabs link-unstyled {{ $tabs_class }}" role="tablist">
+    {{ range $ordered_committees }}
+      {{ $index := index . "committee_name" }}
+      {{ $counter := $.Scratch.Get "counter" }}
+      {{ if eq $counter 0 }}
+        <li role="presentation" class="meeting-minutes-tab-item active"><a class="meeting-minutes-tab-item-link" href="#{{ $index }}" aria-controls="{{ $index }}" role="tab" data-toggle="tab">{{ humanize $index | title }}</a></li>
+        {{ $.Scratch.Add "counter" 1}}
+      {{ else }}
+        <li role="presentation" class="meeting-minutes-tab-item"><a class="meeting-minutes-tab-item-link" href="#{{ $index }}" aria-controls="{{ $index }}" role="tab" data-toggle="tab">{{ humanize $index | title }}</a></li>
+      {{ end }}
+    {{ end }}
+    </ul>
+  {{ end }}
+
+  {{ $.Scratch.Set "types_counter" 0}}
+  <div class="tab-content row">
+    {{ range $ordered_committees }}
+      {{ $committee_name := index . "committee_name" }}
+      {{ $items := index . "items" }}
+
+      {{ $types_counter := $.Scratch.Get "types_counter" }}
+      {{ if eq $types_counter 0 }}
+        <div role="tabpanel" class="tab-pane active" id="{{$committee_name}}">
+      {{ else }}
+        <div role="tabpanel" class="tab-pane" id="{{$committee_name}}">
+      {{ end }}
+        {{/* Creates an iterable sequence or slice. The value of the slice is equal to the year if yearly sections are enabled. */}}
+        {{ $sections := seq 1 }} 
+        {{ if $yearly_sections_enabled }}
+          {{ $sections = index $committee_years_set $committee_name }}
+        {{ end }}
+
+        {{ range $section_name := $sections }}
+
+          {{ $year := "" }}
+          {{ if $yearly_sections_enabled }}
+            {{ $year = $section_name }}
+          {{ end }}
+
+          <div class="card-container col-sm-24">
+            {{ if $yearly_sections_enabled }} <div class="glyph-highlight left-align"><div class="glyph-container text">{{ $year }}</div><div class="glyph-bottom"></div></div>{{ end }}
+            <div class="card-panel bordered panel panel-default {{ if $yearly_sections_enabled -}} with-glyph {{- end }}">
+              <div class="panel-body">
+                <ul class="meeting-minutes-list tri-col margin-bottom-0">
+                  
+                  {{/* Meeting minutes to render for current section */}}
+                  {{ $meeting_minutes := slice }}
+                  {{ if $yearly_sections_enabled }}
+                    {{ range $meeting_minute := (where $items "year" $year) }}
+                      {{ $meeting_minutes = $meeting_minutes | append $meeting_minute }}
+                    {{ end }}
+                  {{ else }}
+                    {{ $meeting_minutes = $items }}  
+                  {{ end }}
+
+                  {{ range $index, $el := $meeting_minutes }}
+
+                    {{/* Handle relative and absolute paths */}}
+                    {{ $url := "" }}
+                    {{ if and $data.dir (not (hasPrefix $el.url "http") ) }}
+                      {{ $url = (path.Join $data.dir $el.url) | absURL }}
+                    {{ else }}
+                      {{ $url = $el.url }}
+                    {{ end }}
+
+                    <li>
+                      <a class="link-unstyled" href="{{ $url }}">
+                        {{ $el.title }}
+                      </a>
+                    </li>
+
+                  {{ end }}
+                  </ul>
+              </div>
+            </div>
+          </div>
+      {{ end }}
+      </div>
+      {{ $.Scratch.Add "types_counter" 1}}
+    {{ end }}
+  </div>
+</div>

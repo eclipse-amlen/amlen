@@ -1,0 +1,21 @@
+<!-- 
+  Copyright (c) 2019 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+<script>
+	{{ if isset .Params "table_classes" }}
+		var tableClasses = {{ .Params.table_classes }};
+	{{ else if isset .Site.Params "table_classes" }}
+		var tableClasses = {{ .Site.Params.table_classes }};
+	{{ else }}
+		var tableClasses = "table";
+	{{ end }}
+</script>

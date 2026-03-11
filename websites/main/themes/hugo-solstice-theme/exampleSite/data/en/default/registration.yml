@@ -1,0 +1,15 @@
+links:
+  - url: https://www.google.com
+    text: Google
+    external: "true"
+  - url: /#register-now
+    text: Register now
+end_date: 2020-05-10
+end_text: The event is now over! Thank you for your interest and attendance!
+custom_content: |
+  <div class="margin-top-20 margin-bottom-20">
+    <ul class="list-inline">
+      <li><img class="img margin-right-20" width="100" src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg" title="Wow what a picture" />
+      <li><img class="img margin-left-20" width="100" src="https://www.eclipse.org/eclipse.org-common/themes/solstice/public/images/logo/eclipse-foundation-white-orange.svg" title="Wow what a second picture" />
+    </ul>
+  </div>

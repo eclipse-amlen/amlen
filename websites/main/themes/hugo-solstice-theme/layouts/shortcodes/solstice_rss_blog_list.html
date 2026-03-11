@@ -1,0 +1,5 @@
+<div class="solstice-rss-blog-list{{ with .Get "classes" }} {{ . }}{{ end }}" {{- with .Get "template-id" }} data-template-id="{{ . }}"{{ end }} {{- with .Get "urls" }} data-urls="{{ . }}"{{ end }} {{- with .Get "limit" }} data-limit="{{ . }}"{{ end }}>
+  <p class="solstice-loading">
+    <i class="fa fa-spinner fa-pulse"></i>
+  </p>
+</div>

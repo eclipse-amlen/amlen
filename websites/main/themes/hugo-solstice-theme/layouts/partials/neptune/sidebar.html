@@ -1,0 +1,73 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ if isset .Site.Menus "sidebar" }}
+  {{ $identifiers := slice "home" }}
+
+  {{ if .Page.Params.sidebar }}
+    {{ $identifiers = .Page.Params.sidebar }}
+  {{ else if .Page.Section }}
+    {{ $identifiers = slice .Page.Section }}
+  {{ end }}
+  
+  {{ $menu_sections := where .Site.Menus.sidebar "Identifier" "in" $identifiers}}
+
+  {{ with $menu_sections }}
+    <aside class="sidebar">
+      <a 
+        class="sidebar-toggle sidebar-toggle-open" 
+        type="button" 
+        href="#sidebar-open"
+      >
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </a>
+      <a 
+        class="sidebar-toggle sidebar-toggle-close" 
+        type="button" 
+        href="#sidebar-close"
+      >
+        <i class="fa-solid fa-close" aria-hidden="true"></i>
+      </a>
+      <nav>
+        <ul class="sidebar-menu">
+          {{ range $index, $menu := . }}
+            <li class="menu-group">
+              <!-- bootstrap 3 collapse -->
+              <a href="#{{ $menu.Identifier }}" data-toggle="collapse" aria-expanded="{{ if eq $index 0 -}} true {{- else -}} false {{- end}}" class="dropdown-toggle">
+                {{ $menu.Name }}
+              </a>
+              <ul class="collapse {{ if eq $index 0 -}} in {{- end }}" id="{{ $menu.Identifier }}">
+                {{ range $menu.Children }}
+                  {{ if .HasChildren }}
+                    <li class="menu-subgroup">
+                      <a href="#{{ .Identifier }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        {{ .Name }}
+                      </a>
+                      <ul class="collapse" id="{{ .Identifier }}">
+                        {{ range .Children }}
+                          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                        {{ end }}
+                      </ul>
+                    </li>
+                  {{ else }}
+                    <li>
+                      <a href="{{ .URL }}">{{ .Name }}</a>
+                    </li>
+                  {{ end }}
+                {{ end }}
+              </ul>
+            </li>
+          {{ end }}
+        </ul>
+      </nav>
+    </aside>
+  {{ end }}
+{{ end }}
+

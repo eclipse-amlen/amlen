@@ -1,0 +1,83 @@
+<!-- 
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+{{ $lang := .Page.Lang}}
+{{ $year := .Get "year" }}
+{{ if $year }}
+  {{ .Scratch.Set "base" (index (index .Site.Data $lang) $year) }}
+{{ else }}
+  {{ .Scratch.Set "base" (index .Site.Data $lang) }}
+{{ end }}
+{{ $base := .Scratch.Get "base" }}
+{{ $event := .Get "event" | default "default" }}
+{{ $source := .Get "source" | default "user" }}
+{{ $imageRoot := .Get "imgRoot" | default "/images/committee/" }}
+<div class="eclipsefdn-user-bios">
+  <!-- Committee member -->
+  {{ range (index (index $base $event) $source).items }}
+  {{ $anchor := urlize .anchor }}
+  {{ if not $anchor }}
+    {{ $anchor = urlize .name }}
+  {{ end }}
+  <div class="row margin-top-30 margin-bottom-30" id="{{ $anchor }}">
+    <div class="eclipsefdn-user-bios-picture col-xs-24 col-sm-6">
+      {{ if .img }}
+      <figure>
+        <img class="img-responsive" 
+             src="{{ $imageRoot }}{{ .img }}"
+             alt="{{ .name }}" 
+             title="{{ .name }}" />
+        <figcaption class="sr-only">{{ .name }}{{ if .title }}, {{ .title }}{{ end }}</figcaption>
+      </figure>
+      {{ else }}
+      <div class="icon-backdrop" role="img" aria-label="{{ .name }}">
+        <div class="ratio"></div>
+        <div class="icon-container"><i class="fa fa-user" aria-hidden="true"></i></div>
+      </div>
+      {{ end }}
+    </div>
+    <div class="eclipsefdn-user-bios-info col-xs-24 col-sm-18">
+      <h3>{{ .name }}</h3>
+      {{ .bio | safeHTML }}
+      {{- if .social }}
+      <p class="eclipsefdn-user-social-links">
+        {{- range .social }}
+        {{- $isExternal := .isExternal | default true }}
+        {{- $linkText := .text | default "" }}
+        {{- $label := .label | default $linkText }}
+        <a class="btn btn-info btn-sm social-link" 
+          href="{{ .href }}"
+          {{- if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}
+          {{- if $label }} aria-label="{{ $label }}" title="{{ $label }}"{{ end }}>
+          <i class="{{ .icon }}" aria-hidden="true"></i>
+          {{- if $linkText }}&nbsp;{{ $linkText }}{{ end }}
+        </a>
+        {{- end }}
+      </p>
+      {{- end }}
+      
+      {{- /* Legacy Twitter handle support for backward compatibility */ -}}
+      {{- if .twitter_handle }}
+      <p>
+        <a class="twitter-follow-button btn btn-info btn-sm"
+          href="https://x.com/{{ .twitter_handle }}" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="{{ i18n "committee-twitter-follow-text" . | default "Follow on Twitter" }}">
+          <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>&nbsp;{{ i18n "committee-twitter-follow-text" . }}
+        </a>
+      </p>
+      {{ end -}}
+    </div>
+  </div>
+  {{ end }}
+</div>

@@ -1,0 +1,24 @@
+{{/*
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $header_wrapper_class := .Params.header_wrapper_class | default .Site.Params.header_wrapper_class }}
+
+{{ partial "google_tag_manager_no_script.html" . }}
+<a class="sr-only" href="#content">{{ i18n "navigation-content-skip" }}</a>
+<header class="header-wrapper {{ $header_wrapper_class }}" id="header">
+  {{ partial "toolbar.html" . }}
+  {{ partial "navbar.html" . }}
+  {{ partial "mobile_menu.html" . }}
+  {{ partial "mega_menu.html" . }}
+  {{ partial "jumbotron.html" . }}
+</header>

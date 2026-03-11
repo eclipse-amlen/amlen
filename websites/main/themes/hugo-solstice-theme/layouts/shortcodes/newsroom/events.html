@@ -1,0 +1,62 @@
+<!-- 
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+       
+  SPDX-License-Identifier: EPL-2.0
+-->
+{{ $id := .Get "id" | default "event-list-container" }}
+{{ $class := .Get "class" | default "news-list col-xs-24" }}
+{{ $title := .Get "title" }}
+{{ $titleClass := .Get "titleClass" | default "header-underline margin-bottom-30" }}
+{{ $containerClass := .Get "containerClass" | default "news-items" }}
+{{ $count := .Get "count" | default "3" }}
+{{ $templateId := .Get "templateId" }}
+{{ $templatePath := .Get "templatePath" }}
+{{ $type := .Get "type" }}
+{{ $paginate := .Get "paginate" }}
+{{ $publishTarget := .Get "publishTarget" }}
+{{ $sortOrder := .Get "sortOrder" }}
+{{ $sortField := .Get "sortField" }}
+{{ $upcoming := .Get "upcoming" | default "false" }}
+{{ $archive := .Get "archive" | default "false" }}
+{{ $past_event := .Get "past_event" | default "false" }}
+{{ $includeLinks := .Get "includeList" }}
+{{ $linksClass := .Get "linksClass" | default "list-inline block-summary-more margin-bottom-40" }}
+{{ $dateFormat := .Get "dateFormat" }}
+
+{{ if not (in (.Page.Scratch.Get "events-container-ids") $id) }}
+  {{ .Page.Scratch.Add "events-container-ids" (slice $id) }}
+{{ end }}
+{{ if and $templateId $templatePath }}
+  {{ .Page.Scratch.SetInMap "mustache-templates" $templateId $templatePath }}
+{{ end }}
+<div class="{{ $class }}">
+  {{ with $title }}
+  <h2 class="{{ $titleClass }}" >{{ . | safeHTML }}</h2>
+  {{ end }}
+  <div id="{{ $id }}" class="{{ $containerClass }}" data-count="{{ $count }}" 
+    {{ with $type }} data-type="{{ . }}" {{ end }}
+    {{ if or (eq $paginate "true") (eq $paginate "1")  }} data-pagination="true" {{ end }}
+    {{ with $templateId }} data-template-id="{{ . }}" {{ end }}
+    {{ with $publishTarget }} data-publish-target="{{ . }}"{{ end }}
+    {{ with $sortField }} data-sort-field="{{ . }}"{{ end }}
+    {{ with $sortOrder }} data-sort-order="{{ . }}"{{ end }}
+    {{ with $dateFormat }} data-date-format="{{ . }}"{{ end }}
+    {{ if or (eq $upcoming "true") (eq $upcoming "1") }} data-upcoming="1"{{ end }}
+    {{ if or (eq $archive "true") (eq $archive "1") }} data-archive="true"{{ end }}
+    {{ if or (eq $past_event "true") (eq $past_event "1") }} data-past-event="1"{{ end }}
+  >
+  </div>
+  {{ if eq $includeLinks "true" }}
+  <ul class="{{ $linksClass }}">
+    <li><a href="https://events.eclipse.org">View all</a></li>
+    <li class="news-list-links-view-all"><a href="https://newsroom.eclipse.org/node/add/events">Submit Event</a></li>
+  </ul>
+  {{ end }}
+</div>

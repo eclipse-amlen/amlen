@@ -1,0 +1,62 @@
+
+<!-- Allow for alt sources and languages -->
+{{ $source := .Get "source" | default "cards" }}
+{{ $languageBase := index .Site.Data .Site.Language.Lang }}
+<!-- Get the base of the testimonials by checking existence in localized section -->
+{{ $base := index .Site.Data $source}}
+{{ if and (ne $languageBase nil) (isset $languageBase $source)  }} 
+  {{ $base = index $languageBase $source }}
+{{ end }}
+
+
+{{ $containerClass := .Get "containerClass" | default "col-xs-24 col-sm-8" }}
+{{ $useMatchHeight := .Get "useMatchHeight" | default "false" }}
+{{ $cardStyle := .Get "cardStyle" | default $base.style | default "vertical" }}
+
+<div class="row">
+  {{ range $base.items }}
+  {{ if .fullCardLink }}
+  <a href="{{ .fullCardLink }}">
+  {{ end }}
+  <div class="card-container{{ with $containerClass }} {{ . }}{{ end }}{{ if eq $useMatchHeight "true" }} match-height-item-by-row{{ end }}">
+    {{ $glyphSet := false }}
+    {{ if or (isset . "glyph") (isset . "glyphSrc") }}
+    {{ $glyphSet = true }}
+    <div class="glyph-highlight">
+      <div class="glyph-container">
+        {{ if .glyph }}
+        <i class="fa {{ .glyph }}"></i>
+        {{ else }}
+        <img class="img margin-auto" src="{{ .glyphSrc }}" />
+        {{ end }}
+      </div>
+      <div class="glyph-bottom"></div>
+    </div>
+    {{ end }}
+    <div class="card-panel panel panel-default{{ if $glyphSet }} with-glyph{{ end }}{{ if eq $cardStyle "horizontal" }} horizontal-card{{ end }}{{ with .class }} {{ . }}{{ end }}">
+      {{ if isset . "imgSrc" }}
+      <div class="panel-heading" aria-hidden="true">
+        <img class="img {{ .imgClass | default "img-responsive margin-auto" }}" src="{{ .imgSrc }}" alt="{{ .imgAlt }}"/>
+      </div>
+      {{ end }}
+      <div class="panel-body">
+        {{ if isset . "heading" }}
+        <h3 class="fw-700{{ with .headingClass }} {{ . }}{{ end }}">{{ .heading }}</h3>
+        {{ end }}
+        <p>{{ .content }}</p>
+      </div>
+      {{ if isset . "links" }}
+      <div class="panel-footer text-center vertical-align">
+        {{ range $index, $link := .links }} 
+        <a class="{{ if eq .style "button" }}btn {{ $link.linkClass | default "btn-primary" }}{{ else if eq $link.style "text" }}{{ $link.linkClass | default "brand-primary" }}{{ end }}" 
+            href="{{ $link.url }}"{{ with $link.title }} title="{{ . }}"{{ end }}>{{ $link.text }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ if .fullCardLink }}
+  </a>
+  {{ end }}
+  {{ end }}
+</div>

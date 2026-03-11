@@ -1,0 +1,24 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $header_wrapper_class := .Params.header_wrapper_class | default .Site.Params.header_wrapper_class }}
+
+{{ partial "google_tag_manager_no_script.html" . }}
+<a href="#main" class="skip-link">Skip to content</a>
+{{ if or (ne .Page.Params.hide_featured_story_banner true) (ne $.Site.Params.hide_featured_story_banner) }}
+  {{ $publish_target := .Page.Params.featured_content_publish_target | default .Site.Params.featured_content_publish_target | default "eclipse_org" }}
+  <div class="eclipsefdn-featured-story-banner" data-publish-target="{{ $publish_target }}"></div>
+{{ end }} 
+<header class="header-wrapper {{ $header_wrapper_class }}" id="header">
+  {{ partial "toolbar.html" . }}
+  {{ partial "navbar.html" . }}
+  {{ partial "mobile_menu.html" . }}
+  {{ partial "mega_menu.html" . }}
+</header>

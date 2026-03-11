@@ -1,0 +1,26 @@
+{{ define "breadcrumbs"}}{{end}}
+{{ define "main" }}
+<div class="padding-bottom-30">
+  <h1>{{ i18n "not-found-template-heading" }}</h1>
+  <p>{{ i18n "not-found-template-content" }}</p>
+  <ul>
+    <li><a href="//eclipse.org">{{ i18n "not-found-template-eclipse-home" }}</a></li>
+    <li>{{ i18n "not-found-template-search-link" | safeHTML }}</li>
+    <li>{{ i18n "not-found-template-privacy-terms-of-use" | safeHTML }}</li>
+    <li><a href="//eclipse.org/legal">{{ i18n "not-found-template-legal-documents" }}</a></li>
+    <li><a href="//eclipse.org/artwork/">{{ i18n "not-found-template-logos-artwork" }}</a></li>
+    <li><a href="//wiki.eclipse.org/index.php/Webmaster_FAQ">{{ i18n "not-found-template-webmaster-faq" }}</a></li>
+    <li><a href="mailto:webmaster@eclipse.org">{{ i18n "not-found-template-email-webmaster" }}</a></li>
+  </ul>
+</div>
+{{ end }}
+
+{{ define "main_prefix" }}
+<main>
+<div class="container">
+{{ end }}
+
+{{ define "main_suffix" }}
+</div>
+</main>
+{{ end }}

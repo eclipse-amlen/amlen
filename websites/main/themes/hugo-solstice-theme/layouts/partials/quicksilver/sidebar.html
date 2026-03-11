@@ -1,0 +1,45 @@
+{{/* 
+  Copyright (c) 2018 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ if isset .Site.Menus "sidebar" }}
+  {{ $currentPage := . }}
+  {{ .Scratch.Set "currentSection" "home" }}
+
+  {{ if $currentPage.Section }}
+    {{ .Scratch.Set "currentSection" $currentPage.Section }}
+  {{ end }}
+
+  {{$currentSection := .Scratch.Get "currentSection" }}
+
+  {{ range .Site.Menus.sidebar }}
+    {{$parentItem := . }}
+
+      {{ if and (.HasChildren) (eq $currentSection $parentItem.Identifier) }}
+        <aside id="main-sidebar" class="subpage-sidebar">
+        <ul id="leftnav" class="ul-left-nav fa-ul hidden-print">
+        <li class="separator">
+          <a class="separator" href="{{ .URL | relURL }}">{{ $parentItem.Name }}</a>
+        </li>
+        {{ range .Children }}
+          {{ if or (eq $parentItem.Identifier $currentSection) (eq .Parent $currentSection) }}
+            <li{{if $currentPage.IsMenuCurrent "main" . }} class="active"{{end}}>
+              {{ .Pre }}
+              <a href="{{ .URL | relURL }}" target="_self">{{ .Name }}</a>
+            </li>
+          {{ end }}
+        {{ end }}
+        </ul>
+        </aside>
+      {{ end }}
+  {{ end }}
+  {{ if isset $currentPage.Params "custom_sidebar" }}
+    {{ $currentPage.Params.custom_sidebar | safeHTML }}
+  {{ end }}
+{{ end }}

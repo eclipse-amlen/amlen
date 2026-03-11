@@ -1,0 +1,38 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $has_jumbotron := .Store.Get "has_jumbotron" }}
+<main id="main">
+  {{ partial "jumbotron.html" . }}
+  {{ partial "breadcrumbs.html" . }}
+  <div class="{{- .Params.container | default .Site.Params.container | default "container padding-bottom-30"}}">
+    {{ if ne .Page.Params.hide_sidebar true }}
+      <div class="row">
+        <div class='{{- .Params.main_sidebar_class | default .Site.Params.main_sidebar_class | default "col-md-6" }}'>
+          {{ partial "sidebar.html" . }}
+        </div>
+        <div class="{{- .Params.main_content_class | default .Site.Params.main_content_class | default "col-md-18"}}">
+    {{ end }}
+    {{ if eq .Page.Params.is_deprecated true }}
+      {{ $msg := .Page.Params.deprecation_msg | default "This page is deprecated and may contain some information that is no longer relevant or accurate." }}
+      <div class="alert alert-danger margin-top-20" role="alert">
+        {{ $msg }}
+      </div>
+    {{ end }}
+
+    {{ if ne .Page.Params.hide_page_title true }}
+      {{ if $has_jumbotron }}
+        <p class="h1">{{ .Title | safeHTML }}</p>
+      {{ else }}
+        <h1>{{ .Title | safeHTML }}</h1>
+      {{ end }}
+    {{ end }}
+
+

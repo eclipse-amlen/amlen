@@ -1,0 +1,13 @@
+@Library('releng-pipeline') _
+
+hugo (
+  appName: 'webdev.eclipse.org-docs-hugo',
+  productionDomain: 'webdev.eclipse.org',
+  build: [
+    containerImage: 'eclipsefdn/hugo-node:h0.144.2-n22.14.0',
+    script: 'bin/build.sh'
+  ],
+  deployment: [
+    locationPath: '/docs/hugo'
+  ]
+)

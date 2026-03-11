@@ -13,6 +13,7 @@
 %define _topdir %(echo $PWD)/..
 %define distrel %(day="`date +%j`"; echo "0.$day")
 %define _tmppath %{_topdir}/tmp
+%global debug_package %{nil}
 
 Summary: ${IMA_PRODUCTNAME_FULL} Web UI for Linux x86_64
 Name: ${IMA_PKG_WEBUI}
@@ -24,9 +25,9 @@ AutoReqProv: no
 Group: Applications/Communications
 Source: %{name}.tar.gz
 BuildRoot: %{_topdir}/tmp/%{name}-%{Version}.${Release}
-Requires: net-tools, openldap, openldap-servers, openldap-clients, tar, openssl, procps, which
-#NB: If the java version is changed from 1.8.0 below, the postInstallWebUI.sh (which in edge cases guesses a java path) needs to be updated
-Requires(post): java-1.8.0-openjdk-headless
+Requires: net-tools, openldap, openldap-servers, openldap-clients, tar, openssl, procps, which, java-21-openjdk-headless
+#NB: If the java version is changed from 21 (change line above and below), the postInstallWebUI.sh (which in edge cases guesses a java path) needs to be updated
+Requires(post): java-21-openjdk-headless
 Obsoletes: IBMIoTMessageSightWebUI
 
 %description

@@ -1,0 +1,28 @@
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+{{ if eq $layout_style "quicksilver" }}
+  {{ $footer_section_legal_class := .Params.footer_section_legal_class | default .Site.Params.footer_section_legal_class | default "col-sm-6 hidden-print" }}
+  <section class="{{ $footer_section_legal_class }}" id="footer-legal">
+    <h2 class="section-title">{{ i18n "footer-legal-section-text" }}</h2>
+    <ul class="nav">
+      <li><a href="https://www.eclipse.org/legal/privacy/">{{ i18n "footer-legal-privacy-policy-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/terms-of-use/">{{ i18n "footer-legal-terms-use-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/compliance/">{{ i18n "footer-legal-compliance-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/epl-2.0/">{{ i18n "footer-legal-epl-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/">{{ i18n "footer-legal-resources-text" }} </a></li>
+    </ul>
+  </section>
+{{ else if eq $layout_style "astro" }}
+  {{ $footer_section_legal_class := .Params.footer_section_legal_class | default .Site.Params.footer_section_legal_class | default "footer-section col-sm-8" }}
+  <section id="footer-legal" class="{{ $footer_section_legal_class }}">
+    <div class="menu-heading">{{ i18n "footer-legal-section-text" }}</div>
+    <ul class="nav">
+      <li><a href="https://www.eclipse.org/legal/privacy/">{{ i18n "footer-legal-privacy-policy-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/terms-of-use/">{{ i18n "footer-legal-terms-use-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/compliance/">{{ i18n "footer-legal-compliance-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/org/documents/Community_Code_of_Conduct.php">{{ i18n "footer-legal-code-of-conduct-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/legal/">{{ i18n "footer-legal-resources-text" }}</a></li>
+      <li><a class="toolbar-manage-cookies" href="#" onclick="event.preventDefault()">{{ i18n "footer-legal-manage-cookies-label" }}</a></li>
+    </ul>
+  </section>
+{{ end }}

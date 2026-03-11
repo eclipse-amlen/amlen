@@ -1,0 +1,24 @@
+[en]
+  languageName = "English"
+  weight =  1
+[fr]
+  languageName = "Francais"
+  weight =  2
+[es]
+  languageName = "Español"
+  weight =  3
+[pt]
+  languageName = "Portuguesa"
+  weight =  4
+[jp]
+  languageName = "日本語"
+  weight =  5
+[zh]
+  languageName = "简体中文"
+  weight =  6
+[ru]
+  languageName = "Русский"
+  weight =  7
+[de]
+  languageName = "Deutsch"
+  weight =  8

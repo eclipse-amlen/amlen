@@ -1,0 +1,380 @@
+[navbar-manage-cookies-label]
+  other = "管理Cookies"
+
+[navbar-edit-acccount-label]
+  other = "编辑账户"
+
+[relative-links]
+  other = "相关链接"
+
+[eclipse-foundation-text]
+  other = "Eclipse Foundation"
+
+[jakarta-ee-website]
+  other = "Jakarta EE 官网网站"
+
+[jakartaee-ambassodars]
+  other = "Jakarta EE 大使官网网站"
+
+[jakartaone-website]
+  other = "JakartaOne 官网网站"
+
+[footer-foundation-about-us-text]
+  other = "关于我们"
+
+[footer-foundation-contact-us-text]
+  other = "联系我们"
+
+[footer-foundation-donate-text]
+  other = "捐赠"
+
+[footer-foundation-members-text]
+  other = "成员"
+
+[footer-foundation-governance-text]
+  other = "治理"
+
+[footer-foundation-logo-artwork-text]
+  other = "徽标和设计元素"
+
+[footer-foundation-board-of-directors-text]
+  other = "董事会"
+
+[footer-legal-section-text]
+  other = "法律条款"
+
+[footer-legal-code-of-conduct-text]
+  other = "行为准则"
+
+[footer-legal-privacy-policy-text]
+  other = "隐私政策"
+
+[footer-legal-terms-use-text]
+  other = "服务条款"
+
+[footer-legal-epl-text]
+  other = "Eclipse公开许可"
+
+[footer-legal-resources-text]
+  other = "法律资源"
+
+[footer-useful-links-section-text]
+  other = "常用链接"
+
+[footer-useful-links-committee]
+  other = "委员会"
+
+[footer-useful-links-newsletter]
+  other = "简讯"
+
+[footer-useful-links-minutes]
+  other = "会议纪要"
+
+[footer-useful-links-report-bug-text]
+  other = "报告Bug"
+
+[footer-useful-links-documentation-text]
+  other = "文档"
+
+[footer-useful-links-contribute-text]
+  other = "如何做出贡献"
+
+[footer-useful-links-mailing-list-text]
+  other = "邮件列表"
+
+[footer-useful-links-forums-text]
+  other = "论坛"
+
+[footer-useful-links-marketplace-text]
+  other = "市场"
+
+[footer-useful-links-googledrive]
+  other = "Jakarta EE 社区文件夹"
+
+[footer-other-section-text]
+  other = "其他"
+
+[footer-other-tools-text]
+  other = "IDE和工具"
+
+[footer-other-community-projects-text]
+  other = "项目"
+
+[footer-other-working-groups-text]
+  other = "工作组"
+
+[footer-other-research-text]
+  other = "研究@Eclipse"
+
+[footer-other-report-vulnerability-text]
+  other = "报告漏洞"
+
+[footer-other-status-text]
+  other = "服务状态"
+
+[footer-other-codeofconduct]
+  other = "社区公约"
+
+[footer-other-ambassodars]
+  other = "加入成为Jakarta EE大使"
+
+[footer-other-charter]
+  other = "工作组章程"
+
+[footer-other-membership]
+  other = "加入工作组"
+
+[footer-other-compatibility]
+  other = "兼容产品"
+
+[footer-sr-social-account]
+  other = "{{ . }}账号"
+
+[navigation-back-to-top]
+  other = "返回顶部"
+
+[navigation-breadcrumb-sr]
+  other = "位置导航"
+
+[navigation-content-skip]
+  other = "跳转到主要内容"
+
+[navigation-mobile-menu-toggle]
+  other = "切换导航"
+
+[navigation-more-menu-label]
+  other = "更多"
+
+[navigation-more-community-section]
+  other = "社区"
+
+[navigation-more-community-marketplace-label]
+  other = "市场"
+
+[navigation-more-community-events-label]
+  other = "活动"
+
+[navigation-more-community-planet-eclipse-label]
+  other = "Eclipse行星社区"
+
+[navigation-more-community-newsletter-label]
+  other = "电子通讯刊物"
+
+[navigation-more-community-videos-label]
+  other = "视频"
+
+[navigation-more-community-blogs-label]
+  other = "博客"
+
+[navigation-more-participate-section]
+  other = "参与"
+
+[navigation-more-participate-bug-label]
+  other = "下载"
+
+[navigation-more-participate-forums-label]
+  other = "论坛"
+
+[navigation-more-participate-mailing-lists-label]
+  other = "邮件组"
+
+[navigation-more-participate-wiki-label]
+  other = "维基"
+
+[navigation-more-participate-irc-label]
+  other = "聊天工具"
+
+[navigation-more-ide-section]
+  other = "Eclipse IDE"
+
+[navigation-more-ide-download-label]
+  other = "下载"
+
+[navigation-more-ide-learn-label]
+  other = "了解更多"
+
+[navigation-more-ide-docs-label]
+  other = "文档"
+
+[navigation-more-ide-support-label]
+  other = "新手入门 / 支持"
+
+[navigation-more-ide-contribute-label]
+  other = "如何贡献"
+
+[navigation-more-ide-tools-label]
+  other = "IDE和工具"
+
+[navigation-more-ide-forum-label]
+  other = "新人论坛"
+
+[footer-copyright-text]
+  other = "Copyright &copy; Eclipse Foundation AISBL. All Right Reserved."
+
+[search-section-label]
+  other = "搜索"
+
+[project-single-licenses-label]
+  other = "许可:"
+
+[project-single-tags-label]
+  other = " 标签"
+
+[project-summary-read-more]
+  other = "了解更多..."
+
+[project-summary-latest-release]
+  other = "最新版本:"
+
+[project-summary-download-label]
+  other = "下载"
+
+[project-summary-toggle-dropdown]
+  other = "下拉"
+
+[project-summary-website-label]
+  other = "网站"
+
+[project-summary-logo-text]
+  other = "{{ .Title }} 徽标"
+
+[events-table-conference-header]
+  other = "会议"
+
+[events-table-location-header]
+  other = "位置"
+
+[events-table-date-header]
+  other = "日期"
+
+[members-list-members-label]
+  other = "成员"
+
+[members-list-all-members]
+  other = "全部成员"
+
+[taxonomy-list-view-all]
+  other = "查看全部"
+
+[taxonomy-list-rss-feed-label]
+  other = "订阅RSS"
+
+[not-found-template-heading]
+  other = "页面没有找到"
+
+[not-found-template-content]
+  other = "抱歉，您所访问的页面找不到了。下面有一些链接可能对您有所帮助。"
+
+[not-found-template-eclipse-home]
+  other = "Eclipse首页"
+
+[not-found-template-search-link]
+  other = "<a href='//eclipse.org/projects/searchpage.php'>站内搜索</a>"
+
+[not-found-template-privacy-terms-of-use]
+  other = "网站 <a href='//eclipse.org/legal/privacy/'>隐私政策</a> and <a href='//eclipse.org/legal/terms-of-use/'>服务条款</a>"
+
+[not-found-template-legal-documents]
+  other = "法律文档"
+
+[not-found-template-logos-artwork]
+  other = "徽标和配图"
+
+[not-found-template-webmaster-faq]
+  other = "网站管理员 FAQ"
+
+[not-found-template-email-webmaster]
+  other = "给网站管理员发邮件"
+
+[not-found-template-useful-links]
+  other = "一些有用的链接"
+
+[not-found-template-project-archives]
+  other = "Eclipse 项目存档"
+
+[not-found-template-project-downloads]
+  other = "Eclipse 项目下载"
+
+[faq-list-heading]
+  other = "目录"
+
+[project-list-logo-alt]
+  other = "{{ .name }} 徽标"
+
+[project-list-read-more-sr]
+  other = "了解关于 {{ .name }} 的更多内容"
+
+[project-list-read-more]
+  other = "了解更多..."
+
+[project-list-dropdown-sr]
+  other = "下拉"
+
+[project-list-downloads]
+  other = "下载"
+
+[project-list-website]
+  other = "网站"
+
+[project-list-resources]
+  other = "开发者资源"
+
+[project-list-who]
+  other = "参与者"
+
+[project-list-governance]
+  other = "治理"
+
+[project-list-contact]
+  other = "联系"
+
+[agenda-schedule]
+other = "当日计划"
+
+[agenda-legend]
+other = "图例"
+
+[agenda-sessions]
+other = "议程"
+
+[agenda-session-name]
+other = "演讲主题"
+
+[agenda-presenter-name]
+other = "演讲者"
+
+[agenda-organization]
+other = "组织"
+
+[agenda-session-recording]
+other = "演讲回放"
+
+[agenda-session-schedule]
+other = "时间"
+
+[agenda-session-recording-button-alt]
+other = "{{ .name }} 主题演讲的视频"
+
+[agenda-session-slides-button-alt]
+other = "{{ .name }} 主题演讲的讲稿"
+
+[agenda-session-slides]
+other = "讲稿"
+
+[committee-carousel-title]
+other = "程序委员会"
+
+[committee-carousel-button-text]
+other = "了解更多"
+
+[committee-twitter-follow-text]
+other = "关注 {{ .name }} 的推特!"
+
+[events-sponsor-title]
+other = "赞助商"
+
+[events-sponsor-image-alt]
+other = "{{ . }} 徽标"
+
+[modal-close-alt]
+other = "关闭"

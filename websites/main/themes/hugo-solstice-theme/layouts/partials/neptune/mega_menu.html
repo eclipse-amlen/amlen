@@ -1,0 +1,61 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+{{ $current_page := . }}
+
+{{ $has_mega_menu := false }}
+{{/* Unless if any of the menus are 3-levels deep then we will show a mega menu. */}}
+{{ with (index .Site.Menus $main_menu) }}
+  {{ range . }}
+    {{ if .HasChildren }}
+      {{ range .Children }}
+        {{ if .HasChildren }}
+          {{ $has_mega_menu = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $has_mega_menu }}
+  <div class="mega-menu">
+    {{ range (index .Site.Menus $main_menu) }}
+      {{ $menu_id := .Identifier | default (lower .Name) }}
+      {{ $menu_id = printf "%s-menu" $menu_id }}
+      <div class="menu hidden" id="{{ $menu_id }}">
+        <div class="container">
+          <nav>
+            {{ range .Children }}
+              <div class="submenu" {{ with .Params.style -}} style="{{ . | safeCSS }}" {{- end }}>
+                <div class="menu-heading-group">
+                  {{ with .Pre }}
+                    <span class="menu-pre">
+                      {{ . | safeHTML }}
+                    </span>
+                  {{ end }}
+                  <h2 class="menu-heading">{{ .Name }}</h2>
+                </div>
+                <ul>
+                  {{ range .Children }}
+                    <li>
+                      <a href="{{ .URL }}" {{ with .Params.target -}} target="{{ . | safeHTMLAttr }}" {{- end }}>{{ .Name }}</a>
+                      {{ with .Params.external }}<i class="external-icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>{{ end }}
+                    </li>
+                  {{ end }}
+                </ul>
+              </div>
+            {{ end }}
+          </nav>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

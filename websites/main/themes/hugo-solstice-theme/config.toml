@@ -1,0 +1,1108 @@
+[Params]
+  _merge = "shallow"
+
+[[Params.socials]]
+  name = "X"
+  icon = "fa-brands fa-x-twitter"
+  url = "https://x.com/EclipseFdn"
+
+[[Params.socials]]
+  name = "Bluesky"
+  icon = "fa-brands fa-bluesky"
+  url = "https://bsky.app/profile/eclipse.org"
+
+[[Params.socials]]
+  name = "Mastodon"
+  icon = "fa-brands fa-mastodon"
+  url = "https://mastodon.social/@EclipseFdn"
+
+[[Params.socials]]
+  name = "Facebook"
+  icon = "fa-brands fa-facebook-f"
+  url = "https://www.facebook.com/eclipse.org"
+
+[[Params.socials]]
+  name = "Instagram"
+  icon = "fa-brands fa-instagram"
+  url = "https://www.instagram.com/eclipsefoundation/"
+
+[[Params.socials]]
+  name = "YouTube"
+  icon = "fa-brands fa-youtube"
+  url = "https://www.youtube.com/user/EclipseFdn"
+
+[[Params.socials]]
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin-in"
+  url = "https://www.linkedin.com/company/eclipse-foundation"
+
+[Params.author]
+  name = "Eclipse Foundation"
+  website = "https://www.eclipse.org"
+  email = "webdev@eclipse-foundation.org"
+  facebook = "eclipse.org"
+  twitter = "eclipsefdn"
+  youtube = "EclipseFdn"
+  googleplus = "+Eclipse"
+  linkedin = "company/eclipse-foundation/"
+  bluesky = "eclipsefdn.bsky.social"
+
+# This is the default menus configuration for all websites consuming the theme.
+# It will be discarded if menu.main is defined at the site-level.
+
+[menus]
+  _merge = "shallow"
+
+# Neptune Menu
+[[menu.neptune]]
+  name = "Join us"
+  weight = 1
+  identifier = "join-us"
+
+[[menu.neptune]]
+  name = "Membership"
+  weight = 1
+  identifier = "membership"
+  parent = "join-us"
+  pre = "<i class=\"fa-solid fa-user-group\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Become a member"
+  url = "https://www.eclipse.org/membership/"
+  weight = 1
+  parent = "membership"
+
+[[menu.neptune]]
+  name = "Review membership fees"
+  url = "https://www.eclipse.org/membership#tab-fees"
+  weight = 2
+  parent = "membership"
+
+[[menu.neptune]]
+  name = "Access member portal"
+  url = "https://membership.eclipse.org/portal"
+  weight = 3
+  parent = "membership"
+  [menu.neptune.params]
+    target = "_blank"
+
+[[menu.neptune]]
+  name = "Sponsorship"
+  weight = 2
+  identifier = "sponsorship-2"
+  parent = "join-us"
+  pre = "<i class=\"fa-solid fa-bookmark\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Support us as a sponsor"
+  url = "https://www.eclipse.org/sponsor/"
+  weight = 1
+  parent = "sponsorship-2"
+
+[[menu.neptune]]
+  name = "Contribute"
+  weight = 3
+  identifier = "contribute"
+  parent = "join-us"
+  pre = "<i class=\"fa-solid fa-handshake-simple\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "How to contribute"
+  url = "https://www.eclipse.org/contribute/"
+  weight = 1
+  parent = "contribute"
+
+[[menu.neptune]]
+  name = "Committer training"
+  url = "https://www.eclipse.org/projects/training/"
+  weight = 2
+  parent = "contribute"
+
+[[menu.neptune]]
+  name = "Collaborate with us"
+  weight = 4
+  identifier = "collaborate-with-us"
+  parent = "join-us"
+  pre = "<i class=\"fa-solid fa-users\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Join an existing industry collaboration"
+  url = "https://www.eclipse.org/org/working-groups/explore/"
+  weight = 1
+  parent = "collaborate-with-us"
+
+[[menu.neptune]]
+  name = "Start a new collaboration"
+  url = "https://www.eclipse.org/collaborations/#start-collaboration"
+  weight = 2
+  parent = "collaborate-with-us"
+
+[[menu.neptune]]
+  name = "What we do"
+  weight = 2
+  identifier = "what-we-do"
+
+[[menu.neptune]]
+  name = "Projects"
+  weight = 1
+  identifier = "projects"
+  parent = "what-we-do"
+  pre = "<i class=\"fa-solid fa-puzzle-piece\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Explore projects"
+  url = "https://projects.eclipse.org/"
+  weight = 1
+  parent = "projects"
+
+[[menu.neptune]]
+  name = "View specifications"
+  url = "https://www.eclipse.org/specifications/"
+  weight = 2
+  parent = "projects"
+
+[[menu.neptune]]
+  name = "Industry collaborations"
+  weight = 2
+  identifier = "industry-collaborations"
+  parent = "what-we-do"
+  pre = "<i class=\"fa-solid fa-building\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Explore collaborations"
+  url = "https://www.eclipse.org/org/working-groups/explore/"
+  weight = 1
+  parent = "industry-collaborations"
+
+[[menu.neptune]]
+  name = "Join a working group"
+  url = "https://www.eclipse.org/org/working-groups/about/"
+  weight = 2
+  parent = "industry-collaborations"
+
+[[menu.neptune]]
+  name = "Join an interest group"
+  url = "https://www.eclipse.org/collaborations/interest-groups/"
+  weight = 3
+  parent = "industry-collaborations"
+
+[[menu.neptune]]
+  name = "Read success stories"
+  url = "https://www.eclipse.org/org/value/"
+  weight = 3
+  parent = "industry-collaborations"
+
+[[menu.neptune]]
+  name = "Core services"
+  weight = 3
+  identifier = "core-services"
+  parent = "what-we-do"
+  pre = "<i class=\"fa-solid fa-laptop-code\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Explore core services"
+  url = "https://www.eclipse.org/org/services/"
+  weight = 1
+  parent = "core-services"
+
+[[menu.neptune]]
+  name = "Ensure project security"
+  url = "https://www.eclipse.org/security/"
+  weight = 2
+  parent = "core-services"
+
+[[menu.neptune]]
+  name = "Strategic services"
+  weight = 5
+  identifier = "strategic-services"
+  parent = "what-we-do"
+  pre = "<i class=\"fa-solid fa-flag\" aria-hidden=\"true\"></i>"
+  [menu.neptune.params]
+    style = "grid-column: -3; margin-top: -20rem;"
+
+
+[[menu.neptune]]
+  name = "Transform research into open source"
+  url = "https://www.eclipse.org/research/"
+  weight = 1
+  parent = "strategic-services"
+
+[[menu.neptune]]
+  name = "Engage professional services"
+  url = "https://www.eclipse.org/os4biz/services/"
+  weight = 2
+  parent = "strategic-services"
+
+[[menu.neptune]]
+  name = "Build your OSPO"
+  url = "https://www.eclipse.org/os4biz/ospo/"
+  weight = 3
+  parent = "strategic-services"
+
+[[menu.neptune]]
+  name = "Key initiatives"
+  weight = 4
+  identifier = "key-initiatives"
+  parent = "what-we-do"
+  pre = "<i class=\"fa-solid fa-bullseye\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Embedded & IoT"
+  url = "https://www.eclipse.org/topics/edge-and-iot/"
+  weight = 1
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "Enterprise Java"
+  url = "https://www.eclipse.org/topics/cloud-native/"
+  weight = 2
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "Data sovereignty"
+  url = "https://dataspace.eclipse.org/"
+  weight = 3
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "Security & privacy"
+  url = "https://www.eclipse.org/security/"
+  weight = 4
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "Developer tools & IDEs"
+  url = "https://www.eclipse.org/topics/ide/"
+  weight = 5
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "AI & emerging technologies"
+  url = "https://aieclipse.org/"
+  weight = 6
+  parent = "key-initiatives"
+  [menu.neptune.params]
+    target = "_blank"
+    external = true
+
+[[menu.neptune]]
+  name = "Automotive & mobility"
+  url = "https://www.eclipse.org/topics/automotive-and-mobility/"
+  weight = 7
+  parent = "key-initiatives"
+
+[[menu.neptune]]
+  name = "Policy & compliance"
+  url = "https://orcwg.org/"
+  weight = 8
+  parent = "key-initiatives"
+  [menu.neptune.params]
+    target = "_blank"
+    external = true
+
+[[menu.neptune]]
+  name = "Resources"
+  weight = 3
+  identifier = "resources"
+  pre = "<i class=\"fa-solid fa-list-ul\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "What's happening"
+  weight = 1
+  identifier = "whats-happening"
+  parent = "resources"
+  pre = "<i class=\"fa-solid fa-bullhorn\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Read our blog"
+  url = "https://blogs.eclipse.org/"
+  weight = 1
+  parent = "whats-happening"
+
+[[menu.neptune]]
+  name = "Join mailing lists"
+  url = "https://accounts.eclipse.org/mailing-list"
+  weight = 2
+  parent = "whats-happening"
+
+[[menu.neptune]]
+  name = "Get news updates"
+  url = "https://newsroom.eclipse.org/"
+  weight = 3
+  parent = "whats-happening"
+
+[[menu.neptune]]
+  name = "Subscribe to newsletter"
+  url = "https://www.eclipse.org/community/eclipse_newsletter"
+  weight = 4
+  parent = "whats-happening"
+
+[[menu.neptune]]
+  name = "Events"
+  weight = 2
+  identifier = "events"
+  parent = "resources"
+  pre = "<i class=\"fa-solid fa-calendar-days\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Explore events"
+  url = "https://events.eclipse.org/"
+  weight = 1
+  parent = "events"
+
+[[menu.neptune]]
+  name = "Join a community meetup"
+  url = "https://www.eclipse.org/events/open-community-meetups/"
+  weight = 2
+  parent = "events"
+
+[[menu.neptune]]
+  name = "Attend a webinar"
+  url = "https://www.eclipse.org/events/open-community-webinars/"
+  weight = 3
+  parent = "events"
+
+[[menu.neptune]]
+  name = "Join OCX"
+  url = "https://www.ocxconf.org/"
+  weight = 3
+  parent = "events"
+  [menu.neptune.params]
+    target = "_blank"
+    external = true
+
+[[menu.neptune]]
+  name = "Developer resources"
+  weight = 3
+  identifier = "developer-resources"
+  parent = "resources"
+  pre = "<i class=\"fa-solid fa-code\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Explore projects hub"
+  url = "https://www.eclipse.org/projects/"
+  weight = 1
+  parent = "developer-resources"
+
+[[menu.neptune]]
+  name = "Attend office hours"
+  url = "https://www.eclipse.org/projects/calendar/#office-hours"
+  weight = 2
+  parent = "developer-resources"
+
+[[menu.neptune]]
+  name = "Report a vulnerability"
+  url = "https://www.eclipse.org/security/"
+  weight = 3
+  parent = "developer-resources"
+
+[[menu.neptune]]
+  name = "View known vulnerabilities"
+  url = "https://www.eclipse.org/security/known/"
+  weight = 4
+  parent = "developer-resources"
+
+[[menu.neptune]]
+  name = "Use the security handbook"
+  url = "https://github.com/eclipse-csi/security-handbook/blob/main/docs/vulnerabilities/advisories.md"
+  weight = 5
+  parent = "developer-resources"
+  [menu.neptune.params]
+    target = "_blank"
+
+[[menu.neptune]]
+  name = "Industry insights"
+  weight = 4
+  identifier = "industry-intelligence-insights"
+  parent = "resources"
+  pre = "<i class=\"fa-solid fa-gear\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "View case studies"
+  url = "https://www.eclipse.org/org/value/#success_stories"
+  weight = 1
+  parent = "industry-intelligence-insights"
+
+[[menu.neptune]]
+  name = "View whitepapers"
+  url = "https://www.eclipse.org/org/value/#whitepapers"
+  weight = 2
+  parent = "industry-intelligence-insights"
+
+[[menu.neptune]]
+  name = "View surveys & reports"
+  url = "https://www.eclipse.org/org/value/#surveyReports"
+  weight = 3
+  parent = "industry-intelligence-insights"
+
+[[menu.neptune]]
+  name = "Marketplaces"
+  weight = 5
+  identifier = "marketplaces"
+  parent = "resources"
+  pre = "<i class=\"fa-solid fa-store\" aria-hidden=\"true\"></i>"
+  [menu.neptune.params]
+    style = "grid-column: -2; margin-top: -6rem;"
+
+[[menu.neptune]]
+  name = "Adoptium"
+  url = "https://adoptium.net/"
+  weight = 1
+  parent = "marketplaces"
+
+[[menu.neptune]]
+  name = "Eclipse IDE"
+  url = "https://marketplace.eclipse.org/"
+  weight = 2
+  parent = "marketplaces"
+
+[[menu.neptune]]
+  name = "Open VSX"
+  url = "https://open-vsx.org/"
+  weight = 3
+  parent = "marketplaces"
+
+[[menu.neptune]]
+  name = "About us"
+  weight = 4
+  identifier = "about-us"
+
+[[menu.neptune]]
+  name = "The Foundation"
+  weight = 1
+  identifier = "the-foundation"
+  parent = "about-us"
+  pre = "<i class=\"fa-regular fa-moon rotate-90\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "About"
+  url = "https://www.eclipse.org/about/"
+  weight = 1
+  parent = "the-foundation"
+
+[[menu.neptune]]
+  name = "Meet the team"
+  url = "https://www.eclipse.org/org/foundation/staff/"
+  weight = 2
+  parent = "the-foundation"
+
+[[menu.neptune]]
+  name = "Board & governance"
+  url = "https://www.eclipse.org/org/governance/"
+  weight = 3
+  parent = "the-foundation"
+
+[[menu.neptune]]
+  name = "Our members"
+  weight = 2
+  identifier = "our-members"
+  parent = "about-us"
+  pre = "<i class=\"fa-solid fa-user-group\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Become a member"
+  url = "https://www.eclipse.org/membership/"
+  weight = 1
+  identifier = "our-members-become-a-member"
+  parent = "our-members"
+
+[[menu.neptune]]
+  name = "View member directory"
+  url = "https://www.eclipse.org/membership/explore-membership/"
+  weight = 2
+  identifier = "our-members-view-member-directory"
+  parent = "our-members"
+
+[[menu.neptune]]
+  name = "Access member portal"
+  url = "https://membership.eclipse.org/portal"
+  weight = 3
+  identifier = "our-members-access-member-portal"
+  parent = "our-members"
+  [menu.neptune.params]
+    target = "_blank"
+
+[[menu.neptune]]
+  name = "Sponsorship"
+  weight = 3
+  identifier = "sponsorship"
+  parent = "about-us"
+  pre = "<i class=\"fa-regular fa-bookmark\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Become a sponsor"
+  url = "https://www.eclipse.org/sponsor/"
+  weight = 1
+  parent = "sponsorship"
+
+[[menu.neptune]]
+  name = "Sponsor directory"
+  url = "https://www.eclipse.org/org/our-sponsors/"
+  weight = 2
+  parent = "sponsorship"
+
+[[menu.neptune]]
+  name = "More"
+  weight = 4
+  identifier = "more"
+  parent = "about-us"
+  pre = "<i class=\"fa-solid fa-cube\" aria-hidden=\"true\"></i>"
+
+[[menu.neptune]]
+  name = "Join our team"
+  url = "https://www.eclipse.org/careers/"
+  weight = 1
+  parent = "more"
+
+[[menu.neptune]]
+  name = "Explore our brand"
+  url = "https://www.eclipse.org/org/artwork/"
+  weight = 2
+  parent = "more"
+
+[[menu.neptune]]
+  name = "Contact us"
+  url = "https://www.eclipse.org/org/foundation/contact.php"
+  weight = 3
+  parent = "more"
+
+# Astro Menu
+
+[[menu.astro]]
+  name = "Projects"
+  weight = 1
+  identifier = "projects"
+  [menu.astro.params]
+    description = """
+      The Eclipse Foundation is home to the Eclipse IDE, Jakarta EE, and
+      hundreds of open source projects, including runtimes, tools,
+      specifications, and frameworks for cloud and edge applications, IoT, AI,
+      automotive, systems engineering, open processor designs, and many others.
+    """
+
+
+[[menu.astro]]
+  name = "Technologies"
+  weight = 1
+  identifier = "projects-technologies"
+  parent = "projects"
+
+[[menu.astro]]
+  name = "Developer Tools & IDEs"
+  url = "https://www.eclipse.org/topics/ide/"
+  weight = 1
+  parent = "projects-technologies"
+
+[[menu.astro]]
+  name = "Cloud Native"
+  url = "https://www.eclipse.org/topics/cloud-native/"
+  weight = 2
+  parent = "projects-technologies"
+
+[[menu.astro]]
+  name = "Edge & IoT"
+  url = "https://www.eclipse.org/topics/edge-and-iot/"
+  weight = 3
+  parent = "projects-technologies"
+
+[[menu.astro]]
+  name = "Automotive & Mobility"
+  url = "https://www.eclipse.org/topics/automotive-and-mobility/"
+  weight = 4
+  parent = "projects-technologies"
+
+[[menu.astro]]
+  name = "Projects"
+  weight = 2
+  identifier = "projects-projects"
+  parent = "projects"
+
+[[menu.astro]]
+  name = "Project Finder"
+  url = "https://projects.eclipse.org/"
+  weight = 1
+  parent = "projects-projects"
+
+[[menu.astro]]
+  name = "Project Activity"
+  url = "https://www.eclipse.org/projects/project_activity.php"
+  weight = 2
+  parent = "projects-projects"
+
+[[menu.astro]]
+  name = "Project Resources"
+  url = "https://www.eclipse.org/projects/resources/"
+  weight = 3
+  parent = "projects-projects"
+
+[[menu.astro]]
+  name = "Specifications"
+  url = "https://www.eclipse.org/specifications/"
+  weight = 4
+  parent = "projects-projects"
+
+[[menu.astro]]
+  name = "Contribute"
+  url = "https://www.eclipse.org/contribute/"
+  weight = 5
+  parent = "projects-projects"
+
+[[menu.astro]]
+  name = "Supporters"
+  weight = 2
+  identifier = "supporters"
+  [menu.astro.params]
+    description = """
+      The Eclipse Foundation is an international non-profit association
+      supported by our members, including industry leaders who value open
+      source as a key enabler for their business strategies.
+    """
+
+[[menu.astro]]
+  name = "Membership"
+  weight = 1
+  identifier = "supporters-membership"
+  parent = "supporters"
+
+[[menu.astro]]
+  name = "Our Members"
+  url = "https://www.eclipse.org/membership/explore-membership/"
+  weight = 1
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Member Benefits"
+  url = "https://www.eclipse.org/membership/"
+  weight = 2
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Membership Levels & Fees"
+  url = "https://www.eclipse.org/membership#tab-levels"
+  weight = 3
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Membership Application"
+  url = "https://www.eclipse.org/membership#tab-membership"
+  weight = 4
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Member Resources"
+  url = "https://www.eclipse.org/membership#tab-resources"
+  weight = 5
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Member Portal"
+  url = "https://membership.eclipse.org/portal"
+  weight = 6
+  parent = "supporters-membership"
+
+[[menu.astro]]
+  name = "Sponsorship"
+  weight = 1
+  identifier = "supporters-sponsorship"
+  parent = "supporters"
+
+[[menu.astro]]
+  name = "Become a Sponsor"
+  url = "https://www.eclipse.org/sponsor/"
+  weight = 1
+  parent = "supporters-sponsorship"
+
+[[menu.astro]]
+  name = "Sponsor Directory"
+  url = "https://www.eclipse.org/org/our-sponsors/"
+  weight = 2
+  parent = "supporters-sponsorship"
+
+[[menu.astro]]
+  name = "Collaborations"
+  weight = 3
+  identifier = "collaborations"
+  [menu.astro.params]
+    description = """
+      Whether you intend on contributing to Eclipse technologies that are
+      important to your product strategy, or simply want to explore a specific
+      innovation area with like-minded organisations, the Eclipse Foundation is
+      the open source home for industry collaboration.
+    """
+
+[[menu.astro]]
+  name = "Industry Collaborations"
+  weight = 1
+  parent = "collaborations"
+  identifier = "collaborations-industry-collaborations"
+
+[[menu.astro]]
+  name = "About Industry Collaborations"
+  url = "https://www.eclipse.org/collaborations/"
+  weight = 1
+  parent = "collaborations-industry-collaborations"
+
+[[menu.astro]]
+  name = "Current Collaborations"
+  url = "https://www.eclipse.org/org/workinggroups/explore.php"
+  weight = 2
+  parent = "collaborations-industry-collaborations"
+
+[[menu.astro]]
+  name = "About Working Groups"
+  url = "https://www.eclipse.org/org/workinggroups/about.php"
+  weight = 3
+  parent = "collaborations-industry-collaborations"
+
+[[menu.astro]]
+  name = "About Interest Groups"
+  url = "https://www.eclipse.org/collaborations/interest-groups/"
+  weight = 4
+  parent = "collaborations-industry-collaborations"
+
+[[menu.astro]]
+  name = "Research Collaborations"
+  identifier = "collaborations-research-collaborations"
+  weight = 2
+  parent = "collaborations"
+
+[[menu.astro]]
+  name = "Research @ Eclipse"
+  url = "https://www.eclipse.org/research/"
+  weight = 1
+  parent="collaborations-research-collaborations"
+
+[[menu.astro]]
+  name = "Resources"
+  weight = 4
+  identifier = "resources"
+  [menu.astro.params]
+    description = """
+      The Eclipse community consists of individual developers and organisations
+      spanning many industries. Stay up to date on our open source community
+      and find resources to support your journey.
+    """
+
+[[menu.astro]]
+  name = "Open Source for Business"
+  weight = 1
+  parent = "resources"
+  identifier = "resources-open-source"
+
+[[menu.astro]]
+  name = "Business Value of Open Source"
+  url = "https://www.eclipse.org/org/value/"
+  weight = 1
+  parent = "resources-open-source"
+
+[[menu.astro]]
+  name = "Professional Services"
+  url = "https://www.eclipse.org/os4biz/services/"
+  weight = 2
+  parent = "resources-open-source"
+
+[[menu.astro]]
+  name = "Open Source Program Offices"
+  url = "https://www.eclipse.org/os4biz/ospo/"
+  weight = 3
+  parent = "resources-open-source"
+
+[[menu.astro]]
+  name = "What's Happening"
+  weight = 2
+  parent = "resources"
+  identifier = "resources-happening"
+
+[[menu.astro]]
+  name = "News"
+  url = "https://newsroom.eclipse.org/"
+  weight = 1
+  parent = "resources-happening"
+
+[[menu.astro]]
+  name = "Events"
+  url = "https://events.eclipse.org/"
+  weight = 2
+  parent = "resources-happening"
+
+[[menu.astro]]
+  name = "Newsletter"
+  url = "https://www.eclipse.org/community/eclipse_newsletter/"
+  weight = 3
+  parent = "resources-happening"
+
+[[menu.astro]]
+  name = "Press Releases"
+  url = "https://newsroom.eclipse.org/news/press-releases"
+  weight = 4
+  parent = "resources-happening"
+
+[[menu.astro]]
+  name = "Awards & Recognition"
+  url = "https://www.eclipse.org/org/foundation/eclipseawards/"
+  weight = 5
+  parent = "resources-happening"
+
+[[menu.astro]]
+  name = "Developer Resources"
+  weight = 3
+  parent = "resources"
+  identifier = "resources-developer"
+
+[[menu.astro]]
+  name = "Forum"
+  url = "https://eclipse.org/forums/"
+  weight = 1
+  parent = "resources-developer"
+
+[[menu.astro]]
+  name = "Mailing Lists"
+  url = "https://accounts.eclipse.org/mailing-list"
+  weight = 2
+  parent = "resources-developer"
+
+[[menu.astro]]
+  name = "Blogs & Videos"
+  url = "https://www.eclipse.org/blogs-and-videos/"
+  weight = 3
+  parent = "resources-developer"
+
+[[menu.astro]]
+  name = "Marketplaces"
+  url = "https://www.eclipse.org/resources/marketplaces/"
+  weight = 4
+  parent = "resources-developer"
+
+[[menu.astro]]
+  name = "The Foundation"
+  weight = 5
+  identifier = "the-foundation"
+  [menu.astro.params]
+    description = """
+      The Eclipse Foundation provides our global community of individuals and
+      organisations with a mature, scalable, and vendor-neutral environment for
+      open source software collaboration and innovation.
+    """
+
+[[menu.astro]]
+  name = "About"
+  weight = 1
+  identifier = "the-foundation-about"
+  parent = "the-foundation"
+
+[[menu.astro]]
+  name = "About the Eclipse Foundation"
+  url = "https://www.eclipse.org/org/"
+  weight = 1
+  parent="the-foundation-about"
+
+[[menu.astro]]
+  name = "Board & Governance"
+  url = "https://www.eclipse.org/org/governance/"
+  weight = 2
+  parent="the-foundation-about"
+
+[[menu.astro]]
+  name = "Staff"
+  url = "https://www.eclipse.org/org/foundation/staff.php"
+  weight = 3
+  parent="the-foundation-about"
+
+[[menu.astro]]
+  name = "Services"
+  url = "https://www.eclipse.org/org/services/"
+  weight = 4
+  parent="the-foundation-about"
+
+[[menu.astro]]
+  name = "Legal"
+  weight = 2
+  identifier = "the-foundation-legal"
+  parent = "the-foundation"
+
+[[menu.astro]]
+  name = "Legal Policies"
+  url = "https://www.eclipse.org/legal/"
+  weight = 1
+  parent="the-foundation-legal"
+
+[[menu.astro]]
+  name = "Privacy Policy"
+  url = "https://www.eclipse.org/legal/privacy/"
+  weight = 2
+  parent="the-foundation-legal"
+
+[[menu.astro]]
+  name = "Terms of Use"
+  url = "https://www.eclipse.org/legal/terms-of-use/"
+  weight = 3
+  parent="the-foundation-legal"
+
+[[menu.astro]]
+  name = "Compliance"
+  url = "https://www.eclipse.org/legal/compliance/"
+  weight = 4
+  parent="the-foundation-legal"
+
+[[menu.astro]]
+  name = "Eclipse Public License"
+  url = "https://www.eclipse.org/legal/epl-2.0/"
+  weight = 5
+  parent="the-foundation-legal"
+
+[[menu.astro]]
+  name = "More"
+  weight = 3
+  identifier = "the-foundation-more"
+  parent = "the-foundation"
+
+[[menu.astro]]
+  name = "Press Releases "
+  url = "https://newsroom.eclipse.org/news/press-releases"
+  weight = 1
+  parent="the-foundation-more"
+
+[[menu.astro]]
+  name = "Careers"
+  url = "https://www.eclipse.org/careers/"
+  weight = 2
+  parent="the-foundation-more"
+
+[[menu.astro]]
+  name = "Logos & Artwork"
+  url = "https://www.eclipse.org/org/artwork/"
+  weight = 3
+  parent="the-foundation-more"
+
+[[menu.astro]]
+  name = "Contact Us"
+  url = "https://www.eclipse.org/org/foundation/contact.php"
+  weight = 4
+  parent="the-foundation-more"
+
+# Quicksilver Menu
+
+[[menu.quicksilver]]
+  name = "Projects"
+  url = "https://www.eclipse.org/projects/"
+  weight = 1
+
+[[menu.quicksilver]]
+  name = "Working Groups"
+  url = "https://www.eclipse.org/org/workinggroups/"
+  weight = 2
+
+[[menu.quicksilver]]
+  name = "Members"
+  url = "https://www.eclipse.org/membership/"
+  weight = 2
+
+# Neptune Footer
+
+[[menu.footer]]
+  name = "Eclipse Foundation"
+  identifier = "eclipse-foundation"
+  weight = 1
+
+[[menu.footer]]
+  name = "About"
+  url = "https://www.eclipse.org/org/"
+  parent = "eclipse-foundation"
+  weight = 1
+
+[[menu.footer]]
+  name = "Projects"
+  url = "https://projects.eclipse.org/"
+  parent = "eclipse-foundation"
+  weight = 2
+
+[[menu.footer]]
+  name = "Collaborations"
+  url = "https://www.eclipse.org/collaborations/"
+  parent = "eclipse-foundation"
+  weight = 3
+
+[[menu.footer]]
+  name = "Membership"
+  url = "https://www.eclipse.org/membership/"
+  parent = "eclipse-foundation"
+  weight = 4
+
+[[menu.footer]]
+  name = "Sponsor"
+  url = "https://www.eclipse.org/sponsor/"
+  parent = "eclipse-foundation"
+  weight = 5
+
+
+[[menu.footer]]
+  name = "Legal"
+  identifier = "legal"
+  weight = 2
+
+[[menu.footer]]
+  name = "Privacy Policy"
+  url = "https://www.eclipse.org/legal/privacy/"
+  parent = "legal"
+  weight = 1
+
+[[menu.footer]]
+  name = "Terms of Use"
+  url = "https://www.eclipse.org/legal/terms-of-use/"
+  parent = "legal"
+  weight = 2
+
+[[menu.footer]]
+  name = "Compliance"
+  url = "https://www.eclipse.org/legal/compliance/"
+  parent = "legal"
+  weight = 3
+
+[[menu.footer]]
+  name = "Code of Conduct"
+  url = "https://www.eclipse.org/org/documents/Community_Code_of_Conduct.php"
+  parent = "legal"
+  weight = 4
+
+[[menu.footer]]
+  name = "Legal Resources"
+  url = "https://www.eclipse.org/legal/"
+  parent = "legal"
+  weight = 5
+
+[[menu.footer]]
+  name = "Manage Cookies"
+  parent = "legal"
+  weight = 6
+  [menu.footer.params]
+    class = "toolbar-manage-cookies"
+
+[[menu.footer]]
+  name = "More"
+  identifier = "more"
+  weight = 3
+
+[[menu.footer]]
+  name = "Report a Vulnerability"
+  url = "https://www.eclipse.org/security/"
+  parent = "more"
+  weight = 1
+
+[[menu.footer]]
+  name = "Service Status"
+  url = "https://status.eclipse.org/"
+  parent = "more"
+  weight = 2
+
+[[menu.footer]]
+  name = "Contact Us"
+  url = "https://www.eclipse.org/org/foundation/contact.php"
+  parent = "more"
+  weight = 3
+
+[[menu.footer]]
+  name = "Support"
+  url = "https://www.eclipse.org/projects/support/"
+  parent = "more"
+  weight = 4
+

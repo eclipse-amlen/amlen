@@ -1,0 +1,93 @@
+<!-- 
+  Copyright (c) 2020 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Martin Lowe <martin.lowe@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+{{ $lang := .Page.Lang }}
+{{ $year := .Get "year" }}
+{{ if $year }}
+  {{ .Scratch.Set "base" (index (index .Site.Data $lang) $year) }}
+{{ else }}
+  {{ .Scratch.Set "base" (index .Site.Data $lang) }}
+{{ end }}
+{{ $base := .Scratch.Get "base" }}
+{{ $event := .Get "event" | default "default" }}
+{{ $source := .Get "source" | default "user" }}
+
+{{ $useCarousel:= .Get "useCarousel" | default "true" }}
+{{ $title := .Get "title" | default (i18n "committee-carousel-title") }}
+{{ $imageRoot := .Get "imageRoot" | default "/images/committee/" }}
+{{ $displayLearnMore := .Get "displayLearnMore" | default "true" }}
+{{ $subpage := .Get "subpage" }}
+{{ $subpageURL := "" }}
+{{ if $subpage }}
+  {{ if and $year $subpage (ne $event "default") }}
+    {{ $subpageURL = printf "%s/%s/%s" $year $event $subpage }}
+  {{ else if and $year $subpage }}
+    {{ $subpageURL = printf "%s/%s" $year $subpage }}
+  {{ else if and $subpage (ne $event "default") }}
+    {{ $subpageURL = printf "%s/%s" $event $subpage }}
+  {{ else }}
+    {{ $subpageURL = printf "%s" $subpage }}
+  {{ end }}
+  {{ $subpageURL = $subpageURL | relURL }}
+{{ else }}
+  {{ $displayLearnMore = "false" }}
+{{ end }}
+{{ $itemClass := .Get "itemClass" | default "col-xs-12 col-sm-6 match-height-item-by-row" }}
+
+<div class="eclipsefdn-user-display">
+  <div class="row">
+    <div class="eclipsefdn-user-display-heading col-xs-24 {{ if eq $displayLearnMore "true" }}col-sm-18 match-height-item-by-row{{ end }}">
+      <h2{{ with .Get "headerClass" }} class="{{ . }}"{{ end }}>{{ $title }}</h2>
+      {{ with .Inner }}{{ . | markdownify }}{{ end }}
+    </div>
+    
+    {{ if and (ne $subpageURL "") (eq $displayLearnMore "true") }}
+    <div class="eclipsefdn-user-display-subpage col-xs-24 col-sm-6 match-height-item-by-row margin-bottom-30">
+      <div class="centered-container">
+        <a href="{{ $subpageURL | relLangURL }}" class="btn btn-primary btn-wide">{{ i18n "committee-carousel-button-text" }}</a>
+      </div>
+    </div>
+    {{ end }}
+    
+    <div class="eclipsefdn-user-display-content col-xs-24">
+      <div {{ if eq $useCarousel "true" }} class="owl-carousel owl-theme solstice-slider" data-slider-lg-count="4"{{ end }}>
+        <!-- Start: image Area -->
+        {{ range (index (index $base $event) $source).items }}
+        {{ $anchor := urlize .anchor }}
+        {{ if not $anchor }}
+          {{ $anchor = urlize .name }}
+        {{ end }}
+        <div class="item padding-40 {{ if ne $useCarousel "true" }}{{ $itemClass }}{{ end }}">
+          {{ if .img }}
+          <img class="img img-responsive" src="{{ $imageRoot }}{{ .img }}" alt="{{ .name }}">
+          {{ else }}
+          <div class="icon-backdrop text-center">
+            <div class="ratio"></div>
+            <div class="icon-container"><i class="fa fa-user"></i></div>
+          </div>
+          
+          {{ end }}
+          <h3>
+            {{- if $subpageURL }}
+              <a href="{{ printf "%s/#%s" $subpageURL $anchor | relLangURL }}">{{ .name }}</a>
+            {{ else }}
+              {{ .name }}
+            {{ end -}}
+           </h3>
+          <p>{{ .title }}</p>
+        </div>
+        {{ end }}
+      </div>
+      <!-- End: "image" Area -->
+    </div>
+  </div>
+</div>

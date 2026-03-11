@@ -13,6 +13,7 @@
 %define _topdir %(echo $PWD)/..
 %define distrel %(day="`date +%j`"; echo "0.$day")
 %define _tmppath %{_topdir}/tmp
+%global debug_package %{nil}
 
 Summary: $[IMA_SVR_COMPONENT_NAME_FULL} for Linux x86_64
 Name: ${IMA_PKG_SERVER}
@@ -24,7 +25,7 @@ AutoReqProv: no
 Group: Applications/Communications
 Source: %{name}.tar.gz
 BuildRoot: %{_topdir}/tmp/%{name}-%{Version}.${Release}
-Requires: gdb, net-tools, openssl, tar, perl, procps >= 3.3.9, libjansson.so.4()(64bit), logrotate, zip, bzip2, unzip, boost, libicu, net-snmp
+Requires: gdb, net-tools, openssl, tar, perl, procps >= 3.3.9, libjansson.so.4()(64bit), logrotate, zip, bzip2, unzip, boost, libicu, net-snmp, python3, python3-requests, python3-pyyaml
 Obsoletes: IBMIoTMessageSightServer
 
 %description

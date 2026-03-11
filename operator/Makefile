@@ -3,7 +3,7 @@
 # To re-generate a bundle for another specific version without changing the standard setup, you can:
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
-VERSION ?= 1.1.2
+VERSION ?= 1.1.3
 
 # CHANNELS define the bundle channels used in the bundle.
 # Add a new line here if you would like to change its default config. (E.g CHANNELS = "candidate,fast,stable")
@@ -112,7 +112,7 @@ ARCH := $(shell uname -m | sed 's/x86_64/amd64/')
 
 .PHONY: kustomize
 KUSTOMIZE = $(shell pwd)/bin/kustomize
-kustomize: ## Download kustomize locally if necessary.
+kustomize: build/scripts/server.py ## Download kustomize locally if necessary.
 ifeq (,$(wildcard $(KUSTOMIZE)))
 ifeq (,$(shell which kustomize 2>/dev/null))
 	@{ \
@@ -196,3 +196,9 @@ catalog-build: opm ## Build a catalog image.
 .PHONY: catalog-push
 catalog-push: ## Push a catalog image.
 	$(MAKE) docker-push IMG=$(CATALOG_IMG)
+
+#We need a python utils file from the server as part of the operator - copy it in
+SERVER_PYUTILS = ../server_main/scripts/server.py
+build/scripts/server.py: $(SERVER_PYUTILS)
+	mkdir -p build/scripts
+	cp $(SERVER_PYUTILS) $@

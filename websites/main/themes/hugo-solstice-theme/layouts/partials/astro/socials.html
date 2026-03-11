@@ -1,0 +1,97 @@
+{{/* 
+  Copyright (c) 2023 Eclipse Foundation, Inc.
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Olivier Goulet <olivier.goulet@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+*/}}
+
+{{ $twitter_url := $.Site.Params.twitter_url }}
+{{ $facebook_url := $.Site.Params.facebook_url }}
+{{ $instagram_url := $.Site.Params.instagram_url }}
+{{ $youtube_url := $.Site.Params.youtube_url }}
+{{ $linkedin_url := $.Site.Params.linkedin_url }}
+{{ $bluesky_url := $.Site.Params.bluesky_url }}
+
+{{/* To support the legacy "socialmedia_url" params */}}
+{{ $socials := slice }}
+{{ $using_legacy_socials := cond (or (ne $facebook_url nil) (ne $twitter_url nil) (ne $instagram_url nil) (ne $youtube_url nil) (ne $linkedin_url nil) (ne $bluesky_url nil)) true false }}
+
+{{ if $using_legacy_socials }}
+  {{ with $twitter_url }}
+    {{ $x := (dict 
+      "name" "X"
+      "url" .
+      "icon" "fa-brands fa-x-twitter"
+    ) }}
+    {{ $socials = $socials | append $x }}
+  {{ end }}
+  {{ with $facebook_url }}
+    {{ $facebook := (dict 
+      "name" "Facebook"
+      "url" .
+      "icon" "fa-brands fa-facebook-f"
+    ) }}
+    {{ $socials = $socials | append $facebook }}
+  {{ end }}
+  {{ with $instagram_url }}
+    {{ $instagram := (dict
+      "name" "Instagram"
+      "url" .
+      "icon" "fa-brands fa-instagram"
+    ) }}
+    {{ $socials = $socials | append $instagram }}
+  {{ end }}
+  {{ with $youtube_url }}
+    {{ $youtube := (dict
+      "name" "YouTube"
+      "url" .
+      "icon" "fa-brands fa-youtube"
+    ) }}
+    {{ $socials = $socials | append $youtube }}
+  {{ end }}
+  {{ with $linkedin_url }}
+    {{ $linkedin := (dict
+      "name" "LinkedIn"
+      "url" .
+      "icon" "fa-brands fa-linkedin-in"
+    ) }}
+    {{ $socials = $socials | append $linkedin }}
+  {{ end }}
+  {{ with $bluesky_url }}
+    {{ $bluesky := (dict
+      "name" "Bluesky"
+      "url" .
+      "icon" "fa-brands fa-bluesky"
+    ) }}
+    {{ $socials = $socials | append $bluesky }}
+  {{ end }}
+{{ else }}
+  {{ $socials = $.Site.Params.socials }}
+{{ end }}
+
+<div class="footer-end-social">
+  <p class="footer-end-social-text hidden-xs">Follow Us:</p>
+  <ul class="footer-end-social-links list-unstyled">
+    {{ range $socials }}
+      {{ $text := i18n "footer-sr-social-account" .name | default (printf "%s account" .name) }}
+      <li>
+        <a 
+          class="link-unstyled" 
+          href="{{ .url }}" 
+          title="{{ $text }}"
+        >
+          <span class="fa-stack">
+            <i class="fa-solid fa-circle fa-stack-2x" aria-hidden="true"></i>
+            <i class="{{ .icon }} fa-stack-1x fa-inverse" aria-hidden="true"></i>
+            <span class="sr-only">{{ $text }}</span>
+          </span>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</div>

@@ -1,0 +1,54 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+{{ $main_menu := .Scratch.Get "main_menu" }}
+{{ $current_page := . }}
+<div class="mobile-menu hidden">
+  <nav class="mobile-menu-nav">
+    {{ template "mobile_menu_list" (dict "current_page" $current_page "menu_id" nil "menu" (index .Site.Menus $main_menu)) }}
+  </nav>
+</div>
+
+{{ define "mobile_menu_list" }}
+  {{ $current_page := .current_page }}
+
+  {{ $has_parent := false }}
+  
+  <!-- Detect whether this menu is the root or not. -->
+  {{ range .menu }}
+    {{ if .Parent }}
+      {{ $has_parent = true }}
+    {{ end }}
+  {{ end }}
+
+  <ul {{ if $has_parent -}} class="collapse" id="{{ .menu_id }}" {{- end -}}>
+    {{ range .menu }}
+      {{ $menu_id := .Identifier | default (lower .Name) }}
+      {{ $target_menu := printf "mobile-menu-%s" $menu_id }}
+      <li>
+        {{ if .HasChildren }}
+          <a
+            role="button"
+            href="#{{ $target_menu }}"
+            data-toggle="collapse"
+            aria-expanded="false"
+            aria-controls="{{ $target_menu }}"
+          >
+            {{ .Name }}
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          </a>
+          {{ template "mobile_menu_list" (dict "current_page" $current_page "menu_id" $target_menu "menu" .Children) }} 
+        {{ else }}
+          <a href="{{ .URL }}" {{ with .Params.target -}} target="{{ . | safeHTMLAttr }}" {{- end }}>{{ .Name }}</a>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

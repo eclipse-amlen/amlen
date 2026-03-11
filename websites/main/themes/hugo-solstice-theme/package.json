@@ -1,0 +1,31 @@
+{
+  "name": "eclipsefdn-hugo-solstice-theme",
+  "description": "Hugo Solstice theme by the Eclipse Foundation.",
+  "main": "webpack.min.js",
+  "author": "Christopher Guindon",
+  "license": "EPL-2.0",
+  "version": "0.2.2",
+  "bugs": {
+    "url": "https://gitlab.eclipse.org/eclipsefdn/it/webdev/hugo-solstice-theme/-/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.eclipse.org:eclipsefdn/it/webdev/hugo-solstice-theme.git"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "NODE_ENV=development webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "NODE_ENV=development webpack-dev-server --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "NODE_ENV=production webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "fetch_project": "node bin/projects/index.js -l exampleSite/data",
+    "build": "npm run production && npm run fetch_project"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "eclipsefdn-solstice-assets": "0.2.1",
+    "json2yaml": "^1.1.0",
+    "toml": "^3.0.0"
+  },
+  "browserslist": "last 5 version, > 0.2%, not dead, IE 11"
+}

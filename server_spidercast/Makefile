@@ -25,6 +25,7 @@ PRJDIR=$(CURDIR)
 # Specify the relative path from this project directory to the root of the directory structure
 ROOTREL=..
 
+CPP_STD_FLAGS = -std=gnu++11
 include $(ROOTREL)/server_build/common.mk
 
 

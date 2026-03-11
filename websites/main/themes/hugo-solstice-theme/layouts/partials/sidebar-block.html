@@ -1,0 +1,56 @@
+<!--
+  Copyright (c) 2018 Eclipse Foundation, Inc.
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  Contributors:
+    Christopher Guindon <chris.guindon@eclipse-foundation.org>
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+{{ if isset .Site.Menus "sidebar" }}
+  {{ $currentPage := . }}
+  {{ .Scratch.Set "currentSection" "home" }}
+  {{ if $currentPage.Section }}
+    {{ .Scratch.Set "currentSection" $currentPage.Section }}
+  {{ end }}
+  {{$currentSection := .Scratch.Get "currentSection" }}
+  {{ range .Site.Menus.sidebar }}
+    {{$parentItem := . }}
+      {{ if and (.HasChildren) (eq $currentSection $parentItem.Identifier) }}
+        <aside class="sidebar-block">
+        {{ range .Children }}
+          {{ if .HasChildren }}
+            <div class="row sidebar-block-item{{ if eq $currentPage.Title .Name }} active{{ end }}">
+              <a href="{{ .URL | relURL }}" {{ if eq $currentPage.Title .Name }}class="active"{{ end }}>
+                <div class="col-xs-6">{{ .Pre }}</div>
+                <div class="col-xs-18 sidebar-block-text">{{ .Name }}</div>
+              </a>
+            </div>
+            <div class="row sidebar-block-sub-items margin-bottom-20">
+              {{ range .Children }}
+                <div class="row sidebar-block-sub-item{{ if eq $currentPage.Title .Name }} active{{ end }}">
+                  <a href="{{ .URL | relURL }}" {{ if eq $currentPage.Title .Name }}class="active"{{ end }}>
+                    <div class="col-xs-18 col-xs-offset-6 sidebar-block-text">{{ .Name }}</div>
+                  </a>
+                </div>
+              {{ end }}
+            </div>
+          {{ else if or (eq $parentItem.Identifier $currentSection) (eq .Parent $currentSection) }}
+            <div class="row sidebar-block-item{{ if eq $currentPage.Title .Name }} active{{ end }}">
+              <a href="{{ .URL | relURL }}" {{ if eq $currentPage.Title .Name }}class="active"{{ end }}>
+                <div class="col-xs-6">{{ .Pre }}</div>
+                <div class="col-xs-18 sidebar-block-text">{{ .Name }}</div>
+              </a>
+            </div>
+          {{ end }}
+        {{ end }}
+        {{ if isset $currentPage.Params "custom_sidebar" }}
+          {{ $currentPage.Params.custom_sidebar | safeHTML }}
+        {{ end }}
+        </aside>
+      {{ end }}
+  {{ end }}
+{{ end }}

@@ -37,6 +37,7 @@
 #include <alloca.h>
 #include <throttle.h>
 #include <malloc.h>
+#include <sched.h>
 #define STR(s) XSTR(s)
 #define XSTR(s) #s
 #define htonll(x) __builtin_bswap64(x)
@@ -3956,7 +3957,7 @@ int ism_transport_startTCPEndpoint(ism_endpoint_t * endpoint) {
 int ism_transport_startTCP(void) {
     xUNUSED int    rc;
     int    i;
-    char   threadname[16];
+    char   threadname[18]; //Can be up to tcpiop.2147483647+null in length
 
     /*
      * Start the connection thread
@@ -3972,7 +3973,7 @@ int ism_transport_startTCP(void) {
      * Start the IO processor threads
      */
     for (i = 0; i < numOfIOProcs; i++) {
-        sprintf(threadname, "tcpiop.%u", i);
+        snprintf(threadname,sizeof(threadname), "tcpiop.%u", i);
         ioProcessors[i] = createIOPThread(threadname, ioListener);
         ioProcessors[i]->which = i;
     }

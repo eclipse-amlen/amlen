@@ -1,0 +1,15 @@
+complete: true
+items:
+    - name: How best to apologize, a workshop
+      presenter: Ken Canadian
+      vod: "#1"
+    - name: How to 'how to'
+      presenter: Jim Bob
+      vod: "#2"
+    - name: Industry Keynote
+      presenter: Eclipse Foundation, .etc
+      vod: "#3"
+    - name: Best fixings for harbour tea
+      presenter: Adam America
+      vod: "#4"
+      

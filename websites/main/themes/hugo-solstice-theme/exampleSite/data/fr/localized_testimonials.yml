@@ -1,0 +1,10 @@
+items:
+  -
+    text: Text of the testimonial 1(localized, fr)
+    title: Name of the person
+  -
+    text: Text of the testimonial 2
+    title: Name of the person
+  -
+    text: Text of the testimonial 3
+    title: Name of the person

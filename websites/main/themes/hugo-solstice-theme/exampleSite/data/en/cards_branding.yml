@@ -1,0 +1,26 @@
+style: vertical
+items:
+  - heading: Test card
+    content: Esse incididunt ipsum nulla consectetur tempor elit. Mollit adipisicing esse labore consectetur irure ut reprehenderit sit. Quis do cupidatat qui quis nostrud laboris nulla incididunt laborum sit sit qui id cupidatat.
+    imgSrc: "https://deploy-preview-248--eclipsefdn-solstice-assets.netlify.app/dist/images/template/placeholders/500x500.png"
+    imgClass: "cover-image"
+    class: background-primary
+    glyph: fa-globe
+    links:
+      - url: "#"
+        text: Download now
+        alt: Link to a the PDF document for X
+        style: button
+      - url: "#"
+        text: Or don't
+        alt: Link to a form to do Y
+        style: text
+  - heading: Test card
+    class: background-secondary
+    content: Esse incididunt ipsum nulla consectetur tempor elit. Mollit adipisicing esse labore consectetur irure ut reprehenderit sit. Quis do cupidatat qui quis nostrud laboris nulla incididunt laborum sit sit qui id cupidatat.
+    imgSrc: "https://deploy-preview-248--eclipsefdn-solstice-assets.netlify.app/dist/images/template/placeholders/500x500.png"
+    imgClass: "cover-image rounded"
+  - heading: Test card
+    class: background-tertiary
+    content: Esse incididunt ipsum nulla consectetur tempor elit. Mollit adipisicing esse labore consectetur irure ut reprehenderit sit. Quis do cupidatat qui quis nostrud laboris nulla incididunt laborum sit sit qui id cupidatat.
+    imgSrc: "https://deploy-preview-248--eclipsefdn-solstice-assets.netlify.app/dist/images/template/placeholders/250x250.png"

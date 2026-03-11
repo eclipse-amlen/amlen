@@ -1,0 +1,341 @@
+[eclipse-foundation-text]
+other = "Eclipse Foundation"
+
+[navbar-manage-cookies-label]
+other = "Çerezleri Yönet"
+
+[navbar-edit-acccount-label]
+other = "Hesabımı Düzenle"
+
+[footer-foundation-about-us-text]
+other = "Hakkımızda"
+
+[footer-foundation-contact-us-text]
+other = "İletişim"
+
+[footer-foundation-donate-text]
+other = "Bağış Yap"
+
+[footer-foundation-members-text]
+other = "Üyeler"
+
+[footer-foundation-governance-text]
+other = "Yönetim"
+
+[footer-foundation-logo-artwork-text]
+other = "Logo ve Görsel"
+
+[footer-foundation-board-of-directors-text]
+other = "Yönetim Kurulu"
+
+[footer-legal-section-text]
+other = "Yasal"
+
+[footer-legal-code-of-conduct-text]
+other = "Etik Kurallar"
+
+[footer-legal-privacy-policy-text]
+other = "Gizlilik Politikası"
+
+[footer-legal-terms-use-text]
+other = "Kullanım Şartları"
+
+[footer-legal-epl-text]
+other = "Eclipse Kamu Lisansı"
+
+[footer-legal-resources-text]
+other = "Yasal Kaynaklar"
+
+[footer-useful-links-section-text]
+other = "Yararlı Linkler"
+
+[footer-useful-links-report-bug-text]
+other = "Hata Bildir"
+
+[footer-useful-links-documentation-text]
+other = "Dokümantasyon"
+
+[footer-useful-links-contribute-text]
+other = "Nasıl Katkı Verebilirim"
+
+[footer-useful-links-mailing-list-text]
+other = "Mail Listeleri"
+
+[footer-useful-links-forums-text]
+other = "Forumlar"
+
+[footer-useful-links-marketplace-text]
+other = "Pazar"
+
+[footer-other-section-text]
+other = "Diğer"
+
+[footer-other-tools-text]
+other = "IDE ve Araçlar"
+
+[footer-other-community-projects-text]
+other = "Projeler"
+
+[footer-other-working-groups-text]
+other = "Çalışma Grupları"
+
+[footer-other-research-text]
+other = "Research@Eclipse"
+
+[footer-other-report-vulnerability-text]
+other = "Güvenlik Açığı Bildir"
+
+[footer-other-status-text]
+other = "Hizmet Durumu"
+
+[footer-sr-social-account]
+other = "{{ . }} hesabı"
+
+[navigation-back-to-top]
+other = "Başa dön"
+
+[navigation-breadcrumb-sr]
+other = "Breadcrumb"
+
+[navigation-content-skip]
+other = "Ana içeriğe atla"
+
+[navigation-mobile-menu-toggle]
+other = "Menüyü Aç/Kapa"
+
+[navigation-more-menu-label]
+other = "Daha"
+
+[navigation-more-community-section]
+other = "Topluluk"
+
+[navigation-more-community-marketplace-label]
+other = "Pazar"
+
+[navigation-more-community-events-label]
+other = "Etkinlikler"
+
+[navigation-more-community-planet-eclipse-label]
+other = "Planet Eclipse"
+
+[navigation-more-community-newsletter-label]
+other = "Haberler"
+
+[navigation-more-community-videos-label]
+other = "Videolar"
+
+[navigation-more-community-blogs-label]
+other = "Bloglar"
+
+[navigation-more-participate-section]
+other = "Katıl"
+
+[navigation-more-participate-bug-label]
+other = "İndir"
+
+[navigation-more-participate-forums-label]
+other = "Forumlar"
+
+[navigation-more-participate-mailing-lists-label]
+other = "Mail Listeleri"
+
+[navigation-more-participate-wiki-label]
+other = "Wiki"
+
+[navigation-more-participate-irc-label]
+other = "IRC"
+
+[navigation-more-ide-section]
+other = "Eclipse IDE"
+
+[navigation-more-ide-download-label]
+other = "İndir"
+
+[navigation-more-ide-learn-label]
+other = "Daha fazla bilgi edin"
+
+[navigation-more-ide-docs-label]
+other = "Dokümantasyon"
+
+[navigation-more-ide-support-label]
+other = "Başlarken / Destek"
+
+[navigation-more-ide-contribute-label]
+other = "Nasıl Katkı Verebilirim"
+
+[navigation-more-ide-tools-label]
+other = "IDE ve Araçlar"
+
+[navigation-more-ide-forum-label]
+other = "Yeni Gelen Forumu"
+
+[footer-copyright-text]
+other = "Copyright &copy; Eclipse Foundation AISBL. Tüm hakları saklıdır."
+
+[search-section-label]
+other = "Ara"
+
+[project-single-licenses-label]
+other = "Lisanslar:"
+
+[project-single-tags-label]
+other = "Etiketler"
+
+[project-summary-read-more]
+other = "Devamını oku..."
+
+[project-summary-latest-release]
+other = "En son sürüm:"
+
+[project-summary-download-label]
+other = "İndir"
+
+[project-summary-toggle-dropdown]
+other = "Açılır menüyü aç/kapat"
+
+[project-summary-website-label]
+other = "Web sitesi"
+
+[project-summary-logo-text]
+other = "{{ .Title }} logo"
+
+[events-table-conference-header]
+other = "Konferans"
+
+[events-table-location-header]
+other = "Konum"
+
+[events-table-date-header]
+other = "Tarih"
+
+[members-list-members-label]
+other = "Üyeler"
+
+[members-list-all-members]
+other = "Tüm üyeler"
+
+[taxonomy-list-view-all]
+other = "Hepsini Gör"
+
+[taxonomy-list-rss-feed-label]
+other = "RSS-feed'imize abone olun"
+
+[not-found-template-heading]
+other = "Sayfa bulunamadı"
+
+[not-found-template-content]
+other = "Üzgünüz, istediğiniz sayfa bulunamıyor. Aşağıda yararlı olabilecek bazı bağlantılar verilmiştir."
+
+[not-found-template-eclipse-home]
+other = "Eclipse Anasayfa"
+
+[not-found-template-search-link]
+other = "Sitemizde <a href='//eclipse.org/projects/searchpage.php'>Ara</a>"
+
+[not-found-template-privacy-terms-of-use]
+other = "Web sitesi <a href='//eclipse.org/legal/privacy/'>gizlilik politikası</a> ve <a href='//eclipse.org/legal/terms-of-use/'>kullanım koşulları</a>"
+
+[not-found-template-legal-documents]
+other = "Yasal Belgeler"
+
+[not-found-template-logos-artwork]
+other = "Logolar ve Görseller"
+
+[not-found-template-webmaster-faq]
+other = "Web yöneticisi SSS"
+
+[not-found-template-email-webmaster]
+other = "Web yöneticisine e-posta gönder"
+
+[not-found-template-useful-links]
+other = "Yararlı linkler"
+
+[not-found-template-project-archives]
+other = "Eclipse proje arşivleri"
+
+[not-found-template-project-downloads]
+other = "Eclipse proje indirme bağlantıları"
+
+[faq-list-heading]
+other = "İçindekiler"
+
+[project-list-logo-alt]
+other = "{{ .name }} logo"
+
+[project-list-read-more-sr]
+other = "{{ .name }} hakkında daha fazlasını okuyun"
+
+[project-list-read-more]
+other = "Devamını oku..."
+
+[project-list-dropdown-sr]
+other = "Açılır menüyü aç/kapat"
+
+[project-list-downloads]
+other = "İndir"
+
+[project-list-website]
+other = "Web Sitesi"
+
+[project-list-resources]
+other = "Geliştirici Kaynakları"
+
+[project-list-who]
+other = "Kimler dahil"
+
+[project-list-governance]
+other = "Yönetim"
+
+[project-list-contact]
+other = "İletişim"
+
+[agenda-schedule]
+other = "Günün Planı"
+
+[agenda-legend]
+other = "Açıklama/Sembol"
+
+[agenda-sessions]
+other = "Gündem"
+
+[agenda-session-name]
+other = "Oturum İsmi"
+
+[agenda-presenter-name]
+other = "Sunucu İsmi"
+
+[agenda-organization]
+other = "Organization"
+
+[agenda-session-recording]
+other = "Oturum Kaydı"
+
+[agenda-session-schedule]
+other = "Planlanmış Zaman"
+
+[agenda-session-recording-button-alt]
+other = "{{ .name }} oturumu için oturum videosu"
+
+[agenda-session-slides-button-alt]
+other = "{{ .name }} oturumu için oturum slaytları"
+
+[agenda-session-slides]
+other = "Slaytlar"
+
+[committee-carousel-title]
+other = "Program Komitesi ile tanışın"
+
+[committee-carousel-button-text]
+other = "Daha fazla bilgi edin"
+
+[committee-twitter-follow-text]
+other = "{{ .name }} Twitter'da takip et!"
+
+[events-sponsor-title]
+other = "Sponsorlar"
+
+[events-sponsor-image-alt]
+other = "logo"
+
+[modal-close-alt]
+other = "Kapat"

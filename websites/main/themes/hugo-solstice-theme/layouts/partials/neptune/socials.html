@@ -1,0 +1,22 @@
+<!-- 
+  Copyright (c) 2025 Eclipse Foundation AISBL
+
+  This program and the accompanying materials are made available under the
+  terms of the Eclipse Public License v. 2.0 which is available at
+  http://www.eclipse.org/legal/epl-2.0.
+
+  SPDX-License-Identifier: EPL-2.0
+-->
+
+<ul class="social-media-list">
+  {{ range $.Site.Params.socials }}
+    <li>
+      <a href="{{ .url }}" aria-label="{{ .name }}">
+        <span class="fa-stack">
+          <i class="fa-solid fa-circle fa-stack-2x" aria-hidden="true"></i>
+          <i class="{{ .icon }} fa-stack-1x fa-inverse" aria-hidden="true"></i>
+        </span>
+      </a>
+    </li>
+  {{ end }}
+</ul>

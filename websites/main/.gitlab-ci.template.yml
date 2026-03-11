@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2024 eclipse foundation
+# SPDX-License-Identifier: EPL-2.0
+
+include:  
+  - project: 'eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates'
+    file: 'pipeline-autodevops.gitlab-ci.yml'
+  - project: 'eclipsefdn/it/releng/gitlab-runner-service/gitlab-ci-templates'
+    file: '/jobs/git.gitlab-ci.yml'
+
+default:
+  tags:
+    - origin:eclipse
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_FORCE_HTTPS: "true"
+  HUGO_ENV: production
+  CI_IMAGE_HUGO: eclipsecbi/hugo_extended:0.110.0
+
+build-hugo:
+  image: $CI_IMAGE_HUGO
+  stage: build
+  script:
+    - hugo -b https://eclipse.dev/${EF_SHORT_NAME}/
+  artifacts:
+    paths:
+      - public
+
+push-modification:
+  extends: .ef-git
+  stage: deploy
+  needs:
+    - job: build-hugo
+      artifacts: true
+  variables:
+    # GIT_REMOTE_URL: "<to define git://gitlab.eclipse.org:eclipse/${EF_SHORT_NAME}/website.git>" # if the repo is not the same as the source
+    GIT_INIT_DIR: "public" # if the build is not in the root directory
+    GIT_INIT_DEFAULT_BRANCH: "deploy" # publish generated files to the deploy branch
+  script:
+    - |
+      git add -A
+      if ! git diff --cached --exit-code; then
+        echo "Changes have been detected, publishing to repo '$GIT_REMOTE_URL'"
+
+        git commit -m "Website build - job: $CI_JOB_NAME-$CI_JOB_ID \
+        Build logs: $CI_JOB_URL"
+        git log --graph --abbrev-commit --date=relative -n 5
+        git push origin HEAD:$GIT_INIT_DEFAULT_BRANCH;
+      else
+        echo "No changes have been detected, nothing to publish"
+      fi
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual 
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"

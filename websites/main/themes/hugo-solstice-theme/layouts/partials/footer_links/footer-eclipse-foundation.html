@@ -1,0 +1,31 @@
+{{ $layout_style := $.Site.Params.layout_style | default "quicksilver" }}
+
+{{ if eq $layout_style "quicksilver" }}
+  {{ $footer_eclipse_foundation_class := .Params.footer_section_eclipse_foundation_class | default .Site.Params.footer_section_eclipse_foundation_class | default "col-sm-6 hidden-print" }}
+  <section class="{{ $footer_eclipse_foundation_class }}" id="footer-eclipse-foundation">
+    <h2 class="section-title">{{ i18n "eclipse-foundation-text" }}</h2>
+    <ul class="nav">
+      <li><a href="https://www.eclipse.org/org/">{{ i18n "footer-foundation-about-us-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/org/foundation/contact.php">{{ i18n "footer-foundation-contact-us-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/sponsor">{{ i18n "footer-foundation-sponsor-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/membership">{{ i18n "footer-foundation-members-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/org/documents/">{{ i18n "footer-foundation-governance-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/org/documents/Community_Code_of_Conduct.php">{{ i18n "footer-foundation-code-of-conduct-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/artwork/">{{ i18n "footer-foundation-logo-artwork-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/org/foundation/directors.php">{{ i18n "footer-foundation-board-of-directors-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/careers/">{{ i18n "footer-foundation-careers-text" }}</a></li>
+    </ul>
+  </section>
+{{ else if eq $layout_style "astro" }}
+  {{ $footer_eclipse_foundation_class := .Params.footer_section_eclipse_foundation_class | default .Site.Params.footer_section_eclipse_foundation_class | default "footer-section col-sm-8" }}
+  <section id="footer-eclipse-foundation" class="{{ $footer_eclipse_foundation_class }}">
+    <div class="menu-heading">{{ i18n "eclipse-foundation-text" }}</div>
+    <ul class="nav">
+      <li><a href="https://www.eclipse.org/org/">{{ i18n "footer-foundation-about-us-text" }}</a></li>
+      <li><a href="https://projects.eclipse.org/">Projects</a></li>
+      <li><a href="https://www.eclipse.org/collaborations/">Collaborations</a></li>
+      <li><a href="https://www.eclipse.org/membership/">{{ i18n "footer-foundation-members-text" }}</a></li>
+      <li><a href="https://www.eclipse.org/sponsor/">{{ i18n "footer-foundation-sponsor-text" }}</a></li>
+    </ul>
+  </section>
+{{ end }}

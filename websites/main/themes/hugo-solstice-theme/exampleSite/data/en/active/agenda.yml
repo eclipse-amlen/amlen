@@ -1,0 +1,35 @@
+types:
+    - name: Demo
+      id: demo 
+      color: "#66c"
+    - name: Keynote
+      id: keynote 
+      color: "#e44"
+items:
+    - name: How best to apologize, a workshop
+      presenter: <strong>Ken Canadian</strong>
+      time: 15:00-18:00
+      type: demo
+      vod: "#1"
+    - name: How to 'how to'
+      presenter: Jim Bob
+      time: 18:00-19:00
+      type: demo
+      vod: "#2"
+    - name: Industry Keynote
+      presenter: Eclipse Foundation, .etc
+      time: 19:00-20:00
+      times: 
+        - 19:00-19:45 CET
+        - 13:00-13:45 EST
+        - 10:00-10:45 PST
+      type: keynote
+      vod: "#3"
+    - name: Lunch Break
+      time: 12:00-13:00
+      times: 
+        - 19:45-20:00 CET
+        - 13:45-14:00 EST
+        - 10:45-11:00 PST
+      type: break
+      
