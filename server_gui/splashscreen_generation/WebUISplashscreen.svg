@@ -5,7 +5,7 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    sodipodi:docname="WebUISplashscreen.svg"
    inkscape:export-filename="WebUISplashscreen_new.png"
    inkscape:export-xdpi="89.999992"
@@ -41,13 +41,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.08"
-     inkscape:cx="91.203704"
+     inkscape:cx="90.740741"
      inkscape:cy="268.51852"
      inkscape:document-units="px"
      inkscape:current-layer="g894"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="979"
+     inkscape:window-height="1043"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -126,7 +126,7 @@
            sodipodi:role="line"
            x="18.8727"
            y="291.823"
-           style="font-size:17.5px;line-height:0.5">Version 1.1dev</tspan></text>
+           style="font-size:17.5px;line-height:0.5">Version 1.1</tspan></text>
       <text
          transform="scale(1.019243,0.9811203)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:Arial;-inkscape-font-specification:'Arial, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start"
@@ -137,7 +137,7 @@
            sodipodi:role="line"
            x="18.186392"
            y="389.14282"
-           style="font-size:12.5px;line-height:1.25">© Copyright Contributors to the Eclipse Foundation. 2012, 2022</tspan><tspan
+           style="font-size:12.5px;line-height:1.25">© Copyright Contributors to the Eclipse Foundation. 2012, 2026</tspan><tspan
            sodipodi:role="line"
            x="18.186392"
            y="404.76782"
