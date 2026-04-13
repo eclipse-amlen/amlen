@@ -48,6 +48,17 @@ def startBuilderBuild(GITHUB_TOKEN,QUAYIO_TOKEN,BUILD_LABEL,distro,filename,vers
     return version
 }
 
+// getAmlenVersion
+def getAmlenVersion(){
+    output = sh (returnStdout: true, script: '''
+        python3 ./server_build/path_parser.py -mvalue -pISM_VERSION_ID
+    ''')
+    firstLine = output.split("\n")[0]
+    return firstLine
+}
+
+
+
 // startQuayBuild
 // Attempt to start a build in quayIo 
 // if the maximim queued build rate has been reached it will sleep for 2 minutes then try again
@@ -324,6 +335,9 @@ spec:
                                             mainBranch='''+mainBranch+'''
                                             free -m 
                                             cd server_build 
+                                            
+                                            amlen_version=$(python3 ./path_parser.py -mvalue -pISM_VERSION_ID)
+                                            
                                             if [[ "$BRANCH_NAME" == "$mainBranch" ]] ; then
                                                 export BUILD_TYPE=fvtbuild
                                             fi
@@ -342,22 +356,22 @@ spec:
                                             tar -c client_ship -f client_ship.tar.gz
                                             tar -c server_ship -f server_ship.tar.gz
                                             pwd
-                                            if [ ! -e rpms/EclipseAmlenBridge-${distro}-1.1dev-${BUILD_LABEL}.tar.gz ]
+                                            if [ ! -e rpms/EclipseAmlenBridge-${distro}-${amlen_version}-${BUILD_LABEL}.tar.gz ]
                                             then 
                                                 echo "Bridge Not built"
                                                 exit 1
                                             fi
-                                            if [ ! -e rpms/EclipseAmlenServer-${distro}-1.1dev-${BUILD_LABEL}.tar.gz ]
+                                            if [ ! -e rpms/EclipseAmlenServer-${distro}-${amlen_version}-${BUILD_LABEL}.tar.gz ]
                                             then 
                                                 echo "Server Not built"
                                                 exit 1
                                             fi
-                                            if [ ! -e rpms/EclipseAmlenWebUI-${distro}-1.1dev-${BUILD_LABEL}.tar.gz ]
+                                            if [ ! -e rpms/EclipseAmlenWebUI-${distro}-${amlen_version}-${BUILD_LABEL}.tar.gz ]
                                             then 
                                                 echo "WebUI not built"
                                                 exit 1
                                             fi
-                                            if [ $BRANCH_NAME == "$mainBranch" -a ! -e rpms/EclipseAmlenProxy-${distro}-1.1dev-${BUILD_LABEL}.tar.gz ]
+                                            if [ $BRANCH_NAME == "$mainBranch" -a ! -e rpms/EclipseAmlenProxy-${distro}-${amlen_version}-${BUILD_LABEL}.tar.gz ]
                                             then 
                                                 echo "Main build but Proxy Not built"
                                                 exit 1
@@ -426,7 +440,8 @@ spec:
                      echo "In Deploy, BUILD_LABEL is ${env.BUILD_LABEL}"
                      withCredentials([string(credentialsId: 'quay.io-token', variable: 'QUAYIO_TOKEN'),string(credentialsId:'github-bot-token',variable:'GITHUB_TOKEN')]) {
                          script {
-                             server_build_uuid=startQuayBuild(QUAYIO_TOKEN,GIT_BRANCH,BUILD_LABEL,"amlen-server",distro,"EclipseAmlenServer-${distro}-1.1dev-${BUILD_LABEL}.tar.gz",GIT_BRANCH)
+                             amlen_version=getAmlenVersion()
+                             server_build_uuid=startQuayBuild(QUAYIO_TOKEN,GIT_BRANCH,BUILD_LABEL,"amlen-server",distro,"EclipseAmlenServer-${distro}-${amlen_version}-${BUILD_LABEL}.tar.gz",GIT_BRANCH)
                              operator_build_uuid=startQuayBuild(QUAYIO_TOKEN,GIT_BRANCH,BUILD_LABEL,"operator",distro,"operator.tar.gz",GIT_BRANCH)
                              operator_bundle_build_uuid=startQuayBuild(QUAYIO_TOKEN,GIT_BRANCH,BUILD_LABEL,"operator-bundle",distro,"operator_bundle.tar.gz",GIT_BRANCH)
                              waitForQuayBuild(server_build_uuid,"amlen-server",QUAYIO_TOKEN)

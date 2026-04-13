@@ -9,7 +9,7 @@ A website including documentation can be found at https://eclipse.org/amlen
 A community blog can be found at https://amlen.org/
 
 ## Building
-Requires an x86-64 Linux distribution. Amlen has been built on RHEL7, RHEL8
+Requires an x86-64 Linux distribution. Amlen has been built on RHEL7-RHEL10
 and recent versions of Fedora. Package names vary slightly between distributions
 (Fedora package names are listed here).
 
@@ -18,7 +18,7 @@ Install the prereq packages:
 sudo dnf install openssl-devel openldap-devel boost-devel CUnit-devel pam-devel curl-devel 
 sudo dnf install gcc make vim-common gcc-c++ net-snmp-devel libicu-devel jansson-devel
 sudo dnf install ant ant-junit ant-contrib rpm-build icu libxslt dos2unix
-sudo dnf install java-1.8.0-openjdk-devel
+sudo dnf install java-21-openjdk-headless
 ```
 Extract  the source into a directory, put the dependencies (see dependencies 
 section of this readme) into another directory and then:
@@ -30,7 +30,7 @@ export DEPS_HOME=<directory containing dependencies>
 export USE_REAL_TRANSLATIONS=true
 export SLESNORPMS=yes
 export IMASERVER_BASE_DIR=$BROOT/rpmtree
-export JAVA_HOME=<suitable Java 8 SDK e.g. /etc/alternatives/java_sdk>
+export JAVA_HOME=<suitable Java 21 SDK e.g. /etc/alternatives/java_sdk>
 export PATH=$JAVA_HOME/bin:$PATH
 
 cd $SROOT/server_build
@@ -42,22 +42,22 @@ The output (in the form of rpms and tar bundles) is put under `$BROOT/rpms`
 Building the default set of components from this repository requires the following to be downloaded
 and placed into a directory (set the $DEP_HOME environment variable to point to this directory)
 
-* openliberty-23.0.0.12.zip
+* openliberty-25.0.0.11.zip
     https://openliberty.io/downloads/
-* jackson-annotations-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.16.0/
-* jackson-core-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.16.0/
-* jackson-databind-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.16.0/
-* jackson-jaxrs-base-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.16.0/
-* jackson-jaxrs-json-provider-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.16.0/
-* jackson-module-jaxb-annotations-2.16.0.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.16.0/
-* icu4j-74.1.jar
-    https://github.com/unicode-org/icu/releases/tag/release-74-1
+* jackson-annotations-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.19.4/
+* jackson-core-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.19.4/
+* jackson-databind-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.19.4/
+* jackson-jaxrs-base-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.19.4/
+* jackson-jaxrs-json-provider-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.19.4/
+* jackson-module-jaxb-annotations-2.19.4.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.19.4/
+* icu4j-78.1.jar
+    https://github.com/unicode-org/icu/releases/tag/release-78-1
 * dojo-release-1.17.3-src.zip
     https://download.dojotoolkit.org/release-1.17.3/ 
 * gridx-1.3.9.zip
