@@ -51,7 +51,7 @@ def startBuilderBuild(GITHUB_TOKEN,QUAYIO_TOKEN,BUILD_LABEL,distro,filename,vers
 // getAmlenVersion
 def getAmlenVersion(){
     output = sh (returnStdout: true, script: '''
-        server_build/path_parser.py -mvalue -pISM_VERSION_ID
+        ./server_build/path_parser.py -mvalue -pISM_VERSION_ID
     ''')
     firstLine = output.split("\n")[0]
     return firstLine
@@ -336,7 +336,7 @@ spec:
                                             free -m 
                                             cd server_build 
                                             
-                                            amlen_version=$(path_parser.py -mvalue -pISM_VERSION_ID)
+                                            amlen_version=$(./path_parser.py -mvalue -pISM_VERSION_ID)
                                             
                                             if [[ "$BRANCH_NAME" == "$mainBranch" ]] ; then
                                                 export BUILD_TYPE=fvtbuild
