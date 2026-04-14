@@ -452,6 +452,7 @@ spec:
                                      pwd
                                      distro='''+distro+'''
                                      mainBranch='''+mainBranch+'''
+                                     amlen_version='''+amlen_version+'''
                                      NOORIGIN_BRANCH=${GIT_BRANCH#origin/} # turns origin/master into master
 
                                      if [[ "$BRANCH_NAME" == "$mainBranch" ]] ; then
