@@ -10,6 +10,7 @@ namePrefix: osdk-
 patchesStrategicMerge:
 - manager_image.yaml
 - debug_logs_patch.yaml
+- watch_namespace_patch.yaml
 # Commented out to remove kube-rbac-proxy dependency (see commit 1eae0e1e)
 #- ../default/manager_auth_proxy_patch.yaml
 
@@ -25,7 +26,3 @@ images:
   newTag: main
 patches:
 - path: pull_policy/Always.yaml
-- path: watch_namespace_patch.yaml
-  target:
-    kind: Deployment
-    name: controller-manager
