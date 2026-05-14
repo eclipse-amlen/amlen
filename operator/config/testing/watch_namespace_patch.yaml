@@ -1,16 +1,7 @@
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: controller-manager
-  namespace: system
-spec:
-  template:
-    spec:
-      containers:
-        - name: manager
-          env:
-            - name: WATCH_NAMESPACE
-              value: "osdk-test"
+- op: replace
+  path: /spec/template/spec/containers/0/env/1
+  value:
+    name: WATCH_NAMESPACE
+    value: "osdk-test"
 
 # Made with Bob
