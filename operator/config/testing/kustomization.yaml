@@ -10,7 +10,9 @@ namePrefix: osdk-
 patchesStrategicMerge:
 - manager_image.yaml
 - debug_logs_patch.yaml
-- ../default/manager_auth_proxy_patch.yaml
+- watch_namespace_patch.yaml
+# Commented out to remove kube-rbac-proxy dependency (see commit 1eae0e1e)
+#- ../default/manager_auth_proxy_patch.yaml
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
