@@ -10,7 +10,7 @@ spec:
   renewBefore: {{ renewBefore }}
   issuerRef:
     name: "{{ issuerName }}"
-    kind: ClusterIssuer
+    kind: "{{ issuerKind }}"
   commonName: "{{ cert.name }}.svc"
   dnsNames:
     - "{{ cert.name }}.svc"
