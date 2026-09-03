@@ -6,6 +6,7 @@
     namespace: "{{ _amlen_namespace }}"
     cert: "{{ item }} "
     issuerName: "{{ ldap.cert_issuer.name }}"
+    issuerKind: "{{ ldap.cert_issuer.kind | default('ClusterIssuer') }}"
     duration: "{{ ldap.cert_issuer.duration  | default() }}"
     renewBefore: "{{ ldap.cert_issuer.renew_before  | default() }}"
     waitForCert: yes

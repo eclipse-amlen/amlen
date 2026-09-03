@@ -137,6 +137,7 @@
     namespace: "{{ _amlen_namespace }}"
     cert: "{{ item }} "
     issuerName: "{{ device_cert_issuer.name }}"
+    issuerKind: "{{ device_cert_issuer.kind | default('ClusterIssuer') }}"
     duration: "{{ device_cert_issuer.duration | default() }}"
     renewBefore: "{{ device_cert_issuer.renew_before | default() }}"
     waitForCert: yes
@@ -157,6 +158,7 @@
     namespace: "{{ _amlen_namespace }}"
     cert: "{{ item }} "
     issuerName: "{{ ha.cert_issuer.name }}"
+    issuerKind: "{{ device_cert_issuer.kind | default('ClusterIssuer') }}"
     duration: "{{ ha.cert_issuer.duration  | default() }}"
     renewBefore: "{{ ha.cert_issuer.renew_before  | default() }}"
     waitForCert: yes
