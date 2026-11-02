@@ -2699,6 +2699,82 @@ char * ism_mhub_toString(ism_mhub_t * mhub) {
 }
 
 /*
+ * Kafka 4.x compatibility (KFK4X)
+ *
+ * Kafka 4.0 (KIP-896) removed the old protocol versions this proxy has always used:
+ *   Produce  v0-v2  (we send v1 with a record batch)  -> broker min is now 3
+ *   Metadata v0-v3  (we send v0)                       -> broker min is now 4
+ * The broker tells us its min/max per API in the ApiVersions response.
+ *
+ * Rule: ONLY if the broker's min version is above what we would normally send do we
+ * move up to the lowest non-flexible version that is allowed (Produce v3..v8, Metadata v4).
+ * For any broker that still accepts the old versions (Kafka 3.x and older) nothing changes.
+ *
+ * We deliberately stay below the "flexible" encodings (Produce v9+, Metadata v9+) so no
+ * compact strings or tagged fields are needed.
+ *
+ * This must be called with the versions already known (versionKnown=1).
+ */
+#define KFK4X_PRODUCE_MAX   8
+#define KFK4X_METADATA_V    4
+static void mhubApplyBrokerVersions(ism_mhub_t * mhub) {
+    if (!mhub->versionKnown)
+        return;
+
+    /*
+     * Produce
+     *
+     * Message format 2 (record batch, magic 2) is only valid with Produce v3 or later.
+     * Older code sent Produce v1 with magic-2 batches; Kafka 3.x tolerated that but Kafka 4.x
+     * closes the connection without a response.  The broker's ApiVersions min can still be 0 on
+     * 4.x, so do not depend on min: whenever we send record batches and the broker supports
+     * Produce v3 or later, use min(broker max, 8).  Brokers whose Produce max is below 3 are
+     * left exactly as before.
+     */
+    if ((mhub->messageVersion >= 2 || mhub->verProduceMin >= 3) && mhub->verProduce >= 3) {
+        int pv = mhub->verProduce;
+        if (pv > KFK4X_PRODUCE_MAX)
+            pv = KFK4X_PRODUCE_MAX;
+        if (pv < mhub->verProduceMin) {
+            TRACE(2, "KFK4X ERROR: broker Produce range min=%u max=%u cannot be used by this proxy (supports 3..%d): mhub=%s\n",
+                    mhub->verProduceMin, mhub->verProduce, KFK4X_PRODUCE_MAX, mhub->id);
+        } else {
+            if (mhub->produceVersion != pv || mhub->messageVersion != 2) {
+                TRACE(3, "KFK4X Produce version raised for broker: mhub=%s was produce=%u msg=%u now produce=%d msg=2 (broker min=%u max=%u)\n",
+                        mhub->id, mhub->produceVersion, mhub->messageVersion, pv, mhub->verProduceMin, mhub->verProduce);
+            }
+            mhub->messageVersion = 2;       /* record batch */
+            mhub->produceVersion = pv;
+        }
+    } else {
+        TRACE(3, "KFK4X Produce version not changed: mhub=%s produce=%u msg=%u (broker min=%u max=%u)\n",
+                mhub->id, mhub->produceVersion, mhub->messageVersion, mhub->verProduceMin, mhub->verProduce);
+    }
+
+    /* Metadata */
+    if (mhub->verMetadataMin >= 1) {
+        if (mhub->verMetadata >= KFK4X_METADATA_V && mhub->verMetadataMin <= KFK4X_METADATA_V) {
+            if (mhub->metadataVersion != KFK4X_METADATA_V) {
+                TRACE(3, "KFK4X Metadata version raised for broker: mhub=%s now metadata=%d (broker min=%u max=%u)\n",
+                        mhub->id, KFK4X_METADATA_V, mhub->verMetadataMin, mhub->verMetadata);
+            }
+            mhub->metadataVersion = KFK4X_METADATA_V;
+        } else {
+            TRACE(2, "KFK4X ERROR: broker Metadata range min=%u max=%u cannot be used by this proxy (supports %d): mhub=%s\n",
+                    mhub->verMetadataMin, mhub->verMetadata, KFK4X_METADATA_V, mhub->id);
+        }
+    }
+    /* SASL: this proxy sends SaslAuthenticate v0.  Warn loudly if the broker ever stops accepting it. */
+    if (mhub->verSaslAuthenticate != 0xff && mhub->verSaslAuthenticateMin > 0) {
+        TRACE(2, "KFK4X ERROR: broker SaslAuthenticate min=%u max=%u but this proxy sends v0: mhub=%s\n",
+                mhub->verSaslAuthenticateMin, mhub->verSaslAuthenticate, mhub->id);
+    }
+    TRACE(4, "KFK4X versions in use: mhub=%s produce=%u message=%u metadata=%u (broker produce=%u..%u metadata=%u..%u)\n",
+            mhub->id, mhub->produceVersion, mhub->messageVersion, mhub->metadataVersion,
+            mhub->verProduceMin, mhub->verProduce, mhub->verMetadataMin, mhub->verMetadata);
+}
+
+/*
  * Map from a single API version to the other versions to use
  */
 void ism_mhub_mapKafkaVersion(ism_mhub_t * mhub, int version) {
@@ -2722,6 +2798,8 @@ void ism_mhub_mapKafkaVersion(ism_mhub_t * mhub, int version) {
          mhub->produceVersion = 1;
          break;
      }
+     /* If a config update re-maps after the broker versions are known, keep what the broker requires */
+     mhubApplyBrokerVersions(mhub);
 }
 
 
@@ -3215,18 +3293,63 @@ static int mhubReceiveKafka(ism_transport_t * transport, char * inbuf, int bufle
 
     /*
      * Parse an ProduceResponse (ACK)
+     *
+     * KFK4X: the response layout depends on the Produce version we sent (non-flexible, v0-v8):
+     *   v0+ : responses[ topic, partitions[ index, error_code, base_offset ] ]
+     *   v1+ : throttle_time_ms (after the responses)
+     *   v2+ : log_append_time (8 bytes) per partition
+     *   v5+ : log_start_offset (8 bytes) per partition
+     *   v8+ : record_errors[ batch_index(4), message(nullable string) ], error_message (nullable string)
      */
     now = ism_common_currentTimeNanos();
+    TRACE(7, "KFK4X Produce response: connect=%u name=%s corrid=%d produceVersion=%u len=%d\n",
+            transport->index, transport->name, corrid, mhub->produceVersion, buflen);
     response_count = ism_kafka_getInt4(buf);
     for (i=0; i< response_count; i++) {
         topiclen = ism_kafka_getString(buf, &topicname);
         part_count = ism_kafka_getInt4(buf);       /* partition count */
+        if (ism_kafka_more(buf) < 0 || part_count < 0 || part_count > 0x10000) {
+            TRACE(2, "KFK4X ERROR: Produce response is malformed or truncated: connect=%u name=%s produceVersion=%u topiclen=%d part_count=%d more=%d\n",
+                    transport->index, transport->name, mhub->produceVersion, topiclen, part_count, ism_kafka_more(buf));
+            break;
+        }
         for (p=0; p<part_count; p++) {
+            int64_t log_start_offset = -1;
             partid = ism_kafka_getInt4(buf);
             partrc = ism_kafka_getInt2(buf);
             offset = ism_kafka_getInt8(buf);
             if (mhub->produceVersion >= 2) {
                 timestamp = ism_kafka_getInt8(buf);
+            }
+            if (mhub->produceVersion >= 5) {
+                log_start_offset = ism_kafka_getInt8(buf);
+            }
+            if (mhub->produceVersion >= 8) {
+                char * errmsg = NULL;
+                int errlen;
+                int err_count = ism_kafka_getInt4(buf);          /* record_errors */
+                if (err_count > 0 && err_count < 0x10000) {
+                    int e;
+                    for (e=0; e<err_count; e++) {
+                        int bidx = ism_kafka_getInt4(buf);
+                        char * emsg;
+                        int emlen = ism_kafka_getString(buf, &emsg);
+                        TRACE(2, "KFK4X Produce record_error: topic=%.*s partition=%d batch_index=%d message=%.*s\n",
+                                topiclen, topicname ? topicname : "", partid, bidx, emlen, emsg ? emsg : "");
+                    }
+                }
+                errlen = ism_kafka_getString(buf, &errmsg);     /* error_message */
+                if (errlen > 0) {
+                    TRACE(2, "KFK4X Produce error_message: topic=%.*s partition=%d message=%.*s\n",
+                            topiclen, topicname ? topicname : "", partid, errlen, errmsg);
+                }
+            }
+            TRACE(7, "KFK4X Produce response partition: connect=%u topic=%.*s partition=%d rc=%d offset=%lld logAppendTime=%lld logStartOffset=%lld\n",
+                    transport->index, topiclen, topicname ? topicname : "", partid, partrc,
+                    (long long)offset, (long long)timestamp, (long long)log_start_offset);
+            if (partrc != 0) {
+                TRACE(2, "KFK4X ERROR: Produce partition error from broker: connect=%u topic=%.*s partition=%d kafka_error_code=%d (35=UNSUPPORTED_VERSION 3=UNKNOWN_TOPIC_OR_PARTITION 6=NOT_LEADER 42=INVALID_REQUEST) produceVersion=%u\n",
+                        transport->index, topiclen, topicname ? topicname : "", partid, partrc, mhub->produceVersion);
             }
             needmetadata += produceResponse(mhub, topicname, topiclen, partid, partrc, offset, timestamp);
         }
@@ -3388,8 +3511,11 @@ static int receiveApiVersions(ism_transport_t * transport, concat_alloc_t * buf)
     int  i;
     int  verElect = -1;
     int krc = ism_kafka_getInt2(buf);
+    TRACE(4, "KFK4X ApiVersions response: connect=%u mhub=%s errorcode=%d len=%d\n", transport->index, mhub->id, krc, buf->used);
     if (!krc) {
          int count = ism_kafka_getInt4(buf);
+         TRACE(4, "KFK4X ApiVersions response: connect=%u mhub=%s api_count=%d versionKnown=%u\n",
+                 transport->index, mhub->id, count, mhub->versionKnown);
          ism_mhub_lock(mhub);
          if (!mhub->versionKnown) {
              mhub->verSaslAuthenticate = 0xff;
@@ -3404,22 +3530,35 @@ static int receiveApiVersions(ism_transport_t * transport, concat_alloc_t * buf)
                  if (minver != 0) {
                      TRACE(9, "Kafka ApiVersions API=%u min=%u max=%u\n", api, minver, maxver);
                  }
-                 if (api == ProduceRequest)
+                 if (api == ProduceRequest) {
                      mhub->verProduce = maxver;
-                 else if (api == FetchRequest)
+                     mhub->verProduceMin = minver;
+                     TRACE(4, "KFK4X ApiVersions Produce: min=%d max=%d\n", minver, maxver);
+                 } else if (api == FetchRequest) {
                      mhub->verFetch = maxver;
-                 else if (api == MetadataRequest)
+                 } else if (api == MetadataRequest) {
                      mhub->verMetadata = maxver;
-                 else if (api == InitProducerIdRequest)
+                     mhub->verMetadataMin = minver;
+                     TRACE(4, "KFK4X ApiVersions Metadata: min=%d max=%d\n", minver, maxver);
+                 } else if (api == InitProducerIdRequest) {
                      mhub->verInitProducerId = maxver;
-                 else if (api == SaslHandshakeRequest)
+                 } else if (api == SaslHandshakeRequest) {
                      mhub->verSaslHandshake = maxver;
-                 else if (api == SaslAuthenticateRequest)
+                     mhub->verSaslHandshakeMin = minver;
+                     TRACE(4, "KFK4X ApiVersions SaslHandshake: min=%d max=%d\n", minver, maxver);
+                 } else if (api == SaslAuthenticateRequest) {
                      mhub->verSaslAuthenticate = maxver;
-                 else if (api == DescribeConfigsRequest)
+                     mhub->verSaslAuthenticateMin = minver;
+                     TRACE(4, "KFK4X ApiVersions SaslAuthenticate: min=%d max=%d\n", minver, maxver);
+                 } else if (api == DescribeConfigsRequest) {
                      mhub->verDescribeConfigs = maxver;
-                 else if (api == ElectPreferredLeader)
+                 } else if (api == ElectPreferredLeader) {
                      verElect = maxver;
+                 }
+             }
+             if (ism_kafka_more(buf) < 0) {
+                 TRACE(2, "KFK4X ERROR: ApiVersions response was shorter than its api_count: connect=%u mhub=%s count=%d used=%d pos=%d\n",
+                         transport->index, mhub->id, count, buf->used, buf->pos);
              }
          }
 
@@ -3455,6 +3594,8 @@ static int receiveApiVersions(ism_transport_t * transport, concat_alloc_t * buf)
                  mhubver = 2;
              ism_mhub_mapKafkaVersion(mhub, mhubver);
          }
+         /* Kafka 4.x: raise Produce/Metadata versions only if the broker no longer accepts the old ones */
+         mhubApplyBrokerVersions(mhub);
          ism_mhub_unlock(mhub);
          TRACE(4, "Kafka version %s: mhub=%s produce=%u fetch=%u metadata=%u saslHandshake=%u saslAuthenticate=%u\n",
                  kver, mhub->id, mhub->verProduce, mhub->verFetch, mhub->verMetadata, mhub->verSaslHandshake, mhub->verSaslAuthenticate);
@@ -3723,21 +3864,64 @@ static int mhubReceiveMetadata(ism_transport_t * transport, char * inbuf, int bu
      * Check for the type of response based on the correlation ID
      */
     if (corrid == 0x20000) {             /* Metadata */
+        /*
+         * KFK4X: Metadata v4 response (non-flexible) differs from v0:
+         *   throttle_time_ms(4)                                      at the start
+         *   broker:  node_id(4) host(str) port(4) rack(nullable str)
+         *   cluster_id(nullable str) controller_id(4)               after the brokers
+         *   topic:   error_code(2) name(str) is_internal(1)  partitions[...]
+         *   partition: unchanged from v0 (error, id, leader, replicas[], isr[])
+         */
+        int mdv = mhub->metadataVersion;
+        int throttle_ms = 0;
+        TRACE(4, "KFK4X Metadata response: connect=%u name=%s metadataVersion=%d len=%d\n",
+                transport->index, transport->name, mdv, buflen);
+        if (mdv >= 3)
+            throttle_ms = ism_kafka_getInt4(buf);
         int broker_cnt = ism_kafka_getInt4(buf);
-        mhub_broker_list_t * brokers = alloca(broker_cnt * sizeof(mhub_broker_list_t));
+        if (broker_cnt < 0 || broker_cnt > 0x1000) {
+            TRACE(2, "KFK4X ERROR: Metadata response has an invalid broker count=%d (metadataVersion=%d throttle=%d len=%d). "
+                     "The response layout does not match the request version.\n", broker_cnt, mdv, throttle_ms, buflen);
+            broker_cnt = 0;
+            rc = 2;
+        }
+        mhub_broker_list_t * brokers = alloca((broker_cnt ? broker_cnt : 1) * sizeof(mhub_broker_list_t));
         for (i=0; i<broker_cnt; i++) {
+            char * rack = NULL;
             brokers[i].nodeid  = ism_kafka_getInt4(buf);
             brokers[i].broker_len = ism_kafka_getString(buf, (char * *)&brokers[i].broker);
             brokers[i].port = (uint16_t) ism_kafka_getInt4(buf);
+            if (mdv >= 1)
+                ism_kafka_getString(buf, &rack);          /* rack: skip */
+            TRACE(4, "KFK4X Metadata broker: arrayindex=%d nodeid=%d broker=%.*s port=%d\n",
+                        i, brokers[i].nodeid, brokers[i].broker_len, brokers[i].broker ? brokers[i].broker : "", brokers[i].port);
             TRACE(8, "MessageHub broker metadata: arrayindex=%d nodeid=%d broker=%s port=%d\n",
             			i, brokers[i].nodeid, brokers[i].broker, brokers[i].port);
         }
+        if (mdv >= 2) {
+            char * clusterid = NULL;
+            int cidlen = ism_kafka_getString(buf, &clusterid);     /* cluster_id */
+            int controller = ism_kafka_getInt4(buf);               /* controller_id (v1+) */
+            TRACE(4, "KFK4X Metadata cluster: clusterid=%.*s controller=%d\n", cidlen, clusterid ? clusterid : "", controller);
+        } else if (mdv >= 1) {
+            ism_kafka_getInt4(buf);                                /* controller_id (v1) */
+        }
         int topic_count = ism_kafka_getInt4(buf);
+        TRACE(4, "KFK4X Metadata response: brokers=%d topics=%d more=%d\n", broker_cnt, topic_count, ism_kafka_more(buf));
+        if (topic_count < 0 || topic_count > 0x10000) {
+            TRACE(2, "KFK4X ERROR: Metadata response has an invalid topic count=%d\n", topic_count);
+            rc = 2;
+            topic_count = 0;
+        }
         for (i=0; rc==0 && i<topic_count; i++) {
             char * topicstr;
             int topicrc = ism_kafka_getInt2(buf);
             int topiclen = ism_kafka_getString(buf, &topicstr);
+            if (mdv >= 1)
+                ism_kafka_getInt1(buf);                            /* is_internal */
             int part_cnt = ism_kafka_getInt4(buf);
+            TRACE(4, "KFK4X Metadata topic: topic=%.*s error_code=%d partitions=%d\n",
+                    topiclen, topicstr ? topicstr : "", topicrc, part_cnt);
             if (ism_kafka_more(buf)<0 || part_cnt >= 0x10000 || topiclen < 1) {
             	TRACE(5, "MessageHub metadata incomplete: connect=%u name=%s morebuf=%d part_cnt=%d topiclen=%d\n",
             			transport->index, transport->name,ism_kafka_more(buf)<0, part_cnt, topiclen);
@@ -3753,6 +3937,12 @@ static int mhubReceiveMetadata(ism_transport_t * transport, char * inbuf, int bu
                     buf->pos += 4 * replica;   /* Skip over replica info */
                     isr =         ism_kafka_getInt4(buf) & 0xffff;
                     buf->pos += 4 * isr;       /* Skip over isr info */
+                    if (mdv >= 5) {
+                        int offline = ism_kafka_getInt4(buf) & 0xffff;   /* offline_replicas (v5+) */
+                        buf->pos += 4 * offline;
+                    }
+                    TRACE(4, "KFK4X Metadata partition: topic=%.*s partition=%d error_code=%d leader=%d replicas=%d isr=%d\n",
+                            topiclen, topicstr ? topicstr : "", partid, partrc, leader, replica, isr);
                     if (ism_kafka_more(buf) >= 0) {
                         processPartMetadata(mhub, brokers, broker_cnt, topicstr, topiclen, partid, partrc, leader);
                     } else {
@@ -3992,7 +4182,17 @@ static void mhubMetadataRequest(ism_mhub_t * mhub, ism_transport_t * transport) 
     if (g_shuttingDown)
         return;
 
-    ism_kafka_putInt4(buf, MetadataRequest0);
+    /*
+     * KFK4X: Kafka 4.x brokers no longer accept Metadata v0-v3.  mhub->metadataVersion is
+     * set to 4 by mhubApplyBrokerVersions() only when the broker's ApiVersions says so.
+     * Otherwise we send exactly what we always sent (v0).
+     */
+    if (mhub->metadataVersion >= 4) {
+        ism_kafka_putInt2(buf, MetadataRequest);       /* API key 3 */
+        ism_kafka_putInt2(buf, 4);                     /* version 4 */
+    } else {
+        ism_kafka_putInt4(buf, MetadataRequest0);
+    }
     ism_kafka_putInt4(buf, 0x20000);   /* Correlation ID */
     ism_kafka_putString(buf, ism_common_getHostnameInfo(), -1);   /* Use our hostname as the kafka clientID */
     topic_count_pos = buf->used;
@@ -4004,7 +4204,13 @@ static void mhubMetadataRequest(ism_mhub_t * mhub, ism_transport_t * transport) 
         topic_count++;
     }
     ism_kafka_putInt4At(buf, topic_count_pos, topic_count);
-    ism_kafka_putString(buf, transport->pobj->topic, -1);
+    if (mhub->metadataVersion >= 4) {
+        ism_kafka_putInt1(buf, 0);     /* allow_auto_topic_creation = false (v4+) */
+    } else {
+        ism_kafka_putString(buf, transport->pobj->topic, -1);
+    }
+    TRACE(4, "KFK4X Metadata request: connect=%u name=%s metadataVersion=%u topics=%d size=%d\n",
+            transport->index, transport->name, mhub->metadataVersion, topic_count, buf->used-4);
 
     //LOG when to send the Metadata Request with server info
     LOG(INFO, Server, 979, "%u%s%s%u%s", "MessageHub metadatarequest submitted: connect={0} name={1} server_addr={2} server_port={3} broker={4}",
@@ -4274,6 +4480,7 @@ static int ism_mhub_connected(ism_transport_t * transport, int rc) {
     transport->pobj->auth_require = 0;
 
     if (mhub->versionKnown == 0) {
+        TRACE(4, "KFK4X Sending ApiVersions v0 request: connect=%u name=%s mhub=%s\n", transport->index, transport->name, mhub->id);
         ism_kafka_putInt2(&buf, 18);    /* ApiVersionReqeuset */
         ism_kafka_putInt2(&buf, 0);     /* No headers */
         ism_kafka_putInt4(&buf, 0x30003);
@@ -4955,8 +5162,16 @@ int ism_mhub_message_produce(ism_transport_t * transport, ism_mhub_t * mhub, mhu
 
     ism_kafka_putInt2(buf, ProduceRequest);         /* Api key */
     ism_kafka_putInt2(buf, mhub->produceVersion);  /* produce version */
+    TRACE(4, "KFK4X Produce request header: connect=%u name=%s apiKey=%d apiVersion=%u (this is the version written to the broker; must not be 1 on Kafka 4.x)\n",
+            transport->index, transport->name, ProduceRequest, mhub->produceVersion);
     ism_kafka_putInt4(buf, 1);                      /* CorrID   */
     ism_kafka_putString(buf, transport->name, -1);
+    /*
+     * KFK4X: Produce v3+ adds transactional_id (nullable string) before acks.
+     * We are not transactional so send null (length -1).  Not sent for v0-v2 (unchanged).
+     */
+    if (mhub->produceVersion >= 3)
+        ism_kafka_putInt2(buf, -1);
 
     /*
      * Set Produce Ack.
@@ -5030,6 +5245,9 @@ int ism_mhub_message_produce(ism_transport_t * transport, ism_mhub_t * mhub, mhu
     int sendBytesSize = buf->used-setsize-4;
     ism_kafka_putInt4At(buf, setsize, sendBytesSize);
     rc = transport->send(transport, buf->buf+4, buf->used-4, 0, SFLAG_FRAMESPACE);
+    TRACE(4, "KFK4X Produce request sent: connect=%u name=%s topic=%s partition=%d produceVersion=%u messageVersion=%u acks=%d messages=%u bytes=%u rc=%d\n",
+            transport->index, transport->name, mhub_part->topic->name, transport->pobj->partID,
+            mhub->produceVersion, mhub->messageVersion, mhub->mhubACK, msgcnt, buf->used-4, rc);
     TRACE(9, "Produce Event Streams messages: connect=%u name=%s messages=%u bytes=%u\n",
             transport->index, transport->name, msgcnt, buf->used-4);
     if (producedMsgsCount!=NULL) {

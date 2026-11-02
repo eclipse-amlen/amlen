@@ -170,6 +170,10 @@ struct ism_mhub_t {
     uint8_t          verSaslAuthenticate; /* The kafka SaslAuthenticate max version */
     uint8_t          verInitProducerId;   /* The kafka InitProducerId max version */
     uint8_t          verDescribeConfigs;  /* The kafaka DescribeConfigs version */
+    uint8_t          verProduceMin;       /* The kafka Produce min version (Kafka 4.x raises this to 3) */
+    uint8_t          verMetadataMin;      /* The kafka Metadata min version (Kafka 4.x raises this to 4) */
+    uint8_t          verSaslHandshakeMin; /* The kafka SaslHandshake min version (trace only) */
+    uint8_t          verSaslAuthenticateMin; /* The kafka SaslAuthenticate min version (trace only) */
     const char *     kafka_version;  /* String representing the Kafka version based on ApiVersions */
     mhubStateChange_f stateChanged;  /* Callback to indicate the state is changed */
     void *           userdata;       /* Used by creator of the object to store its private object */
