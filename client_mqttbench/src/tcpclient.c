@@ -502,13 +502,16 @@ static int sslInit (mqttbenchInfo_t *mqttbenchInfo)
 #endif
 	}
 
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 	SSL_load_error_strings();
 	SSL_library_init();
 	ERR_load_BIO_strings();
 	ERR_load_CRYPTO_strings();
-
 	OpenSSL_add_all_algorithms();
 	OpenSSL_add_all_digests();
+#else
+	OPENSSL_init_ssl(0, NULL);
+#endif
 	rc = sslLockInit();
 	if (rc)
 		MBTRACE(MBERROR, 1, "Failed to initialize OpenSSL locks (rc: %d).\n", rc);

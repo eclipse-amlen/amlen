@@ -653,8 +653,12 @@ static int ism_security_ltpaV1GenUserInfoSignature(
     unsigned char digest[LTPA_SHA1_DIGEST_SIZE];
 
     if ( sslModuleLoaded == 0 ) {
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
         OpenSSL_add_all_digests();
         OpenSSL_add_all_algorithms();
+#else
+        OPENSSL_init_crypto(0, NULL);
+#endif
         sslModuleLoaded = 1;
     }
 
@@ -1572,8 +1576,12 @@ XAPI int ism_security_ltpaReadKeyfile(
     TRACE(9, "Create LTPA key data structure from LTPA Key file: %s\n", keyfile_path);
 
     if ( sslModuleLoaded == 0 ) {
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
         OpenSSL_add_all_digests();
         OpenSSL_add_all_algorithms();
+#else
+        OPENSSL_init_crypto(0, NULL);
+#endif
         sslModuleLoaded = 1;
     }
 

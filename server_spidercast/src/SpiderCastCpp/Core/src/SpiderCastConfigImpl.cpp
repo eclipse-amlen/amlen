@@ -26,6 +26,7 @@
 #include <boost/algorithm/cxx11/any_of.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/asio.hpp>
+#include "BoostAsioCompat.h"
 
 #include "SpiderCastConfigImpl.h"
 #include "CommUtils.h"
@@ -419,7 +420,7 @@ void SpiderCastConfigImpl::initProperties() throw (IllegalConfigException)
 	{
 		try
 		{
-			boost::asio::ip::address_v4 mcg_v4 = boost::asio::ip::address_v4::from_string(multicastGroupAddress_v4);
+			boost::asio::ip::address_v4 mcg_v4 = SPDR_ADDRESS_V4_FROM_STRING(multicastGroupAddress_v4);
 			if (!mcg_v4.is_multicast())
 			{
 				ostringstream what;
@@ -443,7 +444,7 @@ void SpiderCastConfigImpl::initProperties() throw (IllegalConfigException)
 	{
 		try
 		{
-			boost::asio::ip::address_v6 mcg_v6 = boost::asio::ip::address_v6::from_string(multicastGroupAddress_v6);
+			boost::asio::ip::address_v6 mcg_v6 = SPDR_ADDRESS_V6_FROM_STRING(multicastGroupAddress_v6);
 			if (!mcg_v6.is_multicast())
 			{
 				ostringstream what;

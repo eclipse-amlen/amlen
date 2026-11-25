@@ -150,7 +150,7 @@ void CommUDPMulticast::init() throw (SpiderCastRuntimeError)
 		{
 			try
 			{
-				ip::address_v4 multicast_address_v4 = ip::address_v4::from_string(multicastAddress_v4_str_);
+				ip::address_v4 multicast_address_v4 = SPDR_ADDRESS_V4_FROM_STRING(multicastAddress_v4_str_);
 				if (!multicast_address_v4.is_multicast())
 				{
 					stop_ = true;
@@ -169,7 +169,7 @@ void CommUDPMulticast::init() throw (SpiderCastRuntimeError)
 				ip::address_v4 multicast_outbound_interface;
 				if (!multicastOutboundInterface_v4_str_.empty())
 				{
-					multicast_outbound_interface = ip::address_v4::from_string(multicastOutboundInterface_v4_str_);
+					multicast_outbound_interface = SPDR_ADDRESS_V4_FROM_STRING(multicastOutboundInterface_v4_str_);
 				}
 
 				tx_socket_v4_.open(udp::v4());
@@ -247,7 +247,7 @@ void CommUDPMulticast::init() throw (SpiderCastRuntimeError)
 		{
 			try
 			{
-				ip::address_v6 multicast_address_v6 = ip::address_v6::from_string(multicastAddress_v6_str_);
+				ip::address_v6 multicast_address_v6 = SPDR_ADDRESS_V6_FROM_STRING(multicastAddress_v6_str_);
 				if (!multicast_address_v6.is_multicast())
 				{
 					stop_ = true;

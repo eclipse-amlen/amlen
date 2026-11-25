@@ -19,6 +19,7 @@
 #define COMMUDPTHREAD_H_
 
 #include <boost/asio.hpp>
+#include "BoostAsioCompat.h"
 
 #include "Thread.h"
 

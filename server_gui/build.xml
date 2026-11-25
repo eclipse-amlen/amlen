@@ -291,6 +291,7 @@
         <condition property="dojo.extracted">
             <and>
                 <available file="${server.gui.build.js.dir}/dojotoolkit" type="dir" />
+                <available file="${server.gui.build.js.dir}/dojotoolkit/gridx" type="dir" />
                 <available file="${server.gui.build.js.dir}/idx" type="dir" />
             </and>
         </condition>

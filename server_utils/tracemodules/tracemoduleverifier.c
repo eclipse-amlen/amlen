@@ -72,8 +72,12 @@ int main(int argc, char **argv)
 	signedtracemodulefilename = *++argv;
 	outputfilename            = *++argv;
 
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 	OpenSSL_add_all_algorithms();
 	OpenSSL_add_all_digests();
+#else
+	OPENSSL_init_crypto(0, NULL);
+#endif
 
 	EVP_MD_CTX *mdctx= NULL;
 	mdctx = EVP_MD_CTX_create();
