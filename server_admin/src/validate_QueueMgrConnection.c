@@ -15,15 +15,13 @@
 
 #include <validateConfigData.h>
 #include "validateInternal.h"
-#include <sys/socket.h>
-#include <netdb.h>
+#include <arpa/inet.h>
 #include "jansson.h"
 
 
 int ismqmc_validateIPAddress(const char *value, int mode) {
 
-    struct addrinfo hints, *res;
-    const char *ipAddr=value;
+    const char *ipAddr = value;
 
     if ( !value )
         return 1;
@@ -34,17 +32,16 @@ int ismqmc_validateIPAddress(const char *value, int mode) {
     if (strstr(value, " ") != NULL || strstr(value, ",") != NULL)
         return 0;
 
-    memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_UNSPEC;
-    hints.ai_socktype = 0;
+    /* Reject "host:port" strings (colon without opening bracket).
+     * This prevents getaddrinfo() triggering a live DNS lookup on
+     * systemd-resolved systems where "1.2.3.4:5" is treated as a hostname. */
+    if (*value != '[' && strchr(value, ':') != NULL)
+        return 0;
 
-     /*
-     * Allow the IP address to have a surrounding brackets.
-     * This is normally used for IPv6 but we actually allow it for anything.
-     */
+    /* Bracket-enclosed addresses are IPv6 only.
+     * Strip the brackets, then validate strictly as IPv6. */
     if (ipAddr && *ipAddr == '[') {
-    	hints.ai_family = AF_INET6;
-        int  iplen = strlen(ipAddr);
+        int iplen = strlen(ipAddr);
         if (iplen > 1) {
             char * newip = alloca(iplen);
             strcpy(newip, ipAddr+1);
@@ -52,16 +49,19 @@ int ismqmc_validateIPAddress(const char *value, int mode) {
                 newip[iplen-2] = 0;
             ipAddr = newip;
         }
+        struct in6_addr addr6;
+        return (inet_pton(AF_INET6, ipAddr, &addr6) == 1) ? 1 : 0;
     }
 
-    if ( getaddrinfo(ipAddr, NULL, &hints, &res) != 0 ) {
-        /*Failed to resolve the address.*/
-        return 0;
-    }
+    /* Use inet_pton() to validate the IP address without DNS resolution.
+     * This avoids hangs on systemd-resolved systems that perform live DNS
+     * lookups for strings like "1.2.3.4.5". */
+    struct in_addr  addr4;
+    struct in6_addr addr6;
+    if (inet_pton(AF_INET,  ipAddr, &addr4) == 1) return 1;
+    if (inet_pton(AF_INET6, ipAddr, &addr6) == 1) return 1;
 
-    freeaddrinfo(res);
-
-    return 1;
+    return 0;
 }
 
 int ismqmc_validateConnectionName(const char *value) {
