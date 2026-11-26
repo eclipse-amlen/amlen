@@ -17,8 +17,8 @@ RUN dnf -y update && \
     dnf -y install man file which lsof strace python3-devel python3-pip nodejs npm valgrind nc nmap logrotate && \
     # Needed to build rpms in container
     dnf -y install rpm-build && \
-    # We use java21
-    dnf -y install java-21-openjdk-headless java-21-openjdk-devel && \
+    # Fedora no longer ships java 21; use java 25
+    dnf -y install java-25-openjdk-headless java-25-openjdk-devel && \
     # Needed for verifying python
     pip3 install pylint requests
 
@@ -39,6 +39,6 @@ RUN wget https://github.com/d3/d3/releases/download/v3.5.6/d3.zip -O ${DEPS_HOME
 RUN wget https://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar  -O ${DEPS_HOME}/jms.jar 
 
 
-#Use Java 21
-ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+#Use Java 25
+ENV JAVA_HOME=/usr/lib/jvm/java-25-openjdk
 ENV PATH="$JAVA_HOME/bin:$PATH"

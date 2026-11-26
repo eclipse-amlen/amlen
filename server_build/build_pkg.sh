@@ -232,8 +232,11 @@ function set_docker_from {
         sed -i 's+IMA_SVR_DISTRO+quay.io/almalinuxorg/almalinux:8+' $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile
     elif [ "${LINUXDISTRO_FULL}" == "almalinux9"  ] ; then
         sed -i 's+IMA_SVR_DISTRO+quay.io/almalinuxorg/almalinux:9+' $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile
-    elif [ "${LINUXDISTRO_FULL}" == "fedora"  ] ; then
-        sed -i 's+IMA_SVR_DISTRO+quay.io/fedora/fedora:35-x86_64+' $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile
+    elif [ "${LINUXDISTRO_FULL}" == "almalinux10"  ] ; then
+        sed -i 's+IMA_SVR_DISTRO+quay.io/almalinuxorg/almalinux:10+' $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile
+    elif [ "${LINUXDISTRO_ID}" == "fedora"  ] ; then
+        # Use the same Fedora release as the build host (e.g. fedora45 -> fedora:45)
+        sed -i "s+IMA_SVR_DISTRO+quay.io/fedora/fedora:${LINUXDISTRO_VERSION_MAJOR}-x86_64+" $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile
     else
         # default to almalinux 8
         sed -i 's+IMA_SVR_DISTRO+quay.io/almalinuxorg/almalinux:8+' $DIR/${LINUXDISTRO_FULL}/temp/Dockerfile

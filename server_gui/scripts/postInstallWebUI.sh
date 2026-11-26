@@ -547,10 +547,17 @@ function update_liberty_ldap_password() {
 
                 if [ ! -x "$(command -v java)" ]; then
                     if [ -z "${JAVA_HOME}" ]; then
-                        #We currently prereq java 21 - so that should exist - but  so this should exist - if the rpm spec changes, update our guess below
-                        
-                        if [ -e "/usr/lib/jvm/jre-21-openjdk" ]; then
-                            export JAVA_HOME=/usr/lib/jvm/jre-21-openjdk
+                        #We currently prereq java 21 (java 25 on Fedora) - so one of these should exist - if the rpm spec changes, update our guess below
+                        GUESS_JAVA_HOME=""
+                        for candidate in /usr/lib/jvm/jre-21-openjdk /usr/lib/jvm/jre-25-openjdk; do
+                            if [ -e "${candidate}" ]; then
+                                GUESS_JAVA_HOME=${candidate}
+                                break
+                            fi
+                        done
+
+                        if [ -n "${GUESS_JAVA_HOME}" ]; then
+                            export JAVA_HOME=${GUESS_JAVA_HOME}
                             echo "java not setup. Guessing java home to be ${JAVA_HOME}" >> ${INSTALL_LOG}
                             export PATH=${PATH}:${JAVA_HOME}/bin
                         else
