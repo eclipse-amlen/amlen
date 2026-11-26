@@ -516,6 +516,22 @@ function update_liberty_ldap_password() {
         exit 1
     fi
 
+    # Liberty 26.0.0.3+ no longer has a default AES key, so we generate a random one for this install.
+    # It is stored as a configDropins override so the server can decrypt the encoded bindPassword.
+    AESKEYDIR="${WLPDIR}/usr/servers/ISMWebUI/configDropins/overrides"
+    AESKEYFILE="${AESKEYDIR}/aesKey.xml"
+    if [ ! -f "${AESKEYFILE}" ]; then
+        AESKEY=$(openssl rand -base64 32)
+        if [ -z "${AESKEY}" ]; then
+            echo "Updating liberty: failed to generate AES key" >> ${INSTALL_LOG}
+            exit 1
+        fi
+        mkdir -p "${AESKEYDIR}"
+        (umask 077; printf '<?xml version="1.0" encoding="UTF-8"?>\n<server>\n    <variable name="wlp.aes.encryption.key" value="%s" />\n</server>\n' "${AESKEY}" > "${AESKEYFILE}")
+        unset AESKEY
+        echo "Updating liberty: generated AES key file ${AESKEYFILE}" >> ${INSTALL_LOG}
+    fi
+
     genpasswd=true
     numtries=0
 
@@ -523,7 +539,7 @@ function update_liberty_ldap_password() {
     #sometimes the /usr/bin/java & /etc/alternatives/java symlinks are not setup before post install script of webui rpm on RHEL8 era
     #linuxes - we retry - guessing a java path
     while $genpasswd; do
-        lval=$(${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes ${PASSWD})
+        lval=$(${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes --aesConfigFile="${AESKEYFILE}" ${PASSWD})
 
         if [ ! -z "$lval" ]; then
             #Successfully encoded the password
@@ -543,7 +559,7 @@ function update_liberty_ldap_password() {
                 ls -l /usr/lib/jvm/java-1.8.0-openjd*/jre >> ${INSTALL_LOG} 2>&1 
                 ls -l /usr/lib/jvm/jre-21*/jre >> ${INSTALL_LOG} 2>&1 
                 echo $PATH >> ${INSTALL_LOG} 2>&1 
-                ${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes ${PASSWD} >> ${INSTALL_LOG} 2>&1 
+                ${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes --aesConfigFile="${AESKEYFILE}" ${PASSWD} >> ${INSTALL_LOG} 2>&1 
 
                 if [ ! -x "$(command -v java)" ]; then
                     if [ -z "${JAVA_HOME}" ]; then
