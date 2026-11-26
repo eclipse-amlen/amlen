@@ -42,22 +42,22 @@ The output (in the form of rpms and tar bundles) is put under `$BROOT/rpms`
 Building the default set of components from this repository requires the following to be downloaded
 and placed into a directory (set the $DEP_HOME environment variable to point to this directory)
 
-* openliberty-25.0.0.11.zip
+* openliberty-26.0.0.11.zip
     https://openliberty.io/downloads/
-* jackson-annotations-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.19.4/
-* jackson-core-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.19.4/
-* jackson-databind-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.19.4/
-* jackson-jaxrs-base-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.19.4/
-* jackson-jaxrs-json-provider-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.19.4/
-* jackson-module-jaxb-annotations-2.19.4.jar
-    https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.19.4/
-* icu4j-78.1.jar
-    https://github.com/unicode-org/icu/releases/tag/release-78-1
+* jackson-annotations-2.23.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.23/
+* jackson-core-2.23.0.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.23.0/
+* jackson-databind-2.23.0.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.23.0/
+* jackson-jaxrs-base-2.23.0.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.23.0/
+* jackson-jaxrs-json-provider-2.23.0.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.23.0/
+* jackson-module-jaxb-annotations-2.23.0.jar
+    https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.23.0/
+* icu4j-79.1.jar
+    https://github.com/unicode-org/icu/releases/tag/release-79.1
 * dojo-release-1.17.3-src.zip
     https://download.dojotoolkit.org/release-1.17.3/ 
 * gridx-1.3.9.zip

@@ -576,6 +576,7 @@
             <fileset dir="${guiBuildToolsDir}">
                 <include name="${server.gui.icuj4Archive}" />
                 <include name="jackson-*-${server.gui.jackson.version}.jar" />
+                <include name="jackson-annotations-${server.gui.jackson.annotations.version}.jar" />
             </fileset>
         </copy>
     </target>
