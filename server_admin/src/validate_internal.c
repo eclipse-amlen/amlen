@@ -919,24 +919,29 @@ static char * ASN1Time2CTimeStr(ASN1_TIME * time)
     memset(ct_str, '\0', sizeof(ct_str));
 
     /* ASN1 time string to struct tm */
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
+    const unsigned char *tdata = time->data;
+#else
+    const unsigned char *tdata = ASN1_STRING_get0_data(time);
+#endif
     t.tm_zone = 0;
-    memcpy(tmpstr, time->data + 10, 2);
+    memcpy(tmpstr, tdata + 10, 2);
     t.tm_sec = atoi(tmpstr);
 
-    memcpy(tmpstr, time->data + 8, 2);
+    memcpy(tmpstr, tdata + 8, 2);
     t.tm_min = atoi(tmpstr);
 
-    memcpy(tmpstr, time->data + 6, 2);
+    memcpy(tmpstr, tdata + 6, 2);
     t.tm_hour = atoi(tmpstr);
 
-    memcpy(tmpstr, time->data + 4, 2);
+    memcpy(tmpstr, tdata + 4, 2);
     t.tm_mday = atoi(tmpstr);
 
-    memcpy(tmpstr, time->data + 2, 2);
+    memcpy(tmpstr, tdata + 2, 2);
     /* Month range in tm structure is 0-11 */
     t.tm_mon = atoi(tmpstr) - 1;
 
-    memcpy(tmpstr, time->data, 2);
+    memcpy(tmpstr, tdata, 2);
     t.tm_year = atoi(tmpstr);
 
     if (t.tm_year < 70) t.tm_year += 100;

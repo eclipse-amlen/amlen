@@ -516,6 +516,22 @@ function update_liberty_ldap_password() {
         exit 1
     fi
 
+    # Liberty 26.0.0.3+ no longer has a default AES key, so we generate a random one for this install.
+    # It is stored as a configDropins override so the server can decrypt the encoded bindPassword.
+    AESKEYDIR="${WLPDIR}/usr/servers/ISMWebUI/configDropins/overrides"
+    AESKEYFILE="${AESKEYDIR}/aesKey.xml"
+    if [ ! -f "${AESKEYFILE}" ]; then
+        AESKEY=$(openssl rand -base64 32)
+        if [ -z "${AESKEY}" ]; then
+            echo "Updating liberty: failed to generate AES key" >> ${INSTALL_LOG}
+            exit 1
+        fi
+        mkdir -p "${AESKEYDIR}"
+        (umask 077; printf '<?xml version="1.0" encoding="UTF-8"?>\n<server>\n    <variable name="wlp.aes.encryption.key" value="%s" />\n</server>\n' "${AESKEY}" > "${AESKEYFILE}")
+        unset AESKEY
+        echo "Updating liberty: generated AES key file ${AESKEYFILE}" >> ${INSTALL_LOG}
+    fi
+
     genpasswd=true
     numtries=0
 
@@ -523,7 +539,7 @@ function update_liberty_ldap_password() {
     #sometimes the /usr/bin/java & /etc/alternatives/java symlinks are not setup before post install script of webui rpm on RHEL8 era
     #linuxes - we retry - guessing a java path
     while $genpasswd; do
-        lval=$(${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes ${PASSWD})
+        lval=$(${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes --aesConfigFile="${AESKEYFILE}" ${PASSWD})
 
         if [ ! -z "$lval" ]; then
             #Successfully encoded the password
@@ -543,14 +559,21 @@ function update_liberty_ldap_password() {
                 ls -l /usr/lib/jvm/java-1.8.0-openjd*/jre >> ${INSTALL_LOG} 2>&1 
                 ls -l /usr/lib/jvm/jre-21*/jre >> ${INSTALL_LOG} 2>&1 
                 echo $PATH >> ${INSTALL_LOG} 2>&1 
-                ${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes ${PASSWD} >> ${INSTALL_LOG} 2>&1 
+                ${WLPINSTALLDIR}/bin/securityUtility encode --encoding=aes --aesConfigFile="${AESKEYFILE}" ${PASSWD} >> ${INSTALL_LOG} 2>&1 
 
                 if [ ! -x "$(command -v java)" ]; then
                     if [ -z "${JAVA_HOME}" ]; then
-                        #We currently prereq java 21 - so that should exist - but  so this should exist - if the rpm spec changes, update our guess below
-                        
-                        if [ -e "/usr/lib/jvm/jre-21-openjdk" ]; then
-                            export JAVA_HOME=/usr/lib/jvm/jre-21-openjdk
+                        #We currently prereq java 21 (java 25 on Fedora) - so one of these should exist - if the rpm spec changes, update our guess below
+                        GUESS_JAVA_HOME=""
+                        for candidate in /usr/lib/jvm/jre-21-openjdk /usr/lib/jvm/jre-25-openjdk; do
+                            if [ -e "${candidate}" ]; then
+                                GUESS_JAVA_HOME=${candidate}
+                                break
+                            fi
+                        done
+
+                        if [ -n "${GUESS_JAVA_HOME}" ]; then
+                            export JAVA_HOME=${GUESS_JAVA_HOME}
                             echo "java not setup. Guessing java home to be ${JAVA_HOME}" >> ${INSTALL_LOG}
                             export PATH=${PATH}:${JAVA_HOME}/bin
                         else

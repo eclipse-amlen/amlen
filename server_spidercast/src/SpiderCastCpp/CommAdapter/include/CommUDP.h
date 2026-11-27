@@ -19,6 +19,7 @@
 #define COMMUDP_H_
 
 #include <boost/asio.hpp>
+#include "BoostAsioCompat.h"
 
 #include "NodeIDImpl.h"
 #include "SCMessage.h"

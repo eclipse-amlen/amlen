@@ -172,7 +172,7 @@ CommAdapter::CommAdapter(const String& instID,
 		{
 			try
 			{
-				bind_address = boost::asio::ip::address::from_string(config.getBindNetworkAddress());
+				bind_address = SPDR_ADDRESS_FROM_STRING(config.getBindNetworkAddress());
 			}
 			catch (boost::system::system_error& se)
 			{

@@ -18,7 +18,7 @@
 
 Summary: Amlen Bridge for Linux x86_64
 Name: AmlenBridge
-Version: 1.1dev
+Version: 1.1.1
 Release: 1%{?dist}
 License: EPL-2.0
 Packager: IMA Build

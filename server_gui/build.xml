@@ -291,6 +291,7 @@
         <condition property="dojo.extracted">
             <and>
                 <available file="${server.gui.build.js.dir}/dojotoolkit" type="dir" />
+                <available file="${server.gui.build.js.dir}/dojotoolkit/gridx" type="dir" />
                 <available file="${server.gui.build.js.dir}/idx" type="dir" />
             </and>
         </condition>
@@ -575,6 +576,7 @@
             <fileset dir="${guiBuildToolsDir}">
                 <include name="${server.gui.icuj4Archive}" />
                 <include name="jackson-*-${server.gui.jackson.version}.jar" />
+                <include name="jackson-annotations-${server.gui.jackson.annotations.version}.jar" />
             </fileset>
         </copy>
     </target>

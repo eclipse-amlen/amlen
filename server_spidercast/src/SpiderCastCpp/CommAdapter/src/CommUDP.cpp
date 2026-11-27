@@ -146,7 +146,7 @@ void CommUDP::init() throw (SpiderCastRuntimeError)
 		{
 			if (!interface_v4_str_.empty())
 			{
-				bind_address_v4 = ip::address_v4::from_string(interface_v4_str_);
+				bind_address_v4 = SPDR_ADDRESS_V4_FROM_STRING(interface_v4_str_);
 				Trace_Event(this,"init()","parsed UDP IPv4 bind address",
 						"address", bind_address_v4.to_string());
 				if (bind_address_v4.is_multicast())
@@ -239,7 +239,7 @@ void CommUDP::init() throw (SpiderCastRuntimeError)
 		{
 			if (!interface_v6_str_.empty())
 			{
-				bind_address_v6 = ip::address_v6::from_string(interface_v6_str_);
+				bind_address_v6 = SPDR_ADDRESS_V6_FROM_STRING(interface_v6_str_);
 				Trace_Event(this,"init()","parsed UDP IPv6 bind address",
 						"address", bind_address_v4.to_string());
 				if (bind_address_v6.is_multicast())
@@ -566,6 +566,7 @@ boost::asio::ip::udp::endpoint CommUDP::resolveAddress(const String& targetAddre
 
 	boost::recursive_mutex::scoped_lock lock(txMutex_);
 
+#if BOOST_VERSION < 106600
 	udp::resolver::query query(targetAddress, boost::lexical_cast<std::string>(port),
 			boost::asio::ip::resolver_query_base::numeric_service);
 	udp::resolver::iterator res_it = resolver_.resolve(query);
@@ -574,6 +575,17 @@ boost::asio::ip::udp::endpoint CommUDP::resolveAddress(const String& targetAddre
 	for (udp::resolver::iterator end; res_it != end; ++res_it)
 	{
 		udp::endpoint target_endpoint = *res_it;
+#else
+	// Boost >= 1.66: resolve() returns results_type (a range)
+	udp::resolver::results_type results = resolver_.resolve(targetAddress,
+			boost::lexical_cast<std::string>(port),
+			boost::asio::ip::resolver_base::numeric_service);
+
+	udp::endpoint first_target_endpoint;
+	for (const auto& entry : results)
+	{
+		udp::endpoint target_endpoint = entry.endpoint();
+#endif
 		if (first_target_endpoint == udp::endpoint())
 		{
 			first_target_endpoint = target_endpoint;

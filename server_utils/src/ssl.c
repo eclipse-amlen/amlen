@@ -1380,13 +1380,16 @@ XAPI void ism_ssl_init(int useFips, int useBufferPool) {
         CRYPTO_set_mem_functions(my_malloc, my_realloc, my_free);
 #endif
     }
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
     SSL_load_error_strings();
     SSL_library_init();
     ERR_load_BIO_strings();
     ERR_load_crypto_strings();
-
     OpenSSL_add_all_algorithms();
     OpenSSL_add_all_digests();
+#else
+    OPENSSL_init_ssl(0, NULL);
+#endif
     sslLockInit();
     pthread_mutex_unlock(&sslMutex);
 
@@ -2033,7 +2036,11 @@ int ism_ssl_getSubjectAltNames(SSL * ssl, concat_alloc_t * buf) {
             for (i=0; i<sn_count; i++) {
                 const GENERAL_NAME * name = sk_GENERAL_NAME_value(san_names, i);
                 if (name->type == GEN_EMAIL) {
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
                     const char * san =  (const char *)ASN1_STRING_data(name->d.rfc822Name);
+#else
+                    const char * san =  (const char *)ASN1_STRING_get0_data(name->d.rfc822Name);
+#endif
                     ism_common_allocBufferCopy(buf, san);
                     count++;
                 }
@@ -2655,7 +2662,11 @@ static int parseCrlLocations(X509 * cert, ism_common_list * crlLocations) {
                         for (j = 0; j < sk_GENERAL_NAME_num(dp->distpoint->name.fullname); j++) {
                             GENERAL_NAME *gn = sk_GENERAL_NAME_value(dp->distpoint->name.fullname, j);
                             if (gn != NULL && gn->type == GEN_URI) {
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
                                 const char * uri = ism_common_strdup(ISM_MEM_PROBE(ism_memory_utils_sslutils,1000),(const char *) gn->d.ia5->data);
+#else
+                                const char * uri = ism_common_strdup(ISM_MEM_PROBE(ism_memory_utils_sslutils,1000),(const char *) ASN1_STRING_get0_data(gn->d.ia5));
+#endif
                                 if (uri == NULL) {
                                     rc = ISMRC_AllocateError;
                                     break;
@@ -3859,9 +3870,16 @@ ism_time_t ism_ssl_convertTime(const ASN1_TIME * ctime) {
     if (!ctime) {
         return 0;
     }
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
     data = (char *)ctime->data;
     len = ctime->length;
-    if (ctime->type == V_ASN1_UTCTIME) {
+    int ctime_type = ctime->type;
+#else
+    data = (char *)ASN1_STRING_get0_data(ctime);
+    len = ASN1_STRING_length(ctime);
+    int ctime_type = ASN1_STRING_type(ctime);
+#endif
+    if (ctime_type == V_ASN1_UTCTIME) {
         if ((len==11 || len==13) && data[len-1] == 'Z') {
             good = 1;
             t.year = (data[0]-'0') * 10 + (data[1]-'0');
@@ -3874,7 +3892,7 @@ ism_time_t ism_ssl_convertTime(const ASN1_TIME * ctime) {
                 t.second = (data[10]-'0') * 10 + (data[11]-'0');
             data += 2;
         }
-    } else if (ctime->type == V_ASN1_GENERALIZEDTIME) {
+    } else if (ctime_type == V_ASN1_GENERALIZEDTIME) {
         if ((len==13 || len==15) && data[len-1]=='Z') {
             good = 1;
             t.year = (data[0]-'0') * 1000 + (data[1]-'0') * 100 + (data[2]-'0') * 10 + (data[3]-'0');

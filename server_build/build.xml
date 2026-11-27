@@ -344,8 +344,8 @@
 		<antcall target="check-build-manual" />
 	</target>
 
-	<!-- Run CUnit Test -->
-	<target name="cunit-server" depends="build-init">
+	<!-- Run CUnit Test (pass -Dskip.cunit=true to skip) -->
+	<target name="cunit-server" depends="build-init" unless="skip.cunit">
 		<build.activity label="Running server_utils CUnit Tests" activityIdProperty="runningServerUtilsId" />
 		<ant dir="${basedir}/../server_utils" inheritRefs="true" target="cunit-srv-util" />
 
@@ -371,7 +371,7 @@
 		<ant dir="${basedir}/../server_monitoring" inheritRefs="true" target="cunit-srv-monitoring" />
 	</target>
 
-	<target name="cunit-proxy" depends="build-init">
+	<target name="cunit-proxy" depends="build-init" unless="skip.cunit">
 		<build.activity label="Running server_proxy CUnit Tests" activityIdProperty="runningServerProxyUtilsId" />
 		<ant dir="${basedir}/../server_proxy" inheritRefs="true" target="cunit-srv-proxy" />
 	</target>
